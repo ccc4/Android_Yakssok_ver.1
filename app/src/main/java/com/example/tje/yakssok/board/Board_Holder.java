@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.model.Member;
 
 public class Board_Holder extends RecyclerView.ViewHolder {
     TextView str_board_idx;
@@ -16,7 +17,7 @@ public class Board_Holder extends RecyclerView.ViewHolder {
     TextView str_board_nickname;
     Button btn_board_view;
 
-    public Board_Holder(View v, final String type, final int loginMember_idx) {
+    public Board_Holder(View v, final String type, final Member loginMember) {
         super(v);
 
         str_board_idx = (TextView) v.findViewById(R.id.str_board_idx);
@@ -29,8 +30,8 @@ public class Board_Holder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Board_ViewActivity.class);
                 intent.putExtra("type", type);
-                if(loginMember_idx != 0) {
-                    intent.putExtra("loginMember_idx", loginMember_idx);
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
                 }
                 intent.putExtra("b_idx", Integer.parseInt(str_board_idx.getText().toString()));
                 v.getContext().startActivity(intent);

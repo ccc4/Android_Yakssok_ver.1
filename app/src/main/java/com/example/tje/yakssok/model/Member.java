@@ -1,8 +1,9 @@
 package com.example.tje.yakssok.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Member {
+public class Member implements Serializable {
 
 	private int m_idx;
 	private int type;

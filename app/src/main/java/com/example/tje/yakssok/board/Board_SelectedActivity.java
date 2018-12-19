@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
 import com.example.tje.yakssok.model.Board;
+import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +31,7 @@ public class Board_SelectedActivity extends AppCompatActivity {
     public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
     String type;
-    int loginMember_idx;
+    Member loginMember;
     List<Board> list;
     RecyclerView recyclerView;
 
@@ -45,8 +46,12 @@ public class Board_SelectedActivity extends AppCompatActivity {
     }
 
     private void setEvents() {
-        if(loginMember_idx != 0) {
+        if(loginMember != null) {
             set_visible(btn_b_selected_write, View.VISIBLE);
+            if (type.equals("notice")) {
+
+
+            }
         }
         btn_b_selected_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +85,11 @@ public class Board_SelectedActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-        loginMember_idx = intent.getIntExtra("loginMember_idx", 0);
+        loginMember = (Member) intent.getSerializableExtra("loginMember");
         Log.d(LOG_TAG, "type : " + type);
-        Log.d(LOG_TAG, "seleted 에서의 loginMember_idx : " + loginMember_idx);
+        if (loginMember != null) {
+            Log.d(LOG_TAG, "seleted 에서의 loginMember_idx : " + loginMember.getM_idx());
+        }
 
         setRefs();
         init();
@@ -130,7 +137,7 @@ public class Board_SelectedActivity extends AppCompatActivity {
                 //1. 리사이클러뷰 화면 연결
                 recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
                 //2. 아답터 생성
-                BoardCustomAdapter adapter = new BoardCustomAdapter(getApplicationContext(), list, type, loginMember_idx);
+                BoardCustomAdapter adapter = new BoardCustomAdapter(getApplicationContext(), list, type, loginMember);
                 //3.리사이클러뷰와 아답터 연결
                 recyclerView.setAdapter(adapter);
                 //4.리사이클러뷰매니저

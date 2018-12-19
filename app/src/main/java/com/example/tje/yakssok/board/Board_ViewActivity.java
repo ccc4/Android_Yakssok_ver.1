@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
 import com.example.tje.yakssok.model.Board;
+import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +31,7 @@ public class Board_ViewActivity extends AppCompatActivity {
     public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
     String type;
-    int loginMember_idx;
+    Member loginMember;
     int b_idx;
     Board board;
 
@@ -52,10 +53,12 @@ public class Board_ViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-        loginMember_idx = intent.getIntExtra("loginMember_idx", 0);
+        loginMember = (Member) intent.getSerializableExtra("loginMember");
         b_idx = intent.getIntExtra("b_idx", 0);
 
-        Log.d(LOG_TAG, "view - loginMember_idx : " + loginMember_idx);
+        if (loginMember != null) {
+            Log.d(LOG_TAG, "view 에서의 loginMember_idx : " + loginMember.getM_idx());
+        }
         Log.d(LOG_TAG, "view - b_idx : " + b_idx);
 
         setRefs();
@@ -120,12 +123,10 @@ public class Board_ViewActivity extends AppCompatActivity {
                 str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
                 str_b_view_contents.setText(board.getTitle());
 
-                Log.d(LOG_TAG, "view 에서 m_idx : " + loginMember_idx);
-
-                if(loginMember_idx == 0 || loginMember_idx != board.getM_idx()) {
+                if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
                     set_visible(btn_b_view_modify, View.INVISIBLE);
                     set_visible(btn_b_view_delete, View.INVISIBLE);
-                } else if(loginMember_idx == board.getM_idx()){
+                } else if(loginMember.getM_idx() == board.getM_idx()){
                     set_visible(btn_b_view_modify, View.VISIBLE);
                     set_visible(btn_b_view_delete, View.VISIBLE);
                 }

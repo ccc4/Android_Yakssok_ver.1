@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".board.Board_MainActivity" />
         <activity android:name=".board.Board_SelectedActivity" />
-        <activity android:name=".board.Board_ViewActivity"></activity>
+        <activity android:name=".board.Board_ViewActivity" />
+        <activity android:name=".Board_WriteActivity"></activity>
     </application>
 
 </manifest>

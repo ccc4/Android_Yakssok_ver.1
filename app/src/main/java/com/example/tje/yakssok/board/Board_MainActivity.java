@@ -9,10 +9,11 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.model.Member;
 
 public class Board_MainActivity extends AppCompatActivity {
 
-    int loginMember_idx;
+    Member loginMember;
 
     Button btn_board_back;
     Button btn_board_notice;
@@ -33,8 +34,8 @@ public class Board_MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
                 intent.putExtra("type", "notice");
-                if (loginMember_idx != 0) {
-                    intent.putExtra("loginMember_idx", loginMember_idx);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
             }
@@ -44,8 +45,8 @@ public class Board_MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
                 intent.putExtra("type", "share");
-                if (loginMember_idx != 0) {
-                    intent.putExtra("loginMember_idx", loginMember_idx);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember_idx", loginMember);
                 }
                 startActivity(intent);
             }
@@ -55,8 +56,8 @@ public class Board_MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
                 intent.putExtra("type", "free");
-                if (loginMember_idx != 0) {
-                    intent.putExtra("loginMember_idx", loginMember_idx);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember_idx", loginMember);
                 }
                 startActivity(intent);
             }
@@ -77,7 +78,7 @@ public class Board_MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board__main);
 
         Intent intent = getIntent();
-        loginMember_idx = intent.getIntExtra("loginMember_idx", 0);
+        loginMember = (Member) intent.getSerializableExtra("loginMember");
 
         setRefs();
         setEvents();

@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_MainActivity.class);
                 if(loginMember != null) {
-                    intent.putExtra("loginMember_idx", loginMember.getM_idx());
+                    intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
             }

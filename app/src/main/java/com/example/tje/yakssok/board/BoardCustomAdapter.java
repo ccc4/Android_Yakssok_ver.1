@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.tje.yakssok.R;
 import com.example.tje.yakssok.model.Board;
+import com.example.tje.yakssok.model.Member;
 
 import java.util.List;
 
@@ -18,19 +19,19 @@ public class BoardCustomAdapter extends RecyclerView.Adapter<Board_Holder> {
     Context context;
     List<Board> list;
     String type;
-    int loginMember_idx;
+    Member loginMember;
 
-    public BoardCustomAdapter(Context context, List<Board> list, String type, int loginMember_idx)  {
+    public BoardCustomAdapter(Context context, List<Board> list, String type, Member loginMember)  {
         this.context = context;
         this.list = list;
         this.type = type;
-        this.loginMember_idx = loginMember_idx;
+        this.loginMember = loginMember;
     }
 
     @Override
     public Board_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_item, parent, false);
-        return new Board_Holder(view, type, loginMember_idx);
+        return new Board_Holder(view, type, loginMember);
     }
 
     @Override
