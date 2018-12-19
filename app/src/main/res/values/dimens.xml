@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="recyclerview_height">70dp</dimen>
+    <dimen name="board_item_id_height">54dp</dimen>
+    <dimen name="board_item_id_width">54dp</dimen>
+    <dimen name="board_item_btn_width">70dp</dimen>
+    <dimen name="board_item_btn_height">54dp</dimen>
+
+</resources>

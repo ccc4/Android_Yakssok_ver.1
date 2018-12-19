@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <Button
+        android:id="@+id/btn_board_back"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="메인으로"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/btn_board_notice"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="공지사항"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/btn_board_share"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="팁정보 공유"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/btn_board_free"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="자유게시판"
+        android:textSize="30dp" />
+
+</LinearLayout>
+
