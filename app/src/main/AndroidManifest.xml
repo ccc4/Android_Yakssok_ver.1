@@ -22,6 +22,8 @@
         <activity android:name=".board.Board_SelectedActivity" />
         <activity android:name=".board.Board_ViewActivity" />
         <activity android:name=".Board_WriteActivity"></activity>
+        <activity android:name=".member.JoinActivity"/>
+        <activity android:name=".member.DaumWebViewActivity"/>
     </application>
 
 </manifest>

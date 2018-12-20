@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tje.yakssok.board.Board_MainActivity;
+import com.example.tje.yakssok.member.JoinActivity;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -260,6 +261,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+        btn_main_regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
+                startActivity(intent);
             }
         });
     }
