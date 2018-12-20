@@ -24,7 +24,8 @@
         <activity android:name=".Board_WriteActivity" />
         <activity android:name=".member.JoinActivity" />
         <activity android:name=".member.DaumWebViewActivity" />
-        <activity android:name=".Emergency_mainActivity"></activity>
+        <activity android:name=".Firstaid_mainActivity" />
+        <activity android:name=".EmergencyActivity"></activity>
     </application>
 
 </manifest>
