@@ -121,7 +121,7 @@ public class Board_ViewActivity extends AppCompatActivity {
                 str_b_view_nickname.setText(board.getNickname());
                 str_b_view_writeDate.setText(board.getWriteDate());
                 str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
-                str_b_view_contents.setText(board.getTitle());
+                str_b_view_contents.setText(board.getContents());
 
                 if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
                     set_visible(btn_b_view_modify, View.INVISIBLE);

@@ -46,11 +46,10 @@ public class Board_SelectedActivity extends AppCompatActivity {
     }
 
     private void setEvents() {
-        if(loginMember != null) {
+        if(type.length() != 0 && loginMember != null) {
             set_visible(btn_b_selected_write, View.VISIBLE);
-            if (type.equals("notice")) {
-
-
+            if (type.equals("notice") && loginMember.getType() != 2) {
+                set_visible(btn_b_selected_write, View.GONE);
             }
         }
         btn_b_selected_back.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +63,17 @@ public class Board_SelectedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_b_selected_write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Board_WriteActivity.class);
+                intent.putExtra("type", type);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
                 startActivity(intent);
             }
         });
