@@ -28,7 +28,8 @@ import java.util.List;
 public class Board_SelectedActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.219.146:8181/Yakssok";
 
     String type;
     Member loginMember;
@@ -63,6 +64,9 @@ public class Board_SelectedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
                 startActivity(intent);
             }
         });

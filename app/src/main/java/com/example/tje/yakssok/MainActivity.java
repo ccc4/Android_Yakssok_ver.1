@@ -43,7 +43,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.219.146:8181/Yakssok";
 
     Gson gson;
     Member loginMember;
@@ -183,12 +184,7 @@ public class MainActivity extends AppCompatActivity {
                                         if(loginMember != null) {
                                             show_Toast("로그인성공!");
                                             Log.d(LOG_TAG, "로그인성공! " + loginMember.getNickname() + " 님 환영합니다 :)");
-
-                                            set_text(str_output, loginMember.getNickname() + " 님 환영합니다 :)");
-                                            set_visible(btn_main_login, View.GONE);
-                                            set_visible(btn_main_regist, View.GONE);
-                                            set_visible(btn_main_logout, View.VISIBLE);
-                                            set_visible(btn_main_modify, View.VISIBLE);
+                                            check_login();
                                         } else {
                                             show_Toast("로그인실패!");
                                             Log.d(LOG_TAG, "로그인실패");
@@ -243,13 +239,9 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d(LOG_TAG, "result = " + String.valueOf(result));
 
                                 if(result == 1) {
-                                    show_Toast("로그아웃 되었습니다.");
-                                    set_text(str_output, "로그인 해주세요.");
-                                    set_visible(btn_main_login, View.VISIBLE);
-                                    set_visible(btn_main_regist, View.VISIBLE);
-                                    set_visible(btn_main_logout, View.GONE);
-                                    set_visible(btn_main_modify, View.GONE);
                                     loginMember = null;
+                                    show_Toast("로그아웃 되었습니다.");
+                                    check_login();
                                 } else {
                                     show_Toast("로그아웃 실패");
                                 }
@@ -270,6 +262,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void check_login() {
+        Log.d(LOG_TAG, "체크로그인");
+        if(loginMember == null) {
+            Log.d(LOG_TAG, "체크로그인 널");
+            set_text(str_output, "로그인 해주세요.");
+            set_visible(btn_main_login, View.VISIBLE);
+            set_visible(btn_main_regist, View.VISIBLE);
+            set_visible(btn_main_logout, View.GONE);
+            set_visible(btn_main_modify, View.GONE);
+        } else {
+            Log.d(LOG_TAG, "체크로그인 낫널");
+            set_text(str_output, loginMember.getNickname() + " 님 환영합니다 :)");
+            set_visible(btn_main_login, View.GONE);
+            set_visible(btn_main_regist, View.GONE);
+            set_visible(btn_main_logout, View.VISIBLE);
+            set_visible(btn_main_modify, View.VISIBLE);
+        }
     }
 
     private void set_text(final TextView target, final String str) {
@@ -341,5 +352,17 @@ public class MainActivity extends AppCompatActivity {
     public void init(){
         setRefs();
         setEvents();
+
+        Intent intent = getIntent();
+        loginMember = (Member) intent.getSerializableExtra("loginMember");
+        if(loginMember == null) {
+            Log.d(LOG_TAG, "로그인 정보 업승ㅁ");
+        } else {
+            Log.d(LOG_TAG, "로그인 확인");
+            Log.d(LOG_TAG, loginMember.getNickname());
+
+        }
+
+        check_login();
     }
 }

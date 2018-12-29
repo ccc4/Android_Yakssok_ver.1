@@ -28,7 +28,8 @@ import java.util.List;
 public class Board_ViewActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.219.146:8181/Yakssok";
 
     String type;
     Member loginMember;
