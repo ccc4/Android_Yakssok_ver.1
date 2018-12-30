@@ -192,8 +192,8 @@ public class Board_WriteActivity extends AppCompatActivity {
                                         startActivity(intent);
 
                                     } else {
-                                        show_Toast("작성실패!");
-                                        Log.d(LOG_TAG, "작성실패");
+                                        show_Toast("수정실패!");
+                                        Log.d(LOG_TAG, "수정실패");
                                     }
                                 } else {    // 200이 아닐 때
                                     show_Toast("200번x");

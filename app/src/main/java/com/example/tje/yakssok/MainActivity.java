@@ -51,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
     TextView str_output;
     Button btn_main_login;
     Button btn_main_logout;
@@ -116,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 final View dialogView = (View)View.inflate(getApplicationContext(), R.layout.dialog_login, null);
 
                 AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                dlg.setCancelable(false);
                 dlg.setTitle("로그인");
                 dlg.setView(dialogView);
                 dlg.setPositiveButton("로그인", new DialogInterface.OnClickListener() {

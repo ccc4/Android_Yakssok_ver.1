@@ -57,7 +57,10 @@ public class Board_SelectedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_MainActivity.class);
-                finish();
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
             }
         });
         btn_b_selected_go_main.setOnClickListener(new View.OnClickListener() {
