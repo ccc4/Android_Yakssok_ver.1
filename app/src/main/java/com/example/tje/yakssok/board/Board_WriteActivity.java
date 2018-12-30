@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.model.Board;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,21 +35,35 @@ public class Board_WriteActivity extends AppCompatActivity {
 
     String type;
     Member loginMember;
+    String choice;
+    Board board;
 
     EditText str_b_write_title;
     EditText str_b_write_contents;
     Button btn_b_write_cancel;
     Button btn_b_write_ok;
+    Button btn_b_modify_ok;
 
-    Intent intent;
 
     private void setRefs() {
         str_b_write_title = (EditText)findViewById(R.id.str_b_write_title);
         str_b_write_contents = (EditText)findViewById(R.id.str_b_write_contents);
         btn_b_write_cancel = (Button)findViewById(R.id.btn_b_write_cancel);
-        btn_b_write_ok = (Button)findViewById(R.id.btn_b_write_ok);
 
-        intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
+        if(choice.equals("write")) {
+            btn_b_write_ok = (Button)findViewById(R.id.btn_b_write_ok);
+            btn_b_write_ok.setVisibility(View.VISIBLE);
+        } else if(choice.equals("modify")) {
+            btn_b_modify_ok = (Button)findViewById(R.id.btn_b_modify_ok);
+            btn_b_modify_ok.setVisibility(View.VISIBLE);
+        }
+
+        if(board != null) {
+            str_b_write_title.setText(board.getTitle());
+            str_b_write_contents.setText(board.getContents());
+        }
+
+
     }
 
     private void setEvents() {
@@ -58,70 +73,141 @@ public class Board_WriteActivity extends AppCompatActivity {
                 finish();
             }
         });
-        btn_b_write_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String title = str_b_write_title.getText().toString();
-                            String contents = str_b_write_contents.getText().toString();
+        if(btn_b_write_ok != null) {
+            btn_b_write_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String title = str_b_write_title.getText().toString();
+                                String contents = str_b_write_contents.getText().toString();
 
-                            URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/write");
-                            HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+                                URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/" + choice);
+                                HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
 
-                            // POST 값 전달
-                            myConnection.setRequestMethod("POST");
+                                // POST 값 전달
+                                myConnection.setRequestMethod("POST");
 
-                            String requestParam = String.format("title=%s&contents=%s&m_idx=%d", title, contents, loginMember.getM_idx());
-                            myConnection.setDoOutput(true);
-                            myConnection.getOutputStream().write(requestParam.getBytes());
-                            // POST 값 전달 끝
+                                String requestParam = String.format("title=%s&contents=%s&m_idx=%d", title, contents, loginMember.getM_idx());
+                                myConnection.setDoOutput(true);
+                                myConnection.getOutputStream().write(requestParam.getBytes());
+                                // POST 값 전달 끝
 
-                            if (myConnection.getResponseCode() == 200) {
-                                Log.d(LOG_TAG, "200번 성공으로 들어옴");
-                                BufferedReader in =
-                                        new BufferedReader(
-                                                new InputStreamReader(
-                                                        myConnection.getInputStream()));
-                                StringBuffer buffer = new StringBuffer();
-                                String temp = null;
-                                while((temp = in.readLine()) != null) {
-                                    buffer.append(temp);
+                                if (myConnection.getResponseCode() == 200) {
+                                    Log.d(LOG_TAG, "200번 성공으로 들어옴");
+                                    BufferedReader in =
+                                            new BufferedReader(
+                                                    new InputStreamReader(
+                                                            myConnection.getInputStream()));
+                                    StringBuffer buffer = new StringBuffer();
+                                    String temp = null;
+                                    while((temp = in.readLine()) != null) {
+                                        buffer.append(temp);
+                                    }
+                                    Log.d(LOG_TAG, "중간체크");
+                                    Type typeToken = new TypeToken<HashMap<String, Integer>>(){}.getType();
+                                    Gson gson = new Gson();
+                                    HashMap<String, Integer> myMap = gson.fromJson(buffer.toString(), typeToken);
+
+                                    int result = (int) myMap.get("result");
+                                    Log.d(LOG_TAG, "result = " + String.valueOf(result));
+
+                                    if(result == 1) {
+                                        show_Toast("작성완료!");
+                                        Log.d(LOG_TAG, "작성완료");
+
+                                        Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
+                                        intent.putExtra("type", type);
+                                        intent.putExtra("loginMember", loginMember);
+                                        startActivity(intent);
+
+                                    } else {
+                                        show_Toast("작성실패!");
+                                        Log.d(LOG_TAG, "작성실패");
+                                    }
+                                } else {    // 200이 아닐 때
+                                    show_Toast("200번x");
+                                    Log.d(LOG_TAG, "200번x");
                                 }
-                                Log.d(LOG_TAG, "중간체크");
-                                Type typeToken = new TypeToken<HashMap<String, Integer>>(){}.getType();
-                                Gson gson = new Gson();
-                                HashMap<String, Integer> myMap = gson.fromJson(buffer.toString(), typeToken);
-
-                                int result = (int) myMap.get("result");
-                                Log.d(LOG_TAG, "result = " + String.valueOf(result));
-
-                                if(result == 1) {
-                                    show_Toast("작성완료!");
-                                    Log.d(LOG_TAG, "작성완료");
-
-                                    intent.putExtra("type", type);
-                                    intent.putExtra("loginMember", loginMember);
-                                    startActivity(intent);
-
-                                } else {
-                                    show_Toast("작성실패!");
-                                    Log.d(LOG_TAG, "작성실패");
-                                }
-                            } else {    // 200이 아닐 때
-                                show_Toast("200번x");
-                                Log.d(LOG_TAG, "200번x");
+                            } catch (Exception e) {
+                                show_Toast("연결실패!");
+                                Log.d(LOG_TAG, "login catch - 연결실패" + e.getMessage());
                             }
-                        } catch (Exception e) {
-                            show_Toast("연결실패!");
-                            Log.d(LOG_TAG, "login catch - 연결실패" + e.getMessage());
                         }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        }
+        if(btn_b_modify_ok != null) {
+            btn_b_modify_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String title = str_b_write_title.getText().toString();
+                                String contents = str_b_write_contents.getText().toString();
+
+                                URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/" + choice);
+                                HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+
+                                // POST 값 전달
+                                myConnection.setRequestMethod("POST");
+
+                                String requestParam = String.format("title=%s&contents=%s&m_idx=%d&b_idx=%d", title, contents, loginMember.getM_idx(), board.getB_idx());
+                                myConnection.setDoOutput(true);
+                                myConnection.getOutputStream().write(requestParam.getBytes());
+                                // POST 값 전달 끝
+
+                                if (myConnection.getResponseCode() == 200) {
+                                    Log.d(LOG_TAG, "mBoard_modify 200 success");
+                                    BufferedReader in =
+                                            new BufferedReader(
+                                                    new InputStreamReader(
+                                                            myConnection.getInputStream()));
+                                    StringBuffer buffer = new StringBuffer();
+                                    String temp = null;
+                                    while((temp = in.readLine()) != null) {
+                                        buffer.append(temp);
+                                    }
+                                    Log.d(LOG_TAG, "중간체크");
+                                    Type typeToken = new TypeToken<HashMap<String, Integer>>(){}.getType();
+                                    Gson gson = new Gson();
+                                    HashMap<String, Integer> myMap = gson.fromJson(buffer.toString(), typeToken);
+
+                                    int result = (int) myMap.get("result");
+                                    Log.d(LOG_TAG, "result = " + String.valueOf(result));
+
+                                    if(result == 1) {
+                                        show_Toast("수정완료!");
+                                        Log.d(LOG_TAG, "수정완료");
+
+                                        Intent intent = new Intent(getApplicationContext(), Board_ViewActivity.class);
+                                        intent.putExtra("type", type);
+                                        intent.putExtra("loginMember", loginMember);
+                                        intent.putExtra("b_idx", board.getB_idx());
+                                        startActivity(intent);
+
+                                    } else {
+                                        show_Toast("작성실패!");
+                                        Log.d(LOG_TAG, "작성실패");
+                                    }
+                                } else {    // 200이 아닐 때
+                                    show_Toast("200번x");
+                                    Log.d(LOG_TAG, "200번x");
+                                }
+                            } catch (Exception e) {
+                                show_Toast("연결실패!");
+                                Log.d(LOG_TAG, "login catch - 연결실패" + e.getMessage());
+                            }
+                        }
+                    });
+                }
+            });
+        }
     }
 
     private void show_Toast(final String text) {
@@ -142,7 +228,9 @@ public class Board_WriteActivity extends AppCompatActivity {
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
         loginMember = (Member)intent.getSerializableExtra("loginMember");
-        Log.d(LOG_TAG, "write 들어옴, type : " + type);
+        choice = intent.getStringExtra("choice");
+        board = (Board) intent.getSerializableExtra("board");
+        Log.d(LOG_TAG, "write 들어옴, type : " + type + ", choice : " + choice);
 
         setRefs();
         setEvents();

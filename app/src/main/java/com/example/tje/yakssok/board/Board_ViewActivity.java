@@ -149,7 +149,30 @@ public class Board_ViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
-                finish();
+                intent.putExtra("type", type);
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
+            }
+        });
+        btn_b_view_modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Board_WriteActivity.class);
+                intent.putExtra("type", type);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                intent.putExtra("choice", "modify");
+                intent.putExtra("board", board);
+                startActivity(intent);
+            }
+        });
+        btn_b_view_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

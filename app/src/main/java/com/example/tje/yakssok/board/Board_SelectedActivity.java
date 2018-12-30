@@ -78,6 +78,7 @@ public class Board_SelectedActivity extends AppCompatActivity {
                 if (loginMember != null) {
                     intent.putExtra("loginMember", loginMember);
                 }
+                intent.putExtra("choice", "write");
                 startActivity(intent);
             }
         });

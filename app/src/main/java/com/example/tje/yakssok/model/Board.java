@@ -1,9 +1,10 @@
 package com.example.tje.yakssok.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Board {
+public class Board implements Serializable {
 	private int b_idx;
 	private int m_idx;
 	private String nickname;
