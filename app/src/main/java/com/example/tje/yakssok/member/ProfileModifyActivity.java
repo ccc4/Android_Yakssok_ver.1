@@ -32,7 +32,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
 
 
     private static final String LOG_TAG ="Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.168.105:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
 
     Member loginMember;
@@ -280,14 +280,6 @@ public class ProfileModifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_modify);
 
-        int permission_internet = ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.INTERNET);
-
-        if(permission_internet == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 12);
-
-
-        }
-
         Intent intent = getIntent();
         loginMember = (Member)intent.getSerializableExtra("loginMember");
 
@@ -308,9 +300,13 @@ public class ProfileModifyActivity extends AppCompatActivity {
         String address = loginMember.getAddress();
         String[] list = address.split(",");
 
-        modify_address1.setText(list[0]);
-        modify_address2.setText(list[1]);
-        modify_address3.setText(list[2]);
+        for(String item : list) {
+            Log.d(LOG_TAG, item);
+        }
+
+//        modify_address1.setText(list[0]);
+//        modify_address2.setText(list[1]);
+//        modify_address3.setText(list[2]);
 
     }
 
