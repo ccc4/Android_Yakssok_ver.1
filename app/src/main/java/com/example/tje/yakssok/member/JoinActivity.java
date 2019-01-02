@@ -34,7 +34,7 @@ import java.net.URL;
 public class JoinActivity extends AppCompatActivity {
 
     private static final String LOG_TAG ="yakssokjoin";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.168.105:8080/Yakssok";
 
     EditText join_id;
     EditText join_pw;

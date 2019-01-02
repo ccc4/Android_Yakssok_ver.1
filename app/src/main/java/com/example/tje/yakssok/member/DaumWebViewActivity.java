@@ -16,8 +16,8 @@ import com.example.tje.yakssok.R;
 
 public class DaumWebViewActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG= "yakssokjoin";
-    public static final String SERVER_ADDRESS = "192.168.10.132:8080/Yakssok";
+    private static final String LOG_TAG= "Yakssok";
+    public static final String SERVER_ADDRESS = "192.168.168.105:8080/Yakssok";
 
     WebView daum_webView;
     TextView daum_result;
@@ -41,6 +41,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
 
     public void setEvents(){
         final Intent intentB = new Intent(getApplicationContext(), JoinActivity.class);
+        final Intent intentC = new Intent(getApplicationContext(), ProfileModifyActivity.class);
         if(daum_result.getText().equals("주소륵 선택해주세요.")){
             btn_address_ok.setEnabled(false);
         }
@@ -48,8 +49,10 @@ public class DaumWebViewActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     intentB.putExtra("address", daum_result.getText().toString());
-                    Log.d("yakssokjoin", "웹뷰액티비티로그 주소값:" + daum_result.getText().toString());
+                    intentC.putExtra("address", daum_result.getText().toString());
+                    Log.d(LOG_TAG, "웹뷰액티비티로그 주소값:" + daum_result.getText().toString());
                     setResult(RESULT_OK, intentB);
+                    setResult(RESULT_OK,intentC);
                     finish();
                 }
             });
@@ -59,6 +62,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED,intentB);
+                setResult(RESULT_CANCELED,intentC);
                 finish();
             }
         });

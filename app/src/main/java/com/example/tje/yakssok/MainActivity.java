@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.board.Board_MainActivity;
 import com.example.tje.yakssok.member.JoinActivity;
+import com.example.tje.yakssok.member.ProfileModifyActivity;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
 //    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.219.146:8181/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.168.105:8080/Yakssok";
 
     Gson gson;
     Member loginMember;
@@ -259,6 +260,35 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
                 startActivity(intent);
             }
+        });
+
+        btn_main_modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                View dialogView = View.inflate(getApplicationContext(),R.layout.dialog_modify,null);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                dlg.setCancelable(false);
+                dlg.setTitle("정보수정");
+                dlg.setView(dialogView);
+
+                Button modify_password = dialogView.findViewById(R.id.modify_password);
+                Button modify_profile = dialogView.findViewById(R.id.modify_profile);
+
+                modify_profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getApplicationContext(), ProfileModifyActivity.class);
+                        intent.putExtra("loginMember", loginMember);
+                        startActivity(intent);
+                    }
+                });
+                dlg.setNegativeButton("취소",null);
+
+                dlg.show();
+            }
+
         });
     }
 
