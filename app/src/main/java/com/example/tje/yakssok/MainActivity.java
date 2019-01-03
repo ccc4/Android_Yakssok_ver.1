@@ -28,6 +28,7 @@ import com.example.tje.yakssok.member.JoinActivity;
 import com.example.tje.yakssok.member.Modify_Pw_Activity;
 import com.example.tje.yakssok.member.ProfileModifyActivity;
 import com.example.tje.yakssok.model.Member;
+import com.example.tje.yakssok.pill.Pill_ListActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -85,7 +86,11 @@ public class MainActivity extends AppCompatActivity {
         btn_main_pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
             }
         });
         btn_main_drugstore.setOnClickListener(new View.OnClickListener() {

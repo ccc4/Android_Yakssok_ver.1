@@ -25,7 +25,8 @@
         <activity android:name=".member.JoinActivity" />
         <activity android:name=".member.DaumWebViewActivity" />
         <activity android:name=".member.Modify_Pw_Activity" />
-        <activity android:name=".member.ProfileModifyActivity"></activity>
+        <activity android:name=".member.ProfileModifyActivity" />
+        <activity android:name=".pill.Pill_ListActivity"></activity>
     </application>
 
 </manifest>

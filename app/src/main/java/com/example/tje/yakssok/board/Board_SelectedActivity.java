@@ -153,7 +153,7 @@ public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
             @Override
             protected void onPostExecute(Object o) {
                 //1. 리사이클러뷰 화면 연결
-                recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+                recyclerView = (RecyclerView)findViewById(R.id.b_recyclerView);
                 //2. 아답터 생성
                 BoardCustomAdapter adapter = new BoardCustomAdapter(getApplicationContext(), list, type, loginMember);
                 //3.리사이클러뷰와 아답터 연결

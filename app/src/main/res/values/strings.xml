@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Yakssok</string>
+    <string name="GO_BACK">뒤로가기</string>
+    <string name="GO_MAIN">메인으로</string>
 </resources>
