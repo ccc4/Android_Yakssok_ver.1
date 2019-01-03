@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.board.Board_MainActivity;
 import com.example.tje.yakssok.member.JoinActivity;
+import com.example.tje.yakssok.member.Modify_Pw_Activity;
 import com.example.tje.yakssok.member.ProfileModifyActivity;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
@@ -284,6 +285,16 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                modify_password.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), Modify_Pw_Activity.class);
+                        intent.putExtra("id", loginMember.getId());
+                        startActivity(intent);
+                    }
+                });
+
                 dlg.setNegativeButton("취소",null);
 
                 dlg.show();

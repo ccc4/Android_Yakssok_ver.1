@@ -24,6 +24,7 @@
         <activity android:name=".board.Board_WriteActivity" />
         <activity android:name=".member.JoinActivity" />
         <activity android:name=".member.DaumWebViewActivity" />
+        <activity android:name=".member.Modify_Pw_Activity" />
         <activity android:name=".member.ProfileModifyActivity"></activity>
     </application>
 
