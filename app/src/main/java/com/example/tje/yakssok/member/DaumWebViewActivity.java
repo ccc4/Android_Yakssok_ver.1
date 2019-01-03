@@ -17,7 +17,7 @@ import com.example.tje.yakssok.R;
 public class DaumWebViewActivity extends AppCompatActivity {
 
     private static final String LOG_TAG= "Yakssok";
-    public static final String SERVER_ADDRESS = "192.168.168.105:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
     WebView daum_webView;
     TextView daum_result;
@@ -80,7 +80,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
         //web client를 chrome 으로 설정
         daum_webView.setWebChromeClient(new WebChromeClient());
         //webview url load.jsp 파일 주소
-        daum_webView.loadUrl("http://" + SERVER_ADDRESS + "/mobileDaumApi.jsp");
+        daum_webView.loadUrl(SERVER_ADDRESS + "/mobileDaumApi.jsp");
     }
 
 
