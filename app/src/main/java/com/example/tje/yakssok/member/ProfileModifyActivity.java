@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
 import com.example.tje.yakssok.model.Count;
 import com.example.tje.yakssok.model.Member;
@@ -32,7 +33,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
 
 
     private static final String LOG_TAG ="Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
 
 
     Member loginMember;
@@ -43,7 +44,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
     EditText modify_id, modify_name, modify_age, modify_nickname,modify_tel, modify_email;
     TextView modify_address1, modify_address2;
     EditText modify_address3;
-    TextView error_nickname;
+    TextView error_nickname, error_id;
     Button btn_address, modify_cancel, modify_ok;
 
 
@@ -61,10 +62,12 @@ public class ProfileModifyActivity extends AppCompatActivity {
         modify_address2 = findViewById(R.id.modify_address2);
         modify_address3 = findViewById(R.id.modify_address3);
         error_nickname = findViewById(R.id.error_nickname);
+        error_id = findViewById(R.id.error_id);
         btn_address = findViewById(R.id.btn_address);
 
         modify_cancel = findViewById(R.id.modify_cancel);
         modify_ok = findViewById(R.id.modify_ok);
+
 
         set_info();
 
@@ -212,8 +215,13 @@ public class ProfileModifyActivity extends AppCompatActivity {
                                 String temp = null;
                                 while((temp = in.readLine())!= null)
                                     buffer.append(temp);
-                                Gson gson = new Gson();
-                                final Member member = gson.fromJson(buffer.toString(),Member.class);
+                                //gson = new Gson();
+                                loginMember = gson.fromJson(buffer.toString(),Member.class);
+                                Log.d(LOG_TAG,"프로필수정 닉네임 값: "+loginMember.getNickname());
+                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                intent.putExtra("loginMember",loginMember);
+                                startActivity(intent);
+
 
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -223,6 +231,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
                                 });
 
                                 Log.d(LOG_TAG,"수정완료");
+
 
 
 
@@ -241,7 +250,6 @@ public class ProfileModifyActivity extends AppCompatActivity {
                         }
                     }
                 });
-                finish();
             }
         });
 
@@ -304,9 +312,9 @@ public class ProfileModifyActivity extends AppCompatActivity {
             Log.d(LOG_TAG, item);
         }
 
-//        modify_address1.setText(list[0]);
-//        modify_address2.setText(list[1]);
-//        modify_address3.setText(list[2]);
+        modify_address1.setText(list[0]);
+        modify_address2.setText(list[1]);
+        modify_address3.setText(list[2]);
 
     }
 
