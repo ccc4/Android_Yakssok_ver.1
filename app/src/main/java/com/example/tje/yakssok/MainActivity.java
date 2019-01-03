@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = "Yakssok";
 //    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
     public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
 
     Gson gson;
     Member loginMember;
@@ -290,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), Modify_Pw_Activity.class);
-                        intent.putExtra("id", loginMember.getId());
+                        intent.putExtra("loginMember", loginMember);
                         startActivity(intent);
                     }
                 });
@@ -372,6 +374,22 @@ public class MainActivity extends AppCompatActivity {
         }else{ //권한을 허용했을때
             init();
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+            super.onBackPressed();
+        } else {
+            backPressedTime = tempTime;
+            show_Toast("뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.");
+        }
+
+
     }
 
     @Override

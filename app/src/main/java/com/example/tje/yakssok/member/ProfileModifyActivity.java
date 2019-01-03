@@ -218,11 +218,10 @@ public class ProfileModifyActivity extends AppCompatActivity {
                                 //gson = new Gson();
                                 loginMember = gson.fromJson(buffer.toString(),Member.class);
                                 Log.d(LOG_TAG,"프로필수정 닉네임 값: "+loginMember.getNickname());
+
                                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                 intent.putExtra("loginMember",loginMember);
                                 startActivity(intent);
-
-
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -298,7 +297,8 @@ public class ProfileModifyActivity extends AppCompatActivity {
     }
 
     public void set_info(){
-        modify_id.setText(loginMember.getId());
+        modify_id.setHint(loginMember.getId());
+        //modify_id.setText(loginMember.getId());
         modify_name.setText(loginMember.getName());
         modify_age.setText((Integer.toString(loginMember.getAge())));
         modify_tel.setText(loginMember.getTel());

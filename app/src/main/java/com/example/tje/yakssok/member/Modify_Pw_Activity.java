@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
 import com.example.tje.yakssok.model.Count;
 import com.example.tje.yakssok.model.Member;
@@ -32,11 +33,11 @@ import java.net.URL;
 public class Modify_Pw_Activity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
 
 
 
-    Member dbmember;
+    Member loginMember;
 
     EditText str_member_pw;
     EditText str_member_newpw;
@@ -67,8 +68,8 @@ public class Modify_Pw_Activity extends AppCompatActivity {
     public void setEvents(){
         // ID 값을 가져와서 텍스트창에 넣어줌
         final Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        modify_id.setText(id);
+        loginMember = (Member) intent.getSerializableExtra("loginMember");
+        modify_id.setText(loginMember.getId());
 
         // 다른 텍스트로 포커스가 넘어가면 앞뒤, 글자 사이의 공백 제거
         str_member_pw.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -157,8 +158,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
 
                         String pw = str_member_pw.getText().toString();
                         String newPw = str_member_newpw.getText().toString();
-                        String id = intent.getStringExtra("id");
-
+                        String id = loginMember.getId();
                         try {
                             URL endPoint = new URL(SERVER_ADDRESS + "/member/mModifyPw");
                             HttpURLConnection myConnection = (HttpURLConnection) endPoint.openConnection();
@@ -186,6 +186,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
                                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                                 Count count = gson.fromJson(buffer.toString(), Count.class);
 
+
                                 StringBuffer data = new StringBuffer();
                                 Log.d(LOG_TAG, buffer.toString());
 
@@ -195,7 +196,9 @@ public class Modify_Pw_Activity extends AppCompatActivity {
                                     error_member_pw.setText(data.toString());
                                 } else {
                                     show_Toast("변경 성공");
-                                    finish();
+                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                    intent.putExtra("loginMember",loginMember);
+                                    startActivity(intent);
                                 }
                             } else {
                                 Log.d(LOG_TAG, "실패! 응답코드:" + myConnection.getResponseCode());
