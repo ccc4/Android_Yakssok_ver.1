@@ -69,7 +69,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
         // ID 값을 가져와서 텍스트창에 넣어줌
         final Intent intent = getIntent();
         loginMember = (Member) intent.getSerializableExtra("loginMember");
-        modify_id.setText(loginMember.getId());
+        modify_id.setHint(loginMember.getId());
 
         // 다른 텍스트로 포커스가 넘어가면 앞뒤, 글자 사이의 공백 제거
         str_member_pw.setOnFocusChangeListener(new View.OnFocusChangeListener() {
