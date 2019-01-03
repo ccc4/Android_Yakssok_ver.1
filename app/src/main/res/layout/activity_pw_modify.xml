@@ -9,27 +9,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="50dp"
+            android:layout_width="45dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.3"
             android:text="아이디" />
 
-        <EditText
+        <TextView
             android:id="@+id/modify_id"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_height="50dp"
+            android:layout_weight="0.6"
             android:ems="10"
             android:enabled="true"
-            android:focusable="false"
-            android:inputType="textPersonName"
-            android:maxLength="12"
-            android:textStyle="italic" />
+            android:gravity="center_vertical"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

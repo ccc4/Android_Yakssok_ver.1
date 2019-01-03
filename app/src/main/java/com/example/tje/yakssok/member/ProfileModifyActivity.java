@@ -41,10 +41,10 @@ public class ProfileModifyActivity extends AppCompatActivity {
 
     Gson gson;
 
-    EditText modify_id, modify_name, modify_age, modify_nickname,modify_tel, modify_email;
-    TextView modify_address1, modify_address2;
+    EditText modify_name, modify_age, modify_nickname,modify_tel, modify_email;
+    TextView modify_address1, modify_address2,modify_id;
     EditText modify_address3;
-    TextView error_nickname, error_id;
+    TextView error_nickname;
     Button btn_address, modify_cancel, modify_ok;
 
 
@@ -62,7 +62,6 @@ public class ProfileModifyActivity extends AppCompatActivity {
         modify_address2 = findViewById(R.id.modify_address2);
         modify_address3 = findViewById(R.id.modify_address3);
         error_nickname = findViewById(R.id.error_nickname);
-        error_id = findViewById(R.id.error_id);
         btn_address = findViewById(R.id.btn_address);
 
         modify_cancel = findViewById(R.id.modify_cancel);
@@ -187,7 +186,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
                             HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
                             Log.d(LOG_TAG,"커넥션 객체 생성");
 
-                            String id = modify_id.getText().toString();
+                            String id = loginMember.getId();
                             String name  = modify_name.getText().toString();
                             String age = modify_age.getText().toString();
                             String nickname = modify_nickname.getText().toString();

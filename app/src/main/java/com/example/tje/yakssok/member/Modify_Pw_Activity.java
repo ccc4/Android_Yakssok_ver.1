@@ -56,7 +56,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
         str_member_newpw = (EditText)findViewById(R.id.str_member_newpw);
         str_member_check_newpw = (EditText)findViewById(R.id.str_member_check_newpw);
 
-        modify_id = (TextView)findViewById(R.id.modify_id);
+        modify_id = (TextView) findViewById(R.id.modify_id);
 
         error_member_pw = (TextView)findViewById(R.id.error_member_pw);
         error_member_newpw = (TextView)findViewById(R.id.error_member_newpw);
@@ -69,7 +69,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
         // ID 값을 가져와서 텍스트창에 넣어줌
         final Intent intent = getIntent();
         loginMember = (Member) intent.getSerializableExtra("loginMember");
-        modify_id.setHint(loginMember.getId());
+        modify_id.setText(loginMember.getId());
 
         // 다른 텍스트로 포커스가 넘어가면 앞뒤, 글자 사이의 공백 제거
         str_member_pw.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -197,7 +197,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
                                 } else {
                                     show_Toast("변경 성공");
                                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                    intent.putExtra("loginMember",loginMember);
+                                    //intent.putExtra("loginMember",loginMember);
                                     startActivity(intent);
                                 }
                             } else {

@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         } else {
             backPressedTime = tempTime;
-            show_Toast("뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.");
+            show_Toast("버튼을 한번 더 누르면 앱이 종료됩니다.");
         }
 
 
