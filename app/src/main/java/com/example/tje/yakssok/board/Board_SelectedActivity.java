@@ -28,13 +28,13 @@ import java.util.List;
 public class Board_SelectedActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+//public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
     String type;
     Member loginMember;
     List<Board> list;
-    RecyclerView recyclerView;
+    RecyclerView b_recyclerView;
 
     Button btn_b_selected_write;
     Button btn_b_selected_back;
@@ -153,13 +153,13 @@ public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
             @Override
             protected void onPostExecute(Object o) {
                 //1. 리사이클러뷰 화면 연결
-                recyclerView = (RecyclerView)findViewById(R.id.b_recyclerView);
+                b_recyclerView = (RecyclerView)findViewById(R.id.b_recyclerView);
                 //2. 아답터 생성
-                BoardCustomAdapter adapter = new BoardCustomAdapter(getApplicationContext(), list, type, loginMember);
+                Board_CustomAdapter adapter = new Board_CustomAdapter(list, type, loginMember);
                 //3.리사이클러뷰와 아답터 연결
-                recyclerView.setAdapter(adapter);
+                b_recyclerView.setAdapter(adapter);
                 //4.리사이클러뷰매니저
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                b_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 Log.d(LOG_TAG, "list size : " + list.size());
             }
         }.execute();

@@ -33,8 +33,8 @@ public class ProfileModifyActivity extends AppCompatActivity {
 
 
     private static final String LOG_TAG ="Yakssok";
-    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
-
+//    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
 
     Member loginMember;
 
