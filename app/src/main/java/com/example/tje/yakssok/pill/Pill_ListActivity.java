@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
 import com.example.tje.yakssok.model.Member;
 import com.example.tje.yakssok.model.P_mList;
+import com.example.tje.yakssok.model.P_mList_Helper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -31,20 +33,36 @@ import java.util.List;
 
 public class Pill_ListActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "Takssok";
+    private static final String LOG_TAG = "Yakssok";
 //    private static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
     private static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
 
-    Member loginMember;
-    List<P_mList> list;
-    RecyclerView p_recyclerView;
+    int current_page_value = 0;
+    String choice = "평점순";
 
+    Member loginMember;
+    P_mList_Helper list_helper;
+    List<P_mList> list;
+
+    RecyclerView p_recyclerView;
     Button btn_p_list_go_main;
+    TextView str_p_list_page;
     Spinner spn_p_list_choice;
+    Button btn_p_list_prev;
+    Button btn_p_list_go_up;
+    Button btn_p_list_next;
 
     private void setRefs() {
         btn_p_list_go_main = (Button) findViewById(R.id.btn_p_list_go_main);
+        str_p_list_page = (TextView) findViewById(R.id.str_p_list_page);
         spn_p_list_choice = (Spinner) findViewById(R.id.spn_p_list_choice);
+        btn_p_list_prev = (Button) findViewById(R.id.btn_p_list_prev);
+        btn_p_list_go_up = (Button) findViewById(R.id.btn_p_list_go_up);
+        btn_p_list_next = (Button) findViewById(R.id.btn_p_list_next);
+
+        if(current_page_value == 0) {
+            btn_p_list_prev.setEnabled(false);
+        }
     }
 
     private void setList() {
@@ -53,7 +71,8 @@ public class Pill_ListActivity extends AppCompatActivity {
             @Override
             protected Object doInBackground(Object[] objects) {
                 try {
-                    URL endPoint = new URL(SERVER_ADDRESS + "/pill/mList");
+                    int current_page = current_page_value * 10;
+                    URL endPoint = new URL(SERVER_ADDRESS + "/pill/mList" + "/" + choice + "/" + current_page);
                     HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
 
                     if (myConnection.getResponseCode() == 200) {
@@ -68,9 +87,24 @@ public class Pill_ListActivity extends AppCompatActivity {
                             buffer.append(temp);
                         }
                         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                        Type type = new TypeToken<List<P_mList>>(){}.getType();
-                        list = gson.fromJson(buffer.toString(), type);
+                        Type type = new TypeToken<P_mList_Helper>(){}.getType();
+                        list_helper = gson.fromJson(buffer.toString(), type);
+                        list = list_helper.getList();
                         Log.d(LOG_TAG, "p_list size: " + list.size());
+
+                        if (list.size() > 0) {
+                            Log.d(LOG_TAG, "p_list 받아오기 성공");
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    str_p_list_page.setText(current_page_value + 1 + " 번째 페이지");
+                                    if(list_helper.getAll_count() <= (current_page_value + 1) * 10) {
+                                        btn_p_list_next.setEnabled(false);
+                                    }
+                                }
+                            });
+                        }
                     } else {
                         Log.d(LOG_TAG, "서버연결 실패");
                         Log.d(LOG_TAG, myConnection.getResponseCode() + "");
@@ -110,6 +144,10 @@ public class Pill_ListActivity extends AppCompatActivity {
         spn_p_list_choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.d(LOG_TAG, "choice-position: " + position);
+                Log.d(LOG_TAG, "choice-name: " + parent.getItemAtPosition(position));
+
                 switch (position) {
                     case 0:
                         Toast.makeText(getApplicationContext(), "선택: " + parent.getItemAtPosition(0), Toast.LENGTH_SHORT).show();
@@ -125,6 +163,45 @@ public class Pill_ListActivity extends AppCompatActivity {
 
             }
         });
+
+        btn_p_list_prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(current_page_value == 0) {
+                    return;
+                }
+                Log.d(LOG_TAG, "prev 버튼 눌림");
+
+                current_page_value -= 1;
+                Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
+                intent.putExtra("current_page_value", current_page_value);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
+            }
+        });
+
+        btn_p_list_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "next 버튼 눌림");
+                current_page_value += 1;
+                Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
+                intent.putExtra("current_page_value", current_page_value);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
+            }
+        });
+
+        btn_p_list_go_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -135,6 +212,7 @@ public class Pill_ListActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "p_list 진입");
         Intent intent = getIntent();
         loginMember = (Member) intent.getSerializableExtra("loginMember");
+        current_page_value = intent.getIntExtra("current_page_value", 0);
 
         setRefs();
         setList();

@@ -2,4 +2,7 @@
     <string name="app_name">Yakssok</string>
     <string name="GO_BACK">뒤로가기</string>
     <string name="GO_MAIN">메인으로</string>
+    <string name="GO_NEXT">다음</string>
+    <string name="GO_BACK_2">이전</string>
+    <string name="GO_UP">맨 위로</string>
 </resources>
