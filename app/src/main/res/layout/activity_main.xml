@@ -10,101 +10,124 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="166dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         app:srcCompat="@drawable/title" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_main_pill"
-            style="@android:style/Widget.Button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="약 정보"
-            android:textSize="30dp" />
+            android:layout_height="90dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_main_board"
-            style="@android:style/Widget.Button"
+            <Button
+                android:id="@+id/btn_main_pill"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="약 정보"
+                android:textSize="30dp" />
+
+            <Button
+                android:id="@+id/btn_main_board"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="게시판"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="게시판"
-            android:textSize="30dp" />
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_main_drugstore"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="약국찾기"
+                android:textSize="30dp" />
+
+            <Button
+                android:id="@+id/btn_main_emergency"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="응급상황"
+                android:textSize="30dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/str_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="로그인 해주세요."
+            android:textAlignment="center"
+            android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btn_main_drugstore"
+            android:id="@+id/btn_main_regist"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="약국찾기"
-            android:textSize="30dp" />
+            android:fontFamily="sans-serif"
+            android:text="회원가입"
+            android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btn_main_emergency"
+            android:id="@+id/btn_main_login"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="응급상황"
-            android:textSize="30dp" />
+            android:text="로그인"
+            android:textAllCaps="false"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btn_main_modify"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="회원정보"
+            android:textSize="20dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_main_logout"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="로그아웃"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            android:visibility="gone" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/str_output"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그인 해주세요."
-        android:textAlignment="center"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btn_main_login"
-        style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그인"
-        android:textAllCaps="false"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btn_main_logout"
-        style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그아웃"
-        android:textAllCaps="false"
-        android:textSize="20dp"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btn_main_regist"
-        style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="회원가입"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btn_main_modify"
-        style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="회원정보"
-        android:textSize="20dp"
-        android:visibility="gone" />
 
 </LinearLayout>
