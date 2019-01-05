@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="choice">
+    <string-array name="pill_item_choice">
         <item>평점순</item>
         <item>이름순</item>
     </string-array>

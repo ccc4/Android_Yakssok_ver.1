@@ -27,7 +27,7 @@
             android:id="@+id/spn_p_list_choice"
             android:layout_width="110dp"
             android:layout_height="0dp"
-            android:entries="@array/choice"
+            android:entries="@array/pill_item_choice"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,20 +69,20 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_p_list_go_first"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/GO_FIRST" />
+
+            <Button
                 android:id="@+id/btn_p_list_prev"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/GO_BACK_2" />
-
-            <Button
-                android:id="@+id/btn_p_list_go_up"
-                style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/GO_UP" />
 
             <Button
                 android:id="@+id/btn_p_list_next"

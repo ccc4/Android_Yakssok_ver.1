@@ -2,6 +2,7 @@ package com.example.tje.yakssok.pill;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,11 +35,12 @@ import java.util.List;
 public class Pill_ListActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Yakssok";
-//    private static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
-    private static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://172.30.56.206:8080/Yakssok";
+//    private static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    //    private static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
     int current_page_value = 0;
-    String choice = "평점순";
+    String choice = null;
 
     Member loginMember;
     P_mList_Helper list_helper;
@@ -48,20 +50,29 @@ public class Pill_ListActivity extends AppCompatActivity {
     Button btn_p_list_go_main;
     TextView str_p_list_page;
     Spinner spn_p_list_choice;
+    Button btn_p_list_go_first;
     Button btn_p_list_prev;
-    Button btn_p_list_go_up;
     Button btn_p_list_next;
 
     private void setRefs() {
         btn_p_list_go_main = (Button) findViewById(R.id.btn_p_list_go_main);
         str_p_list_page = (TextView) findViewById(R.id.str_p_list_page);
         spn_p_list_choice = (Spinner) findViewById(R.id.spn_p_list_choice);
+        btn_p_list_go_first = (Button) findViewById(R.id.btn_p_list_go_first);
         btn_p_list_prev = (Button) findViewById(R.id.btn_p_list_prev);
-        btn_p_list_go_up = (Button) findViewById(R.id.btn_p_list_go_up);
         btn_p_list_next = (Button) findViewById(R.id.btn_p_list_next);
 
         if(current_page_value == 0) {
             btn_p_list_prev.setEnabled(false);
+            btn_p_list_go_first.setEnabled(false);
+        }
+
+        if(choice == null) {
+            choice = "평점순";
+        }
+
+        if(choice.equals("이름순")) {
+            spn_p_list_choice.setSelection(1);
         }
     }
 
@@ -71,7 +82,8 @@ public class Pill_ListActivity extends AppCompatActivity {
             @Override
             protected Object doInBackground(Object[] objects) {
                 try {
-                    int current_page = current_page_value * 10;
+                    Log.d(LOG_TAG, "pill list AsyncTask 진입, current_page_value => " + current_page_value + ", choice => " + choice);
+                    int current_page = current_page_value * 8;
                     URL endPoint = new URL(SERVER_ADDRESS + "/pill/mList" + "/" + choice + "/" + current_page);
                     HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
 
@@ -99,7 +111,7 @@ public class Pill_ListActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     str_p_list_page.setText(current_page_value + 1 + " 번째 페이지");
-                                    if(list_helper.getAll_count() <= (current_page_value + 1) * 10) {
+                                    if(list_helper.getAll_count() <= (current_page_value + 1) * 8) {
                                         btn_p_list_next.setEnabled(false);
                                     }
                                 }
@@ -124,7 +136,7 @@ public class Pill_ListActivity extends AppCompatActivity {
                 Pill_CustomAdapter adapter = new Pill_CustomAdapter(list, loginMember);
                 p_recyclerView.setAdapter(adapter);
                 p_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                Log.d(LOG_TAG, "p_list_activity onPostExecute 성공적 실행 완료");
+                Log.d(LOG_TAG, "p_list_activity onPostExecute 실행");
             }
         }.execute();
     }
@@ -143,24 +155,50 @@ public class Pill_ListActivity extends AppCompatActivity {
 
         spn_p_list_choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
-                Log.d(LOG_TAG, "choice-position: " + position);
-                Log.d(LOG_TAG, "choice-name: " + parent.getItemAtPosition(position));
+                if(choice.equals(adapterView.getSelectedItem())) {
+                    return;
+                }
+
+                Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
+                intent.putExtra("current_page_value", 0);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
 
                 switch (position) {
-                    case 0:
-                        Toast.makeText(getApplicationContext(), "선택: " + parent.getItemAtPosition(0), Toast.LENGTH_SHORT).show();
+                    case 0: // 평점순
+                        Log.d(LOG_TAG, "pill list 평점순 선택됨");
+                        intent.putExtra("choice", "평점순");
+                        startActivity(intent);
                         break;
-                    case 1:
-                        Toast.makeText(getApplicationContext(), "선택: " + parent.getItemAtPosition(1), Toast.LENGTH_SHORT).show();
+                    case 1: // 이름순
+                        Log.d(LOG_TAG, "pill list 이름순 선택됨");
+                        intent.putExtra("choice", "이름순");
+                        startActivity(intent);
                         break;
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        btn_p_list_go_first.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "pill list 처음으로 가기 버튼 눌림");
+
+                Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
+                intent.putExtra("current_page_value", 0);
+                intent.putExtra("choice", choice);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
             }
         });
 
@@ -175,6 +213,7 @@ public class Pill_ListActivity extends AppCompatActivity {
                 current_page_value -= 1;
                 Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
                 intent.putExtra("current_page_value", current_page_value);
+                intent.putExtra("choice", choice);
                 if (loginMember != null) {
                     intent.putExtra("loginMember", loginMember);
                 }
@@ -189,6 +228,7 @@ public class Pill_ListActivity extends AppCompatActivity {
                 current_page_value += 1;
                 Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
                 intent.putExtra("current_page_value", current_page_value);
+                intent.putExtra("choice", choice);
                 if (loginMember != null) {
                     intent.putExtra("loginMember", loginMember);
                 }
@@ -196,12 +236,6 @@ public class Pill_ListActivity extends AppCompatActivity {
             }
         });
 
-        btn_p_list_go_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
@@ -213,6 +247,7 @@ public class Pill_ListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         loginMember = (Member) intent.getSerializableExtra("loginMember");
         current_page_value = intent.getIntExtra("current_page_value", 0);
+        choice = intent.getStringExtra("choice");
 
         setRefs();
         setList();

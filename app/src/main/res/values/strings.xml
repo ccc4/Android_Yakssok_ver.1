@@ -5,4 +5,5 @@
     <string name="GO_NEXT">다음</string>
     <string name="GO_BACK_2">이전</string>
     <string name="GO_UP">맨 위로</string>
+    <string name="GO_FIRST">처음으로</string>
 </resources>

@@ -46,7 +46,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://172.30.56.206:8080/Yakssok";
+//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
 //    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
