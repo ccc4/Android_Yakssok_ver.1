@@ -34,8 +34,7 @@ import java.net.URL;
 public class JoinActivity extends AppCompatActivity {
 
     private static final String LOG_TAG ="yakssokjoin";
-//    public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    String SERVER_ADDRESS;
 
     EditText join_id;
     EditText join_pw;
@@ -64,6 +63,8 @@ public class JoinActivity extends AppCompatActivity {
 
 
     public void initRefs(){
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         join_id = findViewById(R.id.join_id);
         join_pw = findViewById(R.id.join_pw);
         join_check_pw = findViewById(R.id.join_check_pw);

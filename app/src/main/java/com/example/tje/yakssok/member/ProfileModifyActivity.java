@@ -33,8 +33,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
 
 
     private static final String LOG_TAG ="Yakssok";
-//    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    String SERVER_ADDRESS;
 
     Member loginMember;
 
@@ -49,6 +48,7 @@ public class ProfileModifyActivity extends AppCompatActivity {
 
 
     public void initRefs(){
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 

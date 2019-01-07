@@ -35,9 +35,8 @@ import java.util.List;
 public class Pill_ListActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
-//    private static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-    //    private static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
+
+    String SERVER_ADDRESS;
 
     int current_page_value = 0;
     String choice = null;
@@ -55,6 +54,8 @@ public class Pill_ListActivity extends AppCompatActivity {
     Button btn_p_list_next;
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         btn_p_list_go_main = (Button) findViewById(R.id.btn_p_list_go_main);
         str_p_list_page = (TextView) findViewById(R.id.str_p_list_page);
         spn_p_list_choice = (Spinner) findViewById(R.id.spn_p_list_choice);

@@ -17,8 +17,7 @@ import com.example.tje.yakssok.R;
 public class DaumWebViewActivity extends AppCompatActivity {
 
     private static final String LOG_TAG= "Yakssok";
-//    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    String SERVER_ADDRESS;
 
     WebView daum_webView;
     TextView daum_result;
@@ -30,6 +29,8 @@ public class DaumWebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daum_web_view);
+
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
         daum_result = findViewById(R.id.daum_result);
         btn_address_cancle = findViewById(R.id.btn_address_cancel);

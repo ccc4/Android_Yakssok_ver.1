@@ -32,7 +32,8 @@ import java.net.URL;
 public class Pill_ViewActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
+
+    String SERVER_ADDRESS;
 
     int p_idx;
     int current_page_value;
@@ -64,6 +65,8 @@ public class Pill_ViewActivity extends AppCompatActivity {
     Button btn_p_view_next;
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         btn_p_view_go_back = findViewById(R.id.btn_p_view_go_back);
         btn_p_view_ingredients = findViewById(R.id.btn_p_view_ingredients);
         btn_p_view_company = findViewById(R.id.btn_p_view_company);

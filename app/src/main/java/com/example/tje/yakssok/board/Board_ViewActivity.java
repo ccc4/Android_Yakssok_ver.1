@@ -32,9 +32,7 @@ import java.util.List;
 public class Board_ViewActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
-//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-//public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
+    String SERVER_ADDRESS;
 
     String type;
     Member loginMember;
@@ -73,6 +71,8 @@ public class Board_ViewActivity extends AppCompatActivity {
     }
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         str_b_view_title = (TextView)findViewById(R.id.str_b_view_title);
         str_b_view_nickname = (TextView)findViewById(R.id.str_b_view_nickname);
         str_b_view_writeDate = (TextView)findViewById(R.id.str_b_view_writeDate);

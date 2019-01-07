@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -45,17 +46,16 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
+    private static final String LOG_TAG = "Yakssok";
 //    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
 //    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
+    String SERVER_ADDRESS;
+
     Gson gson;
     Member loginMember;
-
-
 
     TextView str_output;
     Button btn_main_login;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_main_emergency;
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 //        gson = new Gson();
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         loginMember = null;

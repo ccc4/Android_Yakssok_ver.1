@@ -33,9 +33,7 @@ import java.net.URL;
 public class Modify_Pw_Activity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-//    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-
+    String SERVER_ADDRESS;
 
     Member loginMember;
 
@@ -51,6 +49,7 @@ public class Modify_Pw_Activity extends AppCompatActivity {
     Button btn_modify_pw_cancle;
 
     public void initRefs(){
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
         str_member_pw = (EditText)findViewById(R.id.str_member_pw);
         str_member_newpw = (EditText)findViewById(R.id.str_member_newpw);

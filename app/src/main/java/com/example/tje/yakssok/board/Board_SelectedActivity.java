@@ -28,9 +28,7 @@ import java.util.List;
 public class Board_SelectedActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
-//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-//public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
+    String SERVER_ADDRESS;
 
     String type;
     Member loginMember;
@@ -42,6 +40,8 @@ public class Board_SelectedActivity extends AppCompatActivity {
     Button btn_b_selected_go_main;
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         btn_b_selected_write = (Button)findViewById(R.id.btn_b_selected_write);
         btn_b_selected_back = (Button)findViewById(R.id.btn_b_selected_back);
         btn_b_selected_go_main = (Button)findViewById(R.id.btn_b_selected_go_main);
