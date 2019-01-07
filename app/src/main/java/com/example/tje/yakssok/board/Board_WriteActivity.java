@@ -30,7 +30,8 @@ import java.util.Map;
 public class Board_WriteActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
+//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
 //public static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
     String type;

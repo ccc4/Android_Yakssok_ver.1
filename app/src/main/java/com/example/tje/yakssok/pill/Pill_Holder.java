@@ -20,7 +20,7 @@ public class Pill_Holder extends RecyclerView.ViewHolder {
     TextView str_p_item_effet_main;
     TextView str_p_item_idx;
 
-    public Pill_Holder(View v, final Member loginMember) {
+    public Pill_Holder(View v, final int current_page_value, final String choice, final Member loginMember) {
         super(v);
 
         layout_p_item = (ConstraintLayout)v.findViewById(R.id.layout_p_item);
@@ -37,6 +37,15 @@ public class Pill_Holder extends RecyclerView.ViewHolder {
                 if (loginMember != null) {
                     Log.d("Yakssok", "pill view로 전해지는 멤버아이디: " + loginMember.getId());
                 }
+
+                Intent intent = new Intent(v.getContext(), Pill_ViewActivity.class);
+                intent.putExtra("p_idx", Integer.parseInt(str_p_item_idx.getText().toString()));
+                intent.putExtra("current_page_value", current_page_value);
+                intent.putExtra("choice", choice);
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                v.getContext().startActivity(intent);
             }
         });
     }

@@ -35,7 +35,7 @@ import java.util.List;
 public class Pill_ListActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://172.30.56.206:8080/Yakssok";
+    public static final String SERVER_ADDRESS = "http://192.168.0.25:8080/Yakssok";
 //    private static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
     //    private static final String SERVER_ADDRESS = "http://192.168.0.24:8080/Yakssok";
 
@@ -133,7 +133,7 @@ public class Pill_ListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Object o) {
                 p_recyclerView = (RecyclerView)findViewById(R.id.p_recyclerView);
-                Pill_CustomAdapter adapter = new Pill_CustomAdapter(list, loginMember);
+                Pill_CustomAdapter adapter = new Pill_CustomAdapter(list, current_page_value, choice, loginMember);
                 p_recyclerView.setAdapter(adapter);
                 p_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 Log.d(LOG_TAG, "p_list_activity onPostExecute 실행");

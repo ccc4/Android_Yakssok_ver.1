@@ -16,10 +16,14 @@ import java.util.List;
 public class Pill_CustomAdapter extends RecyclerView.Adapter<Pill_Holder> {
 
     List<P_mList> list;
+    int current_page_value;
+    String choice;
     Member loginMember;
 
-    public Pill_CustomAdapter(List<P_mList> list, Member loginMember) {
+    public Pill_CustomAdapter(List<P_mList> list, int current_page_value, String choice, Member loginMember) {
         this.list = list;
+        this.current_page_value = current_page_value;
+        this.choice = choice;
         this.loginMember = loginMember;
     }
 
@@ -27,7 +31,7 @@ public class Pill_CustomAdapter extends RecyclerView.Adapter<Pill_Holder> {
     @Override
     public Pill_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pill_list, parent, false);
-        return new Pill_Holder(view, loginMember);
+        return new Pill_Holder(view, current_page_value, choice, loginMember);
     }
 
     @Override
