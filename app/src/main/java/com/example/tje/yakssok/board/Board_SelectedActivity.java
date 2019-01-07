@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Board;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
@@ -120,34 +121,50 @@ public class Board_SelectedActivity extends AppCompatActivity {
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                try {
-                    URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type);
-                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
 
-                    if(myConnection.getResponseCode() == 200) {
-                        Log.d(LOG_TAG, "board list 200번 성공으로 들어옴");
-                        BufferedReader in =
-                                new BufferedReader(
-                                        new InputStreamReader(
-                                                myConnection.getInputStream()));
-                        StringBuffer buffer = new StringBuffer();
-                        String temp = null;
-                        while((temp = in.readLine()) != null) {
-                            buffer.append(temp);
-                        }
-                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                        Type type = new TypeToken<List<Board>>(){}.getType();
-                        list = gson.fromJson(buffer.toString(), type);
-                        Log.d(LOG_TAG, "list size : " + list.size());
-                    } else {
-                        Log.d(LOG_TAG, "서버연결 실패");
-                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
-                    }
-                } catch(Exception e) {
-                    e.printStackTrace();
-                    Log.d(LOG_TAG, "list 받아오기 - 연결실패");
-                    Log.d(LOG_TAG, e.getMessage());
-                }
+                Server_Connect_Helper helper = new Server_Connect_Helper("board list");
+                helper.connect(SERVER_ADDRESS + "/mBoard/" + type);
+                Type type = new TypeToken<List<Board>>(){}.getType();
+                list = (List<Board>) helper.getResult(type);
+//                if(list != null) {
+//                    Log.d(LOG_TAG, "helper 클래스 result 에 대해 list 는 null 이 아님!");
+//
+//                    Log.d(LOG_TAG, list.toString());
+//
+//                }
+
+
+//                try {
+//                    URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type);
+//                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                    if(myConnection.getResponseCode() == 200) {
+//                        Log.d(LOG_TAG, "board list 200번 성공으로 들어옴");
+//                        BufferedReader in =
+//                                new BufferedReader(
+//                                        new InputStreamReader(
+//                                                myConnection.getInputStream()));
+//                        StringBuffer buffer = new StringBuffer();
+//                        String temp = null;
+//                        while((temp = in.readLine()) != null) {
+//                            buffer.append(temp);
+//                        }
+//                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                        Type type = new TypeToken<List<Board>>(){}.getType();
+//                        list = gson.fromJson(buffer.toString(), type);
+//                        Log.d(LOG_TAG, "list size : " + list.size());
+//
+//                        Log.d(LOG_TAG, list.toString());
+//
+//                    } else {
+//                        Log.d(LOG_TAG, "서버연결 실패");
+//                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+//                    }
+//                } catch(Exception e) {
+//                    e.printStackTrace();
+//                    Log.d(LOG_TAG, "list 받아오기 - 연결실패");
+//                    Log.d(LOG_TAG, e.getMessage());
+//                }
                 return null;
             }
 
@@ -161,7 +178,6 @@ public class Board_SelectedActivity extends AppCompatActivity {
                 b_recyclerView.setAdapter(adapter);
                 //4.리사이클러뷰매니저
                 b_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                Log.d(LOG_TAG, "list size : " + list.size());
             }
         }.execute();
     }

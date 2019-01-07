@@ -14,11 +14,10 @@ import java.net.URL;
 
 // generic 타입으로 들어온 값은
 // 아래에서 Gson 을 이용한 객체화 과정에서 Type 을 받을 때 쓰인다.
-public class Server_Connect_Helper <T> {
+// -> 제네릭 타입을 이용한 방법을 실패.. string 이 객체화가 안된다.. 내일 다시 테스트해보기
+public class Server_Connect_Helper {
 
     private static final String LOG_TAG = "Yakssok";
-
-    Type returnType = new TypeToken<T>(){}.getType();
 
     String about;
     HttpURLConnection myConnection;
@@ -74,8 +73,10 @@ public class Server_Connect_Helper <T> {
     }
 
     // 2 - 최종적으로 연결 및 값 전달 후 받는 값 리턴시키기
-    //     매개변수로는 반납받을 타입지정
-    public Object getResult() {
+    //     매개변수로는 반납받을 타입지정 ( 밖에서 Type 값을 만들어 받아와야한다.)
+    //     ex) Type type = new TypeToken<List<Board>>(){}.getType();
+    //     해서 나온 type 변수.
+    public Object getResult(Type type) {
 
         try {
 
@@ -98,8 +99,8 @@ public class Server_Connect_Helper <T> {
 
                 // 타입 설정
                 //Type ReturnType = new TypeToken<T>(){}.getType();
-
-                return gson.fromJson(buffer.toString(), returnType);
+                Log.d(LOG_TAG, "test -" + buffer.toString());
+                return gson.fromJson(buffer.toString(), type);
 
             } else {
                 Log.d(LOG_TAG, about + " - getResult : 서버연결 실패");
