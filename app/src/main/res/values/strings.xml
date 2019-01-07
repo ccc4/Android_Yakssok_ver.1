@@ -20,7 +20,7 @@
     <string name="NICKNAME">닉네임</string>
     <string name="NAME">이름</string>
     <string name="TITLE">제목</string>
-    <string name="DATE_EXAMPLE">19/01/01 24:24:24</string>
+    <string name="DATE_EXAMPLE">19-01-01 24:24:24</string>
     <string name="CONTENTS">내용</string>
     <string name="SERVER_ADDRESS_STR">http://192.168.0.15:8080//Yakssok</string>
 </resources>

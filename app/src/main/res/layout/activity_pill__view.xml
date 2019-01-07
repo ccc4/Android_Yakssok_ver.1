@@ -8,13 +8,14 @@
 
 
     <ScrollView
+        android:id="@+id/sv_pill_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,8 +107,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -149,39 +150,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="right"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btn_p_view_go_up"
                         style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/GO_UP" />
 
-                    <Button
-                        android:id="@+id/btn_p_view_go_first"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/GO_FIRST" />
-
-                    <Button
-                        android:id="@+id/btn_p_view_prev"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/GO_BACK_2" />
-
-                    <Button
-                        android:id="@+id/btn_p_view_next"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/GO_NEXT" />
                 </LinearLayout>
             </LinearLayout>
 

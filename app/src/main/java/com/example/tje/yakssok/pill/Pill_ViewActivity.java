@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tje.yakssok.R;
@@ -22,11 +23,13 @@ import com.example.tje.yakssok.model.P_mOne;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 
 public class Pill_ViewActivity extends AppCompatActivity {
@@ -41,6 +44,8 @@ public class Pill_ViewActivity extends AppCompatActivity {
     Member loginMember;
 
     P_mOne p_mOne;
+
+    ScrollView sv_pill_view;
 
     Button btn_p_view_go_back;
 
@@ -60,13 +65,11 @@ public class Pill_ViewActivity extends AppCompatActivity {
     Button btn_p_review_write;
 
     Button btn_p_view_go_up;
-    Button btn_p_view_go_first;
-    Button btn_p_view_prev;
-    Button btn_p_view_next;
 
     private void setRefs() {
         SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
+        sv_pill_view = findViewById(R.id.sv_pill_view);
         btn_p_view_go_back = findViewById(R.id.btn_p_view_go_back);
         btn_p_view_ingredients = findViewById(R.id.btn_p_view_ingredients);
         btn_p_view_company = findViewById(R.id.btn_p_view_company);
@@ -74,15 +77,15 @@ public class Pill_ViewActivity extends AppCompatActivity {
         btn_p_view_details = findViewById(R.id.btn_p_view_details);
         btn_p_review_write = findViewById(R.id.btn_p_review_write);
         btn_p_view_go_up = findViewById(R.id.btn_p_view_go_up);
-        btn_p_view_go_first = findViewById(R.id.btn_p_view_go_first);
-        btn_p_view_prev = findViewById(R.id.btn_p_view_prev);
-        btn_p_view_next = findViewById(R.id.btn_p_view_next);
         img_p_view = findViewById(R.id.img_p_view);
         img_p_view_state = findViewById(R.id.img_p_view_state);
         str_p_view_name = findViewById(R.id.str_p_view_name);
         str_p_view_percent = findViewById(R.id.str_p_view_percent);
         str_p_review_write = findViewById(R.id.str_p_review_write);
         review_recyclerView = findViewById(R.id.review_recyclerView);
+
+        btn_p_review_write.setEnabled(false);
+        str_p_review_write.setFocusable(false);
     }
 
     private void setView() {
@@ -117,9 +120,15 @@ public class Pill_ViewActivity extends AppCompatActivity {
                             Log.d(LOG_TAG, p_mOne.getP_idx() + " 의 pill one view 받아옴");
 
                             if(p_mOne.getImgPath() != null) {
-                                Log.d(LOG_TAG, "이미지 path: " + p_mOne.getImgPath());
+                                Log.d(LOG_TAG, "이미지 path: " + SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath());
                                 // 이미지 가져오기.. how?
-                                img_p_view.setImageURI(Uri.parse(SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath()));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Picasso.get().load(SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath()).into(img_p_view);
+                                    }
+                                });
+
                             } else {
                                 img_p_view.setImageResource(R.drawable.no_image);
                             }
@@ -133,6 +142,9 @@ public class Pill_ViewActivity extends AppCompatActivity {
                             }
                             str_p_view_percent.setText(Integer.toString(p_mOne.getRating()) + " %");
 
+                            if (loginMember != null) {
+                                setEnabled(btn_p_review_write, true);
+                            }
                         } else{
                             Log.d(LOG_TAG, "pill one null");
                             finish();
@@ -154,11 +166,10 @@ public class Pill_ViewActivity extends AppCompatActivity {
             protected void onPostExecute(Object o) {
                 // 해당 pill view 에 대한 review 작업할 곳
 
-//                p_recyclerView = (RecyclerView)findViewById(R.id.p_recyclerView);
-//                Pill_CustomAdapter adapter = new Pill_CustomAdapter(list, current_page_value, choice, loginMember);
-//                p_recyclerView.setAdapter(adapter);
-//                p_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//                Log.d(LOG_TAG, "p_list_activity onPostExecute 실행");
+                review_recyclerView = findViewById(R.id.review_recyclerView);
+                Review_CustomAdapter adapter = new Review_CustomAdapter(p_mOne.getReview(), loginMember);
+                review_recyclerView.setAdapter(adapter);
+                review_recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
         }.execute();
     }
@@ -183,6 +194,13 @@ public class Pill_ViewActivity extends AppCompatActivity {
                     intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
+            }
+        });
+
+        btn_p_view_go_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sv_pill_view.fullScroll(ScrollView.FOCUS_UP);
             }
         });
     }
