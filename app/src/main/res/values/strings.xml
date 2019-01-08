@@ -25,4 +25,7 @@
     <string name="SERVER_ADDRESS_STR">http://192.168.0.15:8080//Yakssok</string>
     <string name="BTN_GOOD">Good :)</string>
     <string name="BTN_BAD">Bad :(</string>
+    <string name="REFRESH">새로고침</string>
+    <string name="REFRESH_COORDS">위치갱신</string>
+    <string name="D_NEARBY_TITLE">내 주변 약국</string>
 </resources>

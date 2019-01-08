@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tje.yakssok.board.Board_MainActivity;
+import com.example.tje.yakssok.drugstore.Drugstore_NearbyActivity;
 import com.example.tje.yakssok.member.JoinActivity;
 import com.example.tje.yakssok.member.Modify_Pw_Activity;
 import com.example.tje.yakssok.member.ProfileModifyActivity;
@@ -47,8 +48,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Yakssok";
-//    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
-//    public static final String SERVER_ADDRESS = "http://172.30.1.59:8080/Yakssok";
+
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRefs() {
         SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
-//        gson = new Gson();
+
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         loginMember = null;
 
@@ -98,7 +98,13 @@ public class MainActivity extends AppCompatActivity {
         btn_main_drugstore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getApplicationContext(), Drugstore_NearbyActivity.class);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
             }
         });
         btn_main_emergency.setOnClickListener(new View.OnClickListener() {
@@ -404,24 +410,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //권한 체크
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            checkedPermission();
-        }else{
-            init();
+        int permission_INTERNET = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET);
+        if(permission_INTERNET == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 112);
         }
+
+        int permission_ACCESS_FINE_LOCATION = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+        if(permission_ACCESS_FINE_LOCATION == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 112);
+        }
+
+        int permission_ACCESS_COARSE_LOCATION = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
+        if(permission_ACCESS_COARSE_LOCATION == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 112);
+        }
+        init();
     }
 
-    public static final int REQ_PERM = 1;
-    @TargetApi(Build.VERSION_CODES.M)
-    public void checkedPermission(){
-        if(checkSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED){ //권한을 허용하지 않았을때
-
-            String permarr[] = {Manifest.permission.INTERNET};
-            requestPermissions(permarr, REQ_PERM);
-        }else{ //권한을 허용했을때
-            init();
-        }
-    }
 
 
     @Override
@@ -439,19 +444,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == REQ_PERM){
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                    && grantResults[1] ==PackageManager.PERMISSION_GRANTED
-                    ){
-                init();
-            }else{
-                Toast.makeText(getBaseContext(), "권한을 허용하지 않으시면 프로그램을 실행 시킬 수 없습니다.", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
-    }
 
     public void init(){
         setRefs();

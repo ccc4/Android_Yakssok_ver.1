@@ -82,7 +82,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
         //web client를 chrome 으로 설정
         daum_webView.setWebChromeClient(new WebChromeClient());
         //webview url load.jsp 파일 주소
-        daum_webView.loadUrl(SERVER_ADDRESS + "/mobileDaumApi.jsp");
+        daum_webView.loadUrl(SERVER_ADDRESS + "/mobile/API_Daum_Address");
     }
 
 
