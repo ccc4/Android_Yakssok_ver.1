@@ -111,7 +111,7 @@ public class Server_Connect_Helper {
 
     // 2 - 최종적으로 연결 및 값 전달 후 받는 값 리턴시키기
     //     매개변수로는 반납받을 타입지정 ( 밖에서 Type 값을 만들어 받아와야한다.)
-    //     ex) Type type = new TypeToken<List<Board>>(){}.getType();
+    //     ex) Type resultType = new TypeToken<List<Board>>(){}.getType();
     //     해서 나온 type 변수.
     public Object getResult(Type resultType) {
 
@@ -133,11 +133,27 @@ public class Server_Connect_Helper {
                 // 받은 String 문자열을 Gson 을 이용해 객체화 시키기 위한 준비.
                 // 객체의 멤버필드중 날짜정보가 있을 시 에러발생하는데 아래와 같이 생성해주면 피할 수 있다.
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                // 1)
+                // 이렇게 받으려면 controller 에서도 당연히
+                // Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                // 와 같이 만들어서 보내주어야 한다.
+                // 2)
+                // 날짜를 쓰지 않는 경우
+                // Gson gson = new Gson();
+                // 으로 보내줘도 괜찮은 것 확인!
 
-                // 타입 설정
+                // Type 설정
                 // Type ReturnType = new TypeToken<T>(){}.getType();
-                // 을 밖에서 해준다.
-                Log.d(LOG_TAG, "test -" + buffer.toString()); // JSON 확인
+                // 을 밖에서 해준뒤에 매개변수로 전달
+
+
+                // JSON 확인용
+                // 필요에 따라 주석 풀어서 사용할 것.
+
+//                Log.d(LOG_TAG, "test -" + buffer.toString());
+
+
+
                 return gson.fromJson(buffer.toString(), resultType);      // 객체화 시켜서 리턴
 
             } else {
