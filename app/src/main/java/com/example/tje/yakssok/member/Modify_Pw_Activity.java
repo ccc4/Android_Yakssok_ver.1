@@ -20,13 +20,16 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Count;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -158,65 +161,104 @@ public class Modify_Pw_Activity extends AppCompatActivity {
                         String pw = str_member_pw.getText().toString();
                         String newPw = str_member_newpw.getText().toString();
                         String id = loginMember.getId();
-                        try {
-                            URL endPoint = new URL(SERVER_ADDRESS + "/member/mModifyPw");
-                            HttpURLConnection myConnection = (HttpURLConnection) endPoint.openConnection();
-                            Log.d(LOG_TAG, "커넥션 객체 생성");
 
-                            //전송모드설정
-                            myConnection.setRequestMethod("POST");
+                        Server_Connect_Helper helper = new Server_Connect_Helper("member modify-pw");
+                        helper.connect(SERVER_ADDRESS + "/member/mModifyPw");
+                        helper.selectMethod("POST");
 
-                            String str = "id=%s&pw=%s&newPw=%s";
+                        String str = "id=%s&pw=%s&newPw=%s";
+                        helper.setValue(String.format(str, id, pw, newPw));
+                        Type resultType = new TypeToken<Count>(){}.getType();
+                        Count count = (Count) helper.getResult(resultType);
 
-                            String requestParam = String.format(str, id, pw, newPw);
-                            Log.d(LOG_TAG, requestParam);
-                            Log.d(LOG_TAG, "서버로 전송");
-                            myConnection.setDoOutput(true); //서버에서 읽기모드
-                            myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
-
-                            if (myConnection.getResponseCode() == 200) {
-                                Log.d(LOG_TAG, "200진입");
-
-                                BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
-                                StringBuffer buffer = new StringBuffer();
-                                String temp = null;
-                                while ((temp = in.readLine()) != null)
-                                    buffer.append(temp);
-                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                                Count count = gson.fromJson(buffer.toString(), Count.class);
-
-
-                                StringBuffer data = new StringBuffer();
-                                Log.d(LOG_TAG, buffer.toString());
-
-                                if (count.getCount() == 0) {
-                                    data.append("잘못된 비밀번호입니다.");
-                                    error_member_pw.setTextColor(Color.rgb(204, 000, 000));
-                                    error_member_pw.setText(data.toString());
-                                } else {
-                                    show_Toast("변경 성공");
-                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                    //intent.putExtra("loginMember",loginMember);
-                                    startActivity(intent);
-                                }
-                            } else {
-                                Log.d(LOG_TAG, "실패! 응답코드:" + myConnection.getResponseCode());
-                            }
-                        } catch (Exception e) {
-                            Log.d(LOG_TAG, "catch 진입");
-                            e.printStackTrace();
+                        StringBuffer data = new StringBuffer();
+                        if (count.getCount() == 0) {
+                            data.append("잘못된 비밀번호입니다.");
+                            setTextColor_TextView(error_member_pw, Color.rgb(204, 000, 000));
+                            setText_TextView(error_member_pw, data.toString());
+                        } else {
+                            setToast("변경 성공");
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
                         }
+
+//                        try {
+//                            URL endPoint = new URL(SERVER_ADDRESS + "/member/mModifyPw");
+//                            HttpURLConnection myConnection = (HttpURLConnection) endPoint.openConnection();
+//                            Log.d(LOG_TAG, "커넥션 객체 생성");
+//
+//                            //전송모드설정
+//                            myConnection.setRequestMethod("POST");
+//
+//                            String str = "id=%s&pw=%s&newPw=%s";
+//
+//                            String requestParam = String.format(str, id, pw, newPw);
+//                            Log.d(LOG_TAG, requestParam);
+//                            Log.d(LOG_TAG, "서버로 전송");
+//                            myConnection.setDoOutput(true); //서버에서 읽기모드
+//                            myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+//
+//                            if (myConnection.getResponseCode() == 200) {
+//                                Log.d(LOG_TAG, "200진입");
+//
+//                                BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
+//                                StringBuffer buffer = new StringBuffer();
+//                                String temp = null;
+//                                while ((temp = in.readLine()) != null)
+//                                    buffer.append(temp);
+//                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                                Count count = gson.fromJson(buffer.toString(), Count.class);
+//
+//
+//                                StringBuffer data = new StringBuffer();
+//                                Log.d(LOG_TAG, buffer.toString());
+//
+//                                if (count.getCount() == 0) {
+//                                    data.append("잘못된 비밀번호입니다.");
+//                                    error_member_pw.setTextColor(Color.rgb(204, 000, 000));
+//                                    error_member_pw.setText(data.toString());
+//                                } else {
+//                                    show_Toast("변경 성공");
+//                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                                    //intent.putExtra("loginMember",loginMember);
+//                                    startActivity(intent);
+//                                }
+//                            } else {
+//                                Log.d(LOG_TAG, "실패! 응답코드:" + myConnection.getResponseCode());
+//                            }
+//                        } catch (Exception e) {
+//                            Log.d(LOG_TAG, "catch 진입");
+//                            e.printStackTrace();
+//                        }
                     }
                 });
             }
         });
     }
 
-    private void show_Toast(final String text) {
+    private void setToast(final String str) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setTextColor_TextView(final TextView target, final int color) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                target.setTextColor(color);
+            }
+        });
+    }
+
+    private void setText_TextView(final TextView target, final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                target.setText(str);
             }
         });
     }

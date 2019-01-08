@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Member;
 import com.example.tje.yakssok.model.P_mList;
 import com.example.tje.yakssok.model.P_mList_Helper;
@@ -82,51 +83,75 @@ public class Pill_ListActivity extends AppCompatActivity {
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                try {
-                    Log.d(LOG_TAG, "pill list AsyncTask 진입, current_page_value => " + current_page_value + ", choice => " + choice);
-                    int current_page = current_page_value * 8;
-                    URL endPoint = new URL(SERVER_ADDRESS + "/pill/mList" + "/" + choice + "/" + current_page);
-                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+                int current_page = current_page_value * 8;
 
-                    if (myConnection.getResponseCode() == 200) {
-                        Log.d(LOG_TAG, "p_ilst 200 success");
-                        BufferedReader in =
-                                new BufferedReader(
-                                        new InputStreamReader(
-                                                myConnection.getInputStream()));
-                        StringBuffer buffer = new StringBuffer();
-                        String temp = null;
-                        while((temp = in.readLine()) != null) {
-                            buffer.append(temp);
+                Server_Connect_Helper helper = new Server_Connect_Helper("pill list");
+                helper.connect(SERVER_ADDRESS + "/pill/mList" + "/" + choice + "/" + current_page);
+                Type resultType = new TypeToken<P_mList_Helper>(){}.getType();
+                list_helper = (P_mList_Helper) helper.getResult(resultType);
+
+                list = list_helper.getList();
+                Log.d(LOG_TAG, "p_list size: " + list.size());
+
+                if (list.size() > 0) {
+                    Log.d(LOG_TAG, "p_list 받아오기 성공");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            str_p_list_page.setText(current_page_value + 1 + " 번째 페이지");
+                            if(list_helper.getAll_count() <= (current_page_value + 1) * 8) {
+                                btn_p_list_next.setEnabled(false);
+                            }
                         }
-                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                        Type type = new TypeToken<P_mList_Helper>(){}.getType();
-                        list_helper = gson.fromJson(buffer.toString(), type);
-                        list = list_helper.getList();
-                        Log.d(LOG_TAG, "p_list size: " + list.size());
-
-                        if (list.size() > 0) {
-                            Log.d(LOG_TAG, "p_list 받아오기 성공");
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    str_p_list_page.setText(current_page_value + 1 + " 번째 페이지");
-                                    if(list_helper.getAll_count() <= (current_page_value + 1) * 8) {
-                                        btn_p_list_next.setEnabled(false);
-                                    }
-                                }
-                            });
-                        }
-                    } else {
-                        Log.d(LOG_TAG, "서버연결 실패");
-                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d(LOG_TAG, "p_list 받아오기 - 연결실패");
-                    Log.d(LOG_TAG, e.getMessage());
+                    });
                 }
+
+//                try {
+//                    Log.d(LOG_TAG, "pill list AsyncTask 진입, current_page_value => " + current_page_value + ", choice => " + choice);
+//                    int current_page = current_page_value * 8;
+//                    URL endPoint = new URL(SERVER_ADDRESS + "/pill/mList" + "/" + choice + "/" + current_page);
+//                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                    if (myConnection.getResponseCode() == 200) {
+//                        Log.d(LOG_TAG, "p_ilst 200 success");
+//                        BufferedReader in =
+//                                new BufferedReader(
+//                                        new InputStreamReader(
+//                                                myConnection.getInputStream()));
+//                        StringBuffer buffer = new StringBuffer();
+//                        String temp = null;
+//                        while((temp = in.readLine()) != null) {
+//                            buffer.append(temp);
+//                        }
+//                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                        Type type = new TypeToken<P_mList_Helper>(){}.getType();
+//                        list_helper = gson.fromJson(buffer.toString(), type);
+//                        list = list_helper.getList();
+//                        Log.d(LOG_TAG, "p_list size: " + list.size());
+//
+//                        if (list.size() > 0) {
+//                            Log.d(LOG_TAG, "p_list 받아오기 성공");
+//
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    str_p_list_page.setText(current_page_value + 1 + " 번째 페이지");
+//                                    if(list_helper.getAll_count() <= (current_page_value + 1) * 8) {
+//                                        btn_p_list_next.setEnabled(false);
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    } else {
+//                        Log.d(LOG_TAG, "서버연결 실패");
+//                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    Log.d(LOG_TAG, "p_list 받아오기 - 연결실패");
+//                    Log.d(LOG_TAG, e.getMessage());
+//                }
                 return null;
             }
 

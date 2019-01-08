@@ -134,80 +134,106 @@ public class MainActivity extends AppCompatActivity {
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
-                                try {
-                                    EditText str_id = (EditText) dialogView.findViewById(R.id.str_id);
-                                    EditText str_pw = (EditText) dialogView.findViewById(R.id.str_pw);
-                                    String id = str_id.getText().toString().trim();
-                                    String pw = str_pw.getText().toString().trim();
+                                EditText str_id = (EditText) dialogView.findViewById(R.id.str_id);
+                                EditText str_pw = (EditText) dialogView.findViewById(R.id.str_pw);
+                                String id = str_id.getText().toString().trim();
+                                String pw = str_pw.getText().toString().trim();
 
+                                Server_Connect_Helper helper = new Server_Connect_Helper("main login");
+                                helper.connect(SERVER_ADDRESS + "/member/mLogin");
 
-                                    URL endPoint = new URL(SERVER_ADDRESS + "/member/mLogin");
-                                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+                                // 로그인이라 JSESSIONID 관련 메소드 불러줌.
+                                helper.setCookie_1(SERVER_ADDRESS);
 
-                                    // JSESSIONID 관련 - 1 시작
-                                    String cookieString = CookieManager.getInstance().getCookie(
-                                            SERVER_ADDRESS);
-                                    if (cookieString != null) {
-                                        myConnection.setRequestProperty("Cookie", cookieString);
-                                    }
-                                    // JSESSIONID 관련 - 1 끝
+                                helper.selectMethod("POST");
+                                String str = "id=%s&pw=%s";
+                                helper.setValue(String.format(str, id, pw));
 
-                                    // POST 값 전달
-                                    myConnection.setRequestMethod("POST");
+                                helper.setCookie_2(SERVER_ADDRESS);
 
-                                    String requestParam = String.format("id=%s&pw=%s", id, pw);
-                                    myConnection.setDoOutput(true);
-                                    myConnection.getOutputStream().write(requestParam.getBytes());
-                                    // POST 값 전달 끝
+                                Type resultType = new TypeToken<Member>(){}.getType();
+                                loginMember = (Member) helper.getResult(resultType);
 
-                                    // JSESSIONID 관련 - 2 시작
-                                    Map<String, List<String>> headerFields = myConnection.getHeaderFields();
-                                    String COOKIES_HEADER = "Set-Cookie";
-                                    List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-
-                                    if (cookiesHeader != null) {
-                                        for(String cookie : cookiesHeader) {
-                                            String cookieName = HttpCookie.parse(cookie).get(0).getName();
-                                            String cookieValue = HttpCookie.parse(cookie).get(0).getValue();
-
-                                            cookieString = cookieName + "=" + cookieValue;
-                                            CookieManager.getInstance().setCookie(SERVER_ADDRESS, cookieString);
-                                        }
-                                    }
-                                    // JSESSIONID 관련 - 2 끝
-
-                                    if (myConnection.getResponseCode() == 200) {
-                                        Log.d(LOG_TAG, "200번 성공으로 들어옴");
-                                        BufferedReader in =
-                                                new BufferedReader(
-                                                        new InputStreamReader(
-                                                                myConnection.getInputStream()));
-                                        StringBuffer buffer = new StringBuffer();
-                                        String temp = null;
-                                        while((temp = in.readLine()) != null) {
-                                            buffer.append(temp);
-                                        }
-                                        Log.d(LOG_TAG, "중간체크");
-                                        Log.d(LOG_TAG, buffer.toString());
-                                        loginMember = gson.fromJson(buffer.toString(), Member.class);
-                                        if(loginMember != null) {
-                                            show_Toast("로그인성공!");
-                                            Log.d(LOG_TAG, "로그인성공! " + loginMember.getNickname() + " 님 환영합니다 :)");
-                                            check_login();
-                                        } else {
-                                            show_Toast("로그인실패!");
-                                            Log.d(LOG_TAG, "로그인실패");
-                                        }
-                                    } else {    // 200이 아닐 때
-                                        show_Toast("200번x");
-                                        Log.d(LOG_TAG, "200번x");
-                                    }
-                                } catch (Exception e) {
-                                    show_Toast("연결실패!");
-                                    e.printStackTrace();
-                                    Log.d(LOG_TAG, "login catch - 연결실패");
-                                    Log.d(LOG_TAG, e.getMessage());
+                                if(loginMember != null) {
+                                    show_Toast("로그인성공!");
+                                    Log.d(LOG_TAG, "로그인성공! " + loginMember.getNickname() + " 님 환영합니다 :)");
+                                    check_login();
+                                } else {
+                                    show_Toast("로그인실패!");
+                                    Log.d(LOG_TAG, "로그인실패");
                                 }
+
+
+//                                try {
+//
+//
+//                                    URL endPoint = new URL(SERVER_ADDRESS + "/member/mLogin");
+//                                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                                    // JSESSIONID 관련 - 1 시작
+//                                    String cookieString = CookieManager.getInstance().getCookie(
+//                                            SERVER_ADDRESS);
+//                                    if (cookieString != null) {
+//                                        myConnection.setRequestProperty("Cookie", cookieString);
+//                                    }
+//                                    // JSESSIONID 관련 - 1 끝
+//
+//                                    // POST 값 전달
+//                                    myConnection.setRequestMethod("POST");
+//
+//                                    String requestParam = String.format("id=%s&pw=%s", id, pw);
+//                                    myConnection.setDoOutput(true);
+//                                    myConnection.getOutputStream().write(requestParam.getBytes());
+//                                    // POST 값 전달 끝
+//
+//                                    // JSESSIONID 관련 - 2 시작
+//                                    Map<String, List<String>> headerFields = myConnection.getHeaderFields();
+//                                    String COOKIES_HEADER = "Set-Cookie";
+//                                    List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+//
+//                                    if (cookiesHeader != null) {
+//                                        for(String cookie : cookiesHeader) {
+//                                            String cookieName = HttpCookie.parse(cookie).get(0).getName();
+//                                            String cookieValue = HttpCookie.parse(cookie).get(0).getValue();
+//
+//                                            cookieString = cookieName + "=" + cookieValue;
+//                                            CookieManager.getInstance().setCookie(SERVER_ADDRESS, cookieString);
+//                                        }
+//                                    }
+//                                    // JSESSIONID 관련 - 2 끝
+//
+//                                    if (myConnection.getResponseCode() == 200) {
+//                                        Log.d(LOG_TAG, "200번 성공으로 들어옴");
+//                                        BufferedReader in =
+//                                                new BufferedReader(
+//                                                        new InputStreamReader(
+//                                                                myConnection.getInputStream()));
+//                                        StringBuffer buffer = new StringBuffer();
+//                                        String temp = null;
+//                                        while((temp = in.readLine()) != null) {
+//                                            buffer.append(temp);
+//                                        }
+//                                        Log.d(LOG_TAG, "중간체크");
+//                                        Log.d(LOG_TAG, buffer.toString());
+//                                        loginMember = gson.fromJson(buffer.toString(), Member.class);
+//                                        if(loginMember != null) {
+//                                            show_Toast("로그인성공!");
+//                                            Log.d(LOG_TAG, "로그인성공! " + loginMember.getNickname() + " 님 환영합니다 :)");
+//                                            check_login();
+//                                        } else {
+//                                            show_Toast("로그인실패!");
+//                                            Log.d(LOG_TAG, "로그인실패");
+//                                        }
+//                                    } else {    // 200이 아닐 때
+//                                        show_Toast("200번x");
+//                                        Log.d(LOG_TAG, "200번x");
+//                                    }
+//                                } catch (Exception e) {
+//                                    show_Toast("연결실패!");
+//                                    e.printStackTrace();
+//                                    Log.d(LOG_TAG, "login catch - 연결실패");
+//                                    Log.d(LOG_TAG, e.getMessage());
+//                                }
                             }
                         });
                     }
@@ -224,42 +250,56 @@ public class MainActivity extends AppCompatActivity {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
+                        Server_Connect_Helper helper = new Server_Connect_Helper("main logout");
+                        helper.connect(SERVER_ADDRESS + "/member/mLogout");
+                        Type resultType = new TypeToken<HashMap<String, Integer>>(){}.getType();
+                        HashMap<String, Integer> myMap = (HashMap<String, Integer>) helper.getResult(resultType);
 
-                        try {
-                            URL endPoint = new URL(SERVER_ADDRESS + "/member/mLogout");
-                            HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
-
-                            if(myConnection.getResponseCode() == 200) {
-                                BufferedReader in =
-                                        new BufferedReader(
-                                                new InputStreamReader(myConnection.getInputStream()));
-
-                                StringBuffer buffer = new StringBuffer();
-                                String temp = null;
-
-                                while((temp = in.readLine()) != null) {
-                                    buffer.append(temp);
-                                }
-                                Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
-                                HashMap<String, Integer> myMap = gson.fromJson(buffer.toString(), type);
-
-                                int result = (int) myMap.get("result");
-
-                                Log.d(LOG_TAG, "result = " + String.valueOf(result));
-
-                                if(result == 1) {
-                                    loginMember = null;
-                                    show_Toast("로그아웃 되었습니다.");
-                                    check_login();
-                                } else {
-                                    show_Toast("로그아웃 실패");
-                                }
-                            }
-                        } catch (Exception e) {
-                            show_Toast("연결실패!");
-                            Log.d(LOG_TAG, "logout catch - 연결실패");
-                            Log.d(LOG_TAG, e.getMessage());
+                        int result = (int) myMap.get("result");
+                        Log.d(LOG_TAG, "result = " + String.valueOf(result));
+                        if(result == 1) {
+                            loginMember = null;
+                            show_Toast("로그아웃 되었습니다.");
+                            check_login();
+                        } else {
+                            show_Toast("로그아웃 실패");
                         }
+
+//                        try {
+//                            URL endPoint = new URL(SERVER_ADDRESS + "/member/mLogout");
+//                            HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                            if(myConnection.getResponseCode() == 200) {
+//                                BufferedReader in =
+//                                        new BufferedReader(
+//                                                new InputStreamReader(myConnection.getInputStream()));
+//
+//                                StringBuffer buffer = new StringBuffer();
+//                                String temp = null;
+//
+//                                while((temp = in.readLine()) != null) {
+//                                    buffer.append(temp);
+//                                }
+//                                Type type = new TypeToken<HashMap<String, Integer>>(){}.getType();
+//                                HashMap<String, Integer> myMap = gson.fromJson(buffer.toString(), type);
+//
+//                                int result = (int) myMap.get("result");
+//
+//                                Log.d(LOG_TAG, "result = " + String.valueOf(result));
+//
+//                                if(result == 1) {
+//                                    loginMember = null;
+//                                    show_Toast("로그아웃 되었습니다.");
+//                                    check_login();
+//                                } else {
+//                                    show_Toast("로그아웃 실패");
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            show_Toast("연결실패!");
+//                            Log.d(LOG_TAG, "logout catch - 연결실패");
+//                            Log.d(LOG_TAG, e.getMessage());
+//                        }
                     }
                 });
             }

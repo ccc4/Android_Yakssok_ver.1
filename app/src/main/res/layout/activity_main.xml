@@ -89,16 +89,6 @@
             android:textSize="30dp" />
 
         <Button
-            android:id="@+id/btn_main_regist"
-            style="@android:style/Widget.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="회원가입"
-            android:textSize="36sp" />
-
-        <Button
             android:id="@+id/btn_main_login"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
@@ -106,6 +96,16 @@
             android:layout_weight="1"
             android:text="로그인"
             android:textAllCaps="false"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/btn_main_regist"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="회원가입"
             android:textSize="36sp" />
 
         <Button

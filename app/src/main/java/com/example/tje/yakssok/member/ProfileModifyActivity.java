@@ -19,15 +19,19 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Count;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 public class ProfileModifyActivity extends AppCompatActivity {
 
@@ -89,57 +93,79 @@ public class ProfileModifyActivity extends AppCompatActivity {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                URL endPoint = new URL( SERVER_ADDRESS + "/member/mCheckNick");
-                                HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
-                                Log.d(LOG_TAG,"체크닉네임 커넥션 객체 생성");
+                            String nickname = modify_nickname.getText().toString();
 
-                                String nickname = modify_nickname.getText().toString();
+                            Server_Connect_Helper helper = new Server_Connect_Helper("member modify-nickname check ");
+                            helper.connect(SERVER_ADDRESS + "/member/mCheckNick");
+                            helper.selectMethod("POST");
 
-                                //전송모드설정
-                                myConnection.setRequestMethod("POST");
+                            String str = "nickname=%s";
+                            helper.setValue(String.format(str,nickname));
+                            Type resultType = new TypeToken<Count>(){}.getType();
+                            Count count = (Count) helper.getResult(resultType);
 
-                                String str = "nickname=%s";
-
-                                String requestParam =String.format(str,nickname);
-                                Log.d(LOG_TAG,requestParam);
-                                Log.d(LOG_TAG,"서버로 전송");
-                                myConnection.setDoOutput(true); //서버에서 읽기모드
-                                myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
-
-                                if(myConnection.getResponseCode() == 200){
-                                    Log.d(LOG_TAG,"200진입");
-                                    BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
-                                    StringBuffer buffer = new StringBuffer();
-                                    String temp = null;
-                                    while((temp = in.readLine())!= null)
-                                        buffer.append(temp);
-                                    Gson gson = new Gson();
-                                    Count count = gson.fromJson(buffer.toString(), Count.class);
-
-                                    StringBuffer data = new StringBuffer();
-                                    Log.d(LOG_TAG, buffer.toString());
-                                    if( count.getCount() == 1 ) {
-                                        data.append("이미 사용중인 닉네임 입니다.");
-                                        error_nickname.setTextColor(Color.rgb(204,000,000));
-                                        error_nickname.setText(data.toString());
-                                    }else{
-                                        data.append("멋진 닉네임 입니다!");
-                                        error_nickname.setTextColor(Color.rgb(102,204,204));
-                                        error_nickname.setText(data.toString());
-                                    }
-                                }else{
-                                    Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
-                                }
-                            } catch (Exception e) {
-                                Log.d(LOG_TAG,"catch 진입");
-                                e.printStackTrace();
+                            StringBuffer data = new StringBuffer();
+                            if( count.getCount() == 1 ) {
+                                data.append("이미 사용중인 닉네임 입니다.");
+                                setTextColor_TextView(error_nickname, Color.rgb(204,000,000));
+                                setText_TextView(error_nickname, data.toString());
+                            }else{
+                                data.append("멋진 닉네임 입니다!");
+                                setTextColor_TextView(error_nickname, Color.rgb(102,204,204));
+                                setText_TextView(error_nickname, data.toString());
                             }
+
+//                            try {
+//                                URL endPoint = new URL( SERVER_ADDRESS + "/member/mCheckNick");
+//                                HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
+//                                Log.d(LOG_TAG,"체크닉네임 커넥션 객체 생성");
+//
+//                                String nickname = modify_nickname.getText().toString();
+//
+//                                //전송모드설정
+//                                myConnection.setRequestMethod("POST");
+//
+//                                String str = "nickname=%s";
+//
+//                                String requestParam =String.format(str,nickname);
+//                                Log.d(LOG_TAG,requestParam);
+//                                Log.d(LOG_TAG,"서버로 전송");
+//                                myConnection.setDoOutput(true); //서버에서 읽기모드
+//                                myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+//
+//                                if(myConnection.getResponseCode() == 200){
+//                                    Log.d(LOG_TAG,"200진입");
+//                                    BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
+//                                    StringBuffer buffer = new StringBuffer();
+//                                    String temp = null;
+//                                    while((temp = in.readLine())!= null)
+//                                        buffer.append(temp);
+//                                    Gson gson = new Gson();
+//                                    Count count = gson.fromJson(buffer.toString(), Count.class);
+//
+//                                    StringBuffer data = new StringBuffer();
+//                                    Log.d(LOG_TAG, buffer.toString());
+//                                    if( count.getCount() == 1 ) {
+//                                        data.append("이미 사용중인 닉네임 입니다.");
+//                                        error_nickname.setTextColor(Color.rgb(204,000,000));
+//                                        error_nickname.setText(data.toString());
+//                                    }else{
+//                                        data.append("멋진 닉네임 입니다!");
+//                                        error_nickname.setTextColor(Color.rgb(102,204,204));
+//                                        error_nickname.setText(data.toString());
+//                                    }
+//                                }else{
+//                                    Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
+//                                }
+//                            } catch (Exception e) {
+//                                Log.d(LOG_TAG,"catch 진입");
+//                                e.printStackTrace();
+//                            }
                         }
                     });
                 }else if( modify_nickname.getText().toString().length() == 0 ){
-                    error_nickname.setTextColor(Color.rgb(204,000,000));
-                    error_nickname.setText("필수사항 입니다.");
+                    setTextColor_TextView(error_nickname, Color.rgb(204,000,000));
+                    setText_TextView(error_nickname, "필수사항 입니다.");
                 }
 
             }
@@ -181,71 +207,100 @@ public class ProfileModifyActivity extends AppCompatActivity {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            URL endPoint = new URL( SERVER_ADDRESS + "/member/mModifyProfile");
-                            HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
-                            Log.d(LOG_TAG,"커넥션 객체 생성");
+                        String id = loginMember.getId();
+                        String name  = modify_name.getText().toString();
+                        String age = modify_age.getText().toString();
+                        String nickname = modify_nickname.getText().toString();
+                        String tel = modify_tel.getText().toString();
+                        String email = modify_email.getText().toString();
+                        String address = modify_address1.getText().toString()+"," +modify_address2.getText().toString()+","+modify_address3.getText().toString();
 
-                            String id = loginMember.getId();
-                            String name  = modify_name.getText().toString();
-                            String age = modify_age.getText().toString();
-                            String nickname = modify_nickname.getText().toString();
-                            String tel = modify_tel.getText().toString();
-                            String email = modify_email.getText().toString();
-                            String address = modify_address1.getText().toString()+"," +modify_address2.getText().toString()+","+modify_address3.getText().toString();
+                        Server_Connect_Helper helper = new Server_Connect_Helper("member modify-ok");
+                        helper.connect(SERVER_ADDRESS + "/member/mModifyProfile");
+                        helper.selectMethod("POST");
 
-                            //전송모드설정
-                            myConnection.setRequestMethod("POST");
+                        String str = "id=%s&name=%s&age=%s&nickname=%s&tel=%s&email=%s&address=%s";
 
-                            String str = "id=%s&name=%s&age=%s&nickname=%s&tel=%s&email=%s&address=%s";
+                        helper.setValue(String.format(str,id,name,age,nickname,tel,email,address));
+                        Type resultType = new TypeToken<Member>(){}.getType();
+                        loginMember = (Member) helper.getResult(resultType);
 
-
-                            String requestParam =String.format(str,id,name,age,nickname,tel,email,address);
-                            Log.d(LOG_TAG,requestParam);
-                            Log.d(LOG_TAG,"서버로 전송");
-                            myConnection.setDoOutput(true); //서버에서 읽기모드
-                            myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
-
-
-                            if(myConnection.getResponseCode() == 200){
-                                Log.d(LOG_TAG,"200진입");
-                                BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
-                                StringBuffer buffer = new StringBuffer();
-                                String temp = null;
-                                while((temp = in.readLine())!= null)
-                                    buffer.append(temp);
-                                //gson = new Gson();
-                                loginMember = gson.fromJson(buffer.toString(),Member.class);
-                                Log.d(LOG_TAG,"프로필수정 닉네임 값: "+loginMember.getNickname());
-
-                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                intent.putExtra("loginMember",loginMember);
-                                startActivity(intent);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
-                                Log.d(LOG_TAG,"수정완료");
-
-
-
-
-                            }else{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getApplicationContext(),"수정에 실패했습니다.",Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                                Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
-                            }
-                        } catch (Exception e) {
-                            Log.d(LOG_TAG,"catch 진입");
-                            e.printStackTrace();
+                        if(loginMember != null) {
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            intent.putExtra("loginMember",loginMember);
+                            startActivity(intent);
+                            setToast("수정완료");
+                            Log.d(LOG_TAG,"수정완료");
+                        } else {
+                            setToast("수정실패");
+                            Log.d(LOG_TAG,"수정실패");
                         }
+
+//                        try {
+//                            URL endPoint = new URL( SERVER_ADDRESS + "/member/mModifyProfile");
+//                            HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
+//                            Log.d(LOG_TAG,"커넥션 객체 생성");
+//
+//                            String id = loginMember.getId();
+//                            String name  = modify_name.getText().toString();
+//                            String age = modify_age.getText().toString();
+//                            String nickname = modify_nickname.getText().toString();
+//                            String tel = modify_tel.getText().toString();
+//                            String email = modify_email.getText().toString();
+//                            String address = modify_address1.getText().toString()+"," +modify_address2.getText().toString()+","+modify_address3.getText().toString();
+//
+//                            //전송모드설정
+//                            myConnection.setRequestMethod("POST");
+//
+//                            String str = "id=%s&name=%s&age=%s&nickname=%s&tel=%s&email=%s&address=%s";
+//
+//
+//                            String requestParam =String.format(str,id,name,age,nickname,tel,email,address);
+//                            Log.d(LOG_TAG,requestParam);
+//                            Log.d(LOG_TAG,"서버로 전송");
+//                            myConnection.setDoOutput(true); //서버에서 읽기모드
+//                            myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+//
+//
+//                            if(myConnection.getResponseCode() == 200){
+//                                Log.d(LOG_TAG,"200진입");
+//                                BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
+//                                StringBuffer buffer = new StringBuffer();
+//                                String temp = null;
+//                                while((temp = in.readLine())!= null)
+//                                    buffer.append(temp);
+//                                //gson = new Gson();
+//                                loginMember = gson.fromJson(buffer.toString(),Member.class);
+//                                Log.d(LOG_TAG,"프로필수정 닉네임 값: "+loginMember.getNickname());
+//
+//                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                                intent.putExtra("loginMember",loginMember);
+//                                startActivity(intent);
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
+//                                    }
+//                                });
+//
+//                                Log.d(LOG_TAG,"수정완료");
+//
+//
+//
+//
+//                            }else{
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(getApplicationContext(),"수정에 실패했습니다.",Toast.LENGTH_LONG).show();
+//                                    }
+//                                });
+//                                Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
+//                            }
+//                        } catch (Exception e) {
+//                            Log.d(LOG_TAG,"catch 진입");
+//                            e.printStackTrace();
+//                        }
                     }
                 });
             }
@@ -265,6 +320,33 @@ public class ProfileModifyActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setToast(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setTextColor_TextView(final TextView target, final int color) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                target.setTextColor(color);
+            }
+        });
+    }
+
+    private void setText_TextView(final TextView target, final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                target.setText(str);
+            }
+        });
     }
 
     @Override

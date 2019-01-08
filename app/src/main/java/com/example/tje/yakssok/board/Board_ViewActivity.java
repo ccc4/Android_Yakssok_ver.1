@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Board;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
@@ -88,52 +89,78 @@ public class Board_ViewActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                try {
-                    URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/view/" + b_idx);
-                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
 
-                    if(myConnection.getResponseCode() == 200) {
-                        Log.d(LOG_TAG, "view 200번 성공으로 들어옴");
-                        BufferedReader in =
-                                new BufferedReader(
-                                        new InputStreamReader(
-                                                myConnection.getInputStream()));
-                        StringBuffer buffer = new StringBuffer();
-                        String temp = null;
-                        while((temp = in.readLine()) != null) {
-                            buffer.append(temp);
-                        }
-                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                        board = gson.fromJson(buffer.toString(), Board.class);
-                        if(board != null) {
-                            Log.d(LOG_TAG, board.getB_idx() + " 의 board 받아옴");
+                Server_Connect_Helper helper = new Server_Connect_Helper("board view");
+                helper.connect(SERVER_ADDRESS + "/mBoard/" + type + "/view/" + b_idx);
+                Type resultType = new TypeToken<Board>(){}.getType();
+                board = (Board) helper.getResult(resultType);
 
-                            str_b_view_title.setText(board.getTitle());
-                            str_b_view_nickname.setText(board.getNickname());
-                            str_b_view_writeDate.setText(board.getWriteDate());
-                            str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
-                            str_b_view_contents.setText(board.getContents());
+                if(board != null) {
+                    str_b_view_title.setText(board.getTitle());
+                    str_b_view_nickname.setText(board.getNickname());
+                    str_b_view_writeDate.setText(board.getWriteDate());
+                    str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
+                    str_b_view_contents.setText(board.getContents());
 
-                            if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
-                                set_visible(btn_b_view_modify, View.INVISIBLE);
-                                set_visible(btn_b_view_delete, View.INVISIBLE);
-                            } else if(loginMember.getM_idx() == board.getM_idx()){
-                                set_visible(btn_b_view_modify, View.VISIBLE);
-                                set_visible(btn_b_view_delete, View.VISIBLE);
-                            }
-                        } else{
-                            Log.d(LOG_TAG, "board null !!!");
-                            finish();
-                        }
-                    } else {
-                        Log.d(LOG_TAG, "서버연결 실패");
-                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+                    if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
+                        set_visible(btn_b_view_modify, View.INVISIBLE);
+                        set_visible(btn_b_view_delete, View.INVISIBLE);
+                    } else if(loginMember.getM_idx() == board.getM_idx()){
+                        set_visible(btn_b_view_modify, View.VISIBLE);
+                        set_visible(btn_b_view_delete, View.VISIBLE);
                     }
-                } catch(Exception e) {
-                    Log.d(LOG_TAG, "board 받아오기 - 연결실패");
-                    Log.d(LOG_TAG, e.getMessage());
-                    e.printStackTrace();
+                } else{
+                    Log.d(LOG_TAG, "board null !!!");
+                    finish();
                 }
+
+
+//                try {
+//                    URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/view/" + b_idx);
+//                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                    if(myConnection.getResponseCode() == 200) {
+//                        Log.d(LOG_TAG, "view 200번 성공으로 들어옴");
+//                        BufferedReader in =
+//                                new BufferedReader(
+//                                        new InputStreamReader(
+//                                                myConnection.getInputStream()));
+//                        StringBuffer buffer = new StringBuffer();
+//                        String temp = null;
+//                        while((temp = in.readLine()) != null) {
+//                            buffer.append(temp);
+//                        }
+//                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                        board = gson.fromJson(buffer.toString(), Board.class);
+//                        if(board != null) {
+//                            Log.d(LOG_TAG, board.getB_idx() + " 의 board 받아옴");
+//
+//                            str_b_view_title.setText(board.getTitle());
+//                            str_b_view_nickname.setText(board.getNickname());
+//                            str_b_view_writeDate.setText(board.getWriteDate());
+//                            str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
+//                            str_b_view_contents.setText(board.getContents());
+//
+//                            if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
+//                                set_visible(btn_b_view_modify, View.INVISIBLE);
+//                                set_visible(btn_b_view_delete, View.INVISIBLE);
+//                            } else if(loginMember.getM_idx() == board.getM_idx()){
+//                                set_visible(btn_b_view_modify, View.VISIBLE);
+//                                set_visible(btn_b_view_delete, View.VISIBLE);
+//                            }
+//                        } else{
+//                            Log.d(LOG_TAG, "board null !!!");
+//                            finish();
+//                        }
+//                    } else {
+//                        Log.d(LOG_TAG, "서버연결 실패");
+//                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+//                    }
+//                } catch(Exception e) {
+//                    Log.d(LOG_TAG, "board 받아오기 - 연결실패");
+//                    Log.d(LOG_TAG, e.getMessage());
+//                    e.printStackTrace();
+//                }
             }
         });
 

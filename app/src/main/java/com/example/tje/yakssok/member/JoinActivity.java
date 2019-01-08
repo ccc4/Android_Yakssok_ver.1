@@ -22,14 +22,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Count;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 public class JoinActivity extends AppCompatActivity {
 
@@ -147,57 +151,79 @@ public class JoinActivity extends AppCompatActivity {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                URL endPoint = new URL( SERVER_ADDRESS + "/member/mCheckId");
-                                HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
-                                Log.d(LOG_TAG,"커넥션 객체 생성");
+                            String id = join_id.getText().toString();
 
-                                String id = join_id.getText().toString();
+                            Server_Connect_Helper helper = new Server_Connect_Helper("member join id check");
+                            helper.connect(SERVER_ADDRESS + "/member/mCheckId");
+                            helper.selectMethod("POST");
+                            helper.setValue(String.format("id=%s", id));
+                            Type resultType = new TypeToken<Count>(){}.getType();
+                            Count count = (Count) helper.getResult(resultType);
 
-                                //전송모드설정
-                                myConnection.setRequestMethod("POST");
-
-                                String str = "id=%s";
-
-                                String requestParam =String.format(str,id);
-                                Log.d(LOG_TAG,requestParam);
-                                Log.d(LOG_TAG,"서버로 전송");
-                                myConnection.setDoOutput(true); //서버에서 읽기모드
-                                myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
-
-                                if(myConnection.getResponseCode() == 200){
-                                    Log.d(LOG_TAG,"200진입");
-                                    BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
-                                    StringBuffer buffer = new StringBuffer();
-                                    String temp = null;
-                                    while((temp = in.readLine())!= null)
-                                        buffer.append(temp);
-                                    Gson gson = new Gson();
-                                    Count count = gson.fromJson(buffer.toString(), Count.class);
-
-                                    StringBuffer data = new StringBuffer();
-                                    Log.d(LOG_TAG, buffer.toString());
-                                    if( count.getCount() == 1 ) {
-                                        data.append("이미 사용중이거나 탈퇴한 아이디 입니다.");
-                                        error_id.setTextColor(Color.rgb(204,000,000));
-                                        error_id.setText(data.toString());
-                                    }else{
-                                        data.append("멋진 아이디 입니다!");
-                                        error_id.setTextColor(Color.rgb(102,204,204));
-                                        error_id.setText(data.toString());
-                                    }
-                                }else{
-                                    Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
-                                }
-                            } catch (Exception e) {
-                                Log.d(LOG_TAG,"catch 진입");
-                                e.printStackTrace();
+                            final StringBuffer data = new StringBuffer();
+                            if( count.getCount() == 1 ) {
+                                data.append("이미 사용중이거나 탈퇴한 아이디 입니다.");
+                                setTextColor_TextView(error_id, Color.rgb(204,000,000));
+                                setText_TextView(error_id, data.toString());
+                            }else{
+                                data.append("멋진 아이디 입니다!");
+                                setTextColor_TextView(error_id, Color.rgb(102,204,204));
+                                setText_TextView(error_id, data.toString());
                             }
+
+
+
+//                            try {
+//                                URL endPoint = new URL( SERVER_ADDRESS + "/member/mCheckId");
+//                                HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
+//                                Log.d(LOG_TAG,"커넥션 객체 생성");
+//
+//                                String id = join_id.getText().toString();
+//
+//                                //전송모드설정
+//                                myConnection.setRequestMethod("POST");
+//
+//                                String str = "id=%s";
+//
+//                                String requestParam =String.format(str,id);
+//                                Log.d(LOG_TAG,requestParam);
+//                                Log.d(LOG_TAG,"서버로 전송");
+//                                myConnection.setDoOutput(true); //서버에서 읽기모드
+//                                myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+//
+//                                if(myConnection.getResponseCode() == 200){
+//                                    Log.d(LOG_TAG,"200진입");
+//                                    BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
+//                                    StringBuffer buffer = new StringBuffer();
+//                                    String temp = null;
+//                                    while((temp = in.readLine())!= null)
+//                                        buffer.append(temp);
+//                                    Gson gson = new Gson();
+//                                    Count count = gson.fromJson(buffer.toString(), Count.class);
+//
+//                                    StringBuffer data = new StringBuffer();
+//                                    Log.d(LOG_TAG, buffer.toString());
+//                                    if( count.getCount() == 1 ) {
+//                                        data.append("이미 사용중이거나 탈퇴한 아이디 입니다.");
+//                                        error_id.setTextColor(Color.rgb(204,000,000));
+//                                        error_id.setText(data.toString());
+//                                    }else{
+//                                        data.append("멋진 아이디 입니다!");
+//                                        error_id.setTextColor(Color.rgb(102,204,204));
+//                                        error_id.setText(data.toString());
+//                                    }
+//                                }else{
+//                                    Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
+//                                }
+//                            } catch (Exception e) {
+//                                Log.d(LOG_TAG,"catch 진입");
+//                                e.printStackTrace();
+//                            }
                         }
                     });
                 }else if( join_id.getText().toString().length() == 0 ){
-                    error_id.setTextColor(Color.rgb(204,000,000));
-                    error_id.setText("필수사항 입니다.");
+                    setTextColor_TextView(error_id, Color.rgb(204,000,000));
+                    setText_TextView(error_id, "필수사항 입니다.");
                 }
 
             }
@@ -216,57 +242,77 @@ public class JoinActivity extends AppCompatActivity {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                URL endPoint = new URL( SERVER_ADDRESS + "/member/mCheckNick");
-                                HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
-                                Log.d(LOG_TAG,"커넥션 객체 생성");
+                            String nickname = join_nickname.getText().toString();
 
-                                String id = join_nickname.getText().toString();
+                            Server_Connect_Helper helper = new Server_Connect_Helper("member join nickname check");
+                            helper.connect(SERVER_ADDRESS + "/member/mCheckNick");
+                            helper.selectMethod("POST");
+                            helper.setValue(String.format("nickname=%s", nickname));
+                            Type resultType = new TypeToken<Count>(){}.getType();
+                            Count count = (Count) helper.getResult(resultType);
 
-                                //전송모드설정
-                                myConnection.setRequestMethod("POST");
-
-                                String str = "nickname=%s";
-
-                                String requestParam =String.format(str,id);
-                                Log.d(LOG_TAG,requestParam);
-                                Log.d(LOG_TAG,"서버로 전송");
-                                myConnection.setDoOutput(true); //서버에서 읽기모드
-                                myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
-
-                                if(myConnection.getResponseCode() == 200){
-                                    Log.d(LOG_TAG,"200진입");
-                                    BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
-                                    StringBuffer buffer = new StringBuffer();
-                                    String temp = null;
-                                    while((temp = in.readLine())!= null)
-                                        buffer.append(temp);
-                                    Gson gson = new Gson();
-                                    Count count = gson.fromJson(buffer.toString(), Count.class);
-
-                                    StringBuffer data = new StringBuffer();
-                                    Log.d(LOG_TAG, buffer.toString());
-                                    if( count.getCount() == 1 ) {
-                                        data.append("이미 사용중인 닉네임 입니다.");
-                                        error_nickname.setTextColor(Color.rgb(204,000,000));
-                                        error_nickname.setText(data.toString());
-                                    }else{
-                                        data.append("멋진 닉네임 입니다!");
-                                        error_nickname.setTextColor(Color.rgb(102,204,204));
-                                        error_nickname.setText(data.toString());
-                                    }
-                                }else{
-                                    Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
-                                }
-                            } catch (Exception e) {
-                                Log.d(LOG_TAG,"catch 진입");
-                                e.printStackTrace();
+                            StringBuffer data = new StringBuffer();
+                            if( count.getCount() == 1 ) {
+                                data.append("이미 사용중인 닉네임 입니다.");
+                                setTextColor_TextView(error_nickname, Color.rgb(204,000,000));
+                                setText_TextView(error_nickname, data.toString());
+                            }else{
+                                data.append("멋진 닉네임 입니다!");
+                                setTextColor_TextView(error_nickname, Color.rgb(102,204,204));
+                                setText_TextView(error_nickname, data.toString());
                             }
+
+//                            try {
+//                                URL endPoint = new URL( SERVER_ADDRESS + "/member/mCheckNick");
+//                                HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
+//                                Log.d(LOG_TAG,"커넥션 객체 생성");
+//
+//                                String id = join_nickname.getText().toString();
+//
+//                                //전송모드설정
+//                                myConnection.setRequestMethod("POST");
+//
+//                                String str = "nickname=%s";
+//
+//                                String requestParam =String.format(str,id);
+//                                Log.d(LOG_TAG,requestParam);
+//                                Log.d(LOG_TAG,"서버로 전송");
+//                                myConnection.setDoOutput(true); //서버에서 읽기모드
+//                                myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+//
+//                                if(myConnection.getResponseCode() == 200){
+//                                    Log.d(LOG_TAG,"200진입");
+//                                    BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
+//                                    StringBuffer buffer = new StringBuffer();
+//                                    String temp = null;
+//                                    while((temp = in.readLine())!= null)
+//                                        buffer.append(temp);
+//                                    Gson gson = new Gson();
+//                                    Count count = gson.fromJson(buffer.toString(), Count.class);
+//
+//                                    StringBuffer data = new StringBuffer();
+//                                    Log.d(LOG_TAG, buffer.toString());
+//                                    if( count.getCount() == 1 ) {
+//                                        data.append("이미 사용중인 닉네임 입니다.");
+//                                        error_nickname.setTextColor(Color.rgb(204,000,000));
+//                                        error_nickname.setText(data.toString());
+//                                    }else{
+//                                        data.append("멋진 닉네임 입니다!");
+//                                        error_nickname.setTextColor(Color.rgb(102,204,204));
+//                                        error_nickname.setText(data.toString());
+//                                    }
+//                                }else{
+//                                    Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
+//                                }
+//                            } catch (Exception e) {
+//                                Log.d(LOG_TAG,"catch 진입");
+//                                e.printStackTrace();
+//                            }
                         }
                     });
                 }else if( join_nickname.getText().toString().length() == 0 ){
-                    error_nickname.setTextColor(Color.rgb(204,000,000));
-                    error_nickname.setText("필수사항 입니다.");
+                    setTextColor_TextView(error_nickname, Color.rgb(204,000,000));
+                    setText_TextView(error_nickname, "필수사항 입니다.");
                 }
 
             }
@@ -283,11 +329,11 @@ public class JoinActivity extends AppCompatActivity {
                 String confirm = join_check_pw.getText().toString();
 
                 if (password.equals(confirm)) {
-                    error_pw.setTextColor(Color.rgb(102,204,204));
-                    error_pw.setText("비밀번호 확인");
+                    setTextColor_TextView(error_pw, Color.rgb(102,204,204));
+                    setText_TextView(error_pw, "비밀번호 확인");
                 } else {
-                    error_pw.setTextColor(Color.rgb(204,000,000));
-                    error_pw.setText("비밀번호가 다릅니다.");
+                    setTextColor_TextView(error_pw, Color.rgb(204,000,000));
+                    setText_TextView(error_pw, "비밀번호가 다릅니다.");
                 }
             }
             public void afterTextChanged(Editable s) {
@@ -370,72 +416,129 @@ public class JoinActivity extends AppCompatActivity {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            URL endPoint = new URL( SERVER_ADDRESS + "/member/mJoin");
-                            HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
-                            Log.d(LOG_TAG,"커넥션 객체 생성");
-
-                            String id = join_id.getText().toString();
-                            String pw = join_pw.getText().toString();
-                            String name  = join_name.getText().toString();
-                            String age = join_age.getText().toString();
-                            String nickname = join_nickname.getText().toString();
-                            String tel = join_tel.getText().toString();
-                            String email = join_email.getText().toString();
-                            int gender;
-                            String address = str_address1.getText().toString()+"," +str_address2.getText().toString()+","+str_address3.getText().toString();
-
-
-                            if(join_gender_male.isChecked())
-                                gender=1;
-                            else
-                                gender =0;
-                            Log.d(LOG_TAG,"선택된 젠더 값:"+gender);
-
-                            //전송모드설정
-                            myConnection.setRequestMethod("POST");
-
-                            String str = "id=%s&pw=%s&name=%s&age=%s&nickname=%s&tel=%s&email=%s&gender=%d&address=%s";
+                        String id = join_id.getText().toString();
+                        String pw = join_pw.getText().toString();
+                        String name  = join_name.getText().toString();
+                        String age = join_age.getText().toString();
+                        String nickname = join_nickname.getText().toString();
+                        String tel = join_tel.getText().toString();
+                        String email = join_email.getText().toString();
+                        int gender;
+                        String address = str_address1.getText().toString()+"," +str_address2.getText().toString()+","+str_address3.getText().toString();
+                        if(join_gender_male.isChecked())
+                            gender=1;
+                        else
+                            gender =0;
+                        Log.d(LOG_TAG,"선택된 젠더 값:"+gender);
 
 
-                            String requestParam =String.format(str,id,pw,name,age,nickname,tel,email,gender,address);
-                            Log.d(LOG_TAG,requestParam);
-                            Log.d(LOG_TAG,"서버로 전송");
-                            myConnection.setDoOutput(true); //서버에서 읽기모드
-                            myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+                        Server_Connect_Helper helper = new Server_Connect_Helper("member join");
+                        helper.connect(SERVER_ADDRESS + "/member/mJoin");
+                        helper.selectMethod("POST");
 
+                        String str = "id=%s&pw=%s&name=%s&age=%s&nickname=%s&tel=%s&email=%s&gender=%d&address=%s";
+                        helper.setValue(String.format(str,id,pw,name,age,nickname,tel,email,gender,address));
+                        Type resultType = new TypeToken<Member>(){}.getType();
+                        final Member member = (Member) helper.getResult(resultType);
 
-                            if(myConnection.getResponseCode() == 200){
-                                Log.d(LOG_TAG,"200진입");
-                                BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
-                                StringBuffer buffer = new StringBuffer();
-                                String temp = null;
-                                while((temp = in.readLine())!= null)
-                                    buffer.append(temp);
-                                Gson gson = new Gson();
-                                final Member member = gson.fromJson(buffer.toString(),Member.class);
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getApplicationContext(),member.getId()+"로 가입완료!",Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
-                            }else{
-                                Toast.makeText(getApplicationContext(),"회원가입에 실패했습니다.",Toast.LENGTH_LONG).show();
-                                Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
-                            }
-                        } catch (Exception e) {
-                            Log.d(LOG_TAG,"catch 진입");
-                            e.printStackTrace();
+                        if(member != null) {
+                            setToast(member.getId()+"로 가입완료!");
+                        } else {
+                            setToast("회원가입에 실패했습니다.");
                         }
+
+//                        try {
+//                            URL endPoint = new URL( SERVER_ADDRESS + "/member/mJoin");
+//                            HttpURLConnection myConnection =(HttpURLConnection)endPoint.openConnection();
+//                            Log.d(LOG_TAG,"커넥션 객체 생성");
+//
+//                            String id = join_id.getText().toString();
+//                            String pw = join_pw.getText().toString();
+//                            String name  = join_name.getText().toString();
+//                            String age = join_age.getText().toString();
+//                            String nickname = join_nickname.getText().toString();
+//                            String tel = join_tel.getText().toString();
+//                            String email = join_email.getText().toString();
+//                            int gender;
+//                            String address = str_address1.getText().toString()+"," +str_address2.getText().toString()+","+str_address3.getText().toString();
+//
+//
+//                            if(join_gender_male.isChecked())
+//                                gender=1;
+//                            else
+//                                gender =0;
+//                            Log.d(LOG_TAG,"선택된 젠더 값:"+gender);
+//
+//                            //전송모드설정
+//                            myConnection.setRequestMethod("POST");
+//
+//
+//
+//                            String requestParam =String.format(str,id,pw,name,age,nickname,tel,email,gender,address);
+//                            Log.d(LOG_TAG,requestParam);
+//                            Log.d(LOG_TAG,"서버로 전송");
+//                            myConnection.setDoOutput(true); //서버에서 읽기모드
+//                            myConnection.getOutputStream().write(requestParam.getBytes());//서버로 쓰기
+//
+//
+//                            if(myConnection.getResponseCode() == 200){
+//                                Log.d(LOG_TAG,"200진입");
+//                                BufferedReader in = new BufferedReader(new InputStreamReader(myConnection.getInputStream()));
+//                                StringBuffer buffer = new StringBuffer();
+//                                String temp = null;
+//                                while((temp = in.readLine())!= null)
+//                                    buffer.append(temp);
+//                                Gson gson = new Gson();
+//                                final Member member = gson.fromJson(buffer.toString(),Member.class);
+//
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(getApplicationContext(),member.getId()+"로 가입완료!",Toast.LENGTH_LONG).show();
+//                                    }
+//                                });
+//
+//                            }else{
+//                                Toast.makeText(getApplicationContext(),"회원가입에 실패했습니다.",Toast.LENGTH_LONG).show();
+//                                Log.d(LOG_TAG,"실패! 응답코드:"+ myConnection.getResponseCode());
+//                            }
+//                        } catch (Exception e) {
+//                            Log.d(LOG_TAG,"catch 진입");
+//                            e.printStackTrace();
+//                        }
                     }
                 });
                 finish();
             }
         });
 
+    }
+
+    private void setToast(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setTextColor_TextView(final TextView target, final int color) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                target.setTextColor(color);
+            }
+        });
+    }
+
+    private void setText_TextView(final TextView target, final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                target.setText(str);
+            }
+        });
     }
 
     @Override

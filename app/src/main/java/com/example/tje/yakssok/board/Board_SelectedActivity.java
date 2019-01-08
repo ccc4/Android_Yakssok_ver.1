@@ -124,14 +124,11 @@ public class Board_SelectedActivity extends AppCompatActivity {
 
                 Server_Connect_Helper helper = new Server_Connect_Helper("board list");
                 helper.connect(SERVER_ADDRESS + "/mBoard/" + type);
-                Type type = new TypeToken<List<Board>>(){}.getType();
-                list = (List<Board>) helper.getResult(type);
-//                if(list != null) {
-//                    Log.d(LOG_TAG, "helper 클래스 result 에 대해 list 는 null 이 아님!");
-//
-//                    Log.d(LOG_TAG, list.toString());
-//
-//                }
+                Type resultType = new TypeToken<List<Board>>(){}.getType();
+                list = (List<Board>) helper.getResult(resultType);
+                if(list != null) {
+                    Log.d(LOG_TAG, list.toString());
+                }
 
 
 //                try {

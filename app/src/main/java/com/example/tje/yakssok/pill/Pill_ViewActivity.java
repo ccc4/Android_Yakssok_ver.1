@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Board;
 import com.example.tje.yakssok.model.Member;
 import com.example.tje.yakssok.model.P_mList_Helper;
@@ -99,65 +100,105 @@ public class Pill_ViewActivity extends AppCompatActivity {
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                try {
-                    URL endPoint = new URL(SERVER_ADDRESS + "/pill/mView/" + p_idx);
-                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+                Server_Connect_Helper helper = new Server_Connect_Helper("pill view");
+                helper.connect(SERVER_ADDRESS + "/pill/mView/" + p_idx);
+                Type resultType = new TypeToken<P_mOne>(){}.getType();
+                p_mOne = (P_mOne) helper.getResult(resultType);
 
-                    if(myConnection.getResponseCode() == 200) {
-                        Log.d(LOG_TAG, "pill view 200번 성공으로 들어옴");
-                        BufferedReader in =
-                                new BufferedReader(
-                                        new InputStreamReader(
-                                                myConnection.getInputStream()));
-                        StringBuffer buffer = new StringBuffer();
-                        String temp = null;
-                        while((temp = in.readLine()) != null) {
-                            buffer.append(temp);
-                        }
-                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                        p_mOne = gson.fromJson(buffer.toString(), P_mOne.class);
-                        if(p_mOne != null) {
-                            Log.d(LOG_TAG, p_mOne.getP_idx() + " 의 pill one view 받아옴");
+                if(p_mOne != null) {
+                    Log.d(LOG_TAG, p_mOne.getP_idx() + " 의 pill one view 받아옴");
 
-                            if(p_mOne.getImgPath() != null) {
-                                Log.d(LOG_TAG, "이미지 path: " + SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath());
-                                // 이미지 가져오기.. how?
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Picasso.get().load(SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath()).into(img_p_view);
-                                    }
-                                });
-
-                            } else {
-                                img_p_view.setImageResource(R.drawable.no_image);
+                    if(p_mOne.getImgPath() != null) {
+                        Log.d(LOG_TAG, "이미지 path: " + SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath());
+                        // 이미지 가져오기
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Picasso.get().load(SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath()).into(img_p_view);
                             }
-                            str_p_view_name.setText(p_mOne.getName());
-                            if(p_mOne.getRating() >= 50) {
-                                img_p_view_state.setImageResource(R.drawable.good);
-                            } else if(p_mOne.getTotal() != 0 && p_mOne.getRating() < 50 && p_mOne.getRating() != -1) {
-                                img_p_view_state.setImageResource(R.drawable.bad);
-                            } else if(p_mOne.getTotal() == 0 || p_mOne.getRating() == -1) {
-                                img_p_view_state.setImageResource(R.drawable.none);
-                            }
-                            str_p_view_percent.setText(Integer.toString(p_mOne.getRating()) + " %");
+                        });
 
-                            if (loginMember != null) {
-                                setEnabled(btn_p_review_write, true);
-                            }
-                        } else{
-                            Log.d(LOG_TAG, "pill one null");
-                            finish();
-                        }
                     } else {
-                        Log.d(LOG_TAG, "서버연결 실패");
-                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+                        img_p_view.setImageResource(R.drawable.no_image);
                     }
-                } catch(Exception e) {
-                    Log.d(LOG_TAG, "pill one 받아오기 - 연결실패");
-                    Log.d(LOG_TAG, e.getMessage());
-                    e.printStackTrace();
+                    str_p_view_name.setText(p_mOne.getName());
+                    if(p_mOne.getRating() >= 50) {
+                        img_p_view_state.setImageResource(R.drawable.good);
+                    } else if(p_mOne.getTotal() != 0 && p_mOne.getRating() < 50 && p_mOne.getRating() != -1) {
+                        img_p_view_state.setImageResource(R.drawable.bad);
+                    } else if(p_mOne.getTotal() == 0 || p_mOne.getRating() == -1) {
+                        img_p_view_state.setImageResource(R.drawable.none);
+                    }
+                    str_p_view_percent.setText(Integer.toString(p_mOne.getRating()) + " %");
+
+                    if (loginMember != null) {
+                        setEnabled(btn_p_review_write, true);
+                    }
+                } else{
+                    Log.d(LOG_TAG, "pill one null");
+                    finish();
                 }
+
+
+//                try {
+//                    URL endPoint = new URL(SERVER_ADDRESS + "/pill/mView/" + p_idx);
+//                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                    if(myConnection.getResponseCode() == 200) {
+//                        Log.d(LOG_TAG, "pill view 200번 성공으로 들어옴");
+//                        BufferedReader in =
+//                                new BufferedReader(
+//                                        new InputStreamReader(
+//                                                myConnection.getInputStream()));
+//                        StringBuffer buffer = new StringBuffer();
+//                        String temp = null;
+//                        while((temp = in.readLine()) != null) {
+//                            buffer.append(temp);
+//                        }
+//                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                        p_mOne = gson.fromJson(buffer.toString(), P_mOne.class);
+//                        if(p_mOne != null) {
+//                            Log.d(LOG_TAG, p_mOne.getP_idx() + " 의 pill one view 받아옴");
+//
+//                            if(p_mOne.getImgPath() != null) {
+//                                Log.d(LOG_TAG, "이미지 path: " + SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath());
+//                                // 이미지 가져오기.. how?
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Picasso.get().load(SERVER_ADDRESS + "/resources/img/pill/img/" + p_mOne.getImgPath()).into(img_p_view);
+//                                    }
+//                                });
+//
+//                            } else {
+//                                img_p_view.setImageResource(R.drawable.no_image);
+//                            }
+//                            str_p_view_name.setText(p_mOne.getName());
+//                            if(p_mOne.getRating() >= 50) {
+//                                img_p_view_state.setImageResource(R.drawable.good);
+//                            } else if(p_mOne.getTotal() != 0 && p_mOne.getRating() < 50 && p_mOne.getRating() != -1) {
+//                                img_p_view_state.setImageResource(R.drawable.bad);
+//                            } else if(p_mOne.getTotal() == 0 || p_mOne.getRating() == -1) {
+//                                img_p_view_state.setImageResource(R.drawable.none);
+//                            }
+//                            str_p_view_percent.setText(Integer.toString(p_mOne.getRating()) + " %");
+//
+//                            if (loginMember != null) {
+//                                setEnabled(btn_p_review_write, true);
+//                            }
+//                        } else{
+//                            Log.d(LOG_TAG, "pill one null");
+//                            finish();
+//                        }
+//                    } else {
+//                        Log.d(LOG_TAG, "서버연결 실패");
+//                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+//                    }
+//                } catch(Exception e) {
+//                    Log.d(LOG_TAG, "pill one 받아오기 - 연결실패");
+//                    Log.d(LOG_TAG, e.getMessage());
+//                    e.printStackTrace();
+//                }
                 return null;
             }
 
