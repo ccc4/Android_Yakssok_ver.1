@@ -22,10 +22,12 @@
     <string name="TITLE">제목</string>
     <string name="DATE_EXAMPLE">19-01-01 24:24:24</string>
     <string name="CONTENTS">내용</string>
-    <string name="SERVER_ADDRESS_STR">http://172.30.56.41:8080//Yakssok</string>
+    <string name="SERVER_ADDRESS_STR">http://192.168.0.15:8080//Yakssok</string>
     <string name="BTN_GOOD">Good :)</string>
     <string name="BTN_BAD">Bad :(</string>
     <string name="REFRESH">새로고침</string>
     <string name="REFRESH_COORDS">위치갱신</string>
     <string name="D_NEARBY_TITLE">내 주변 약국</string>
+    <string name="CHAT">채팅</string>
+    <string name="X">X</string>
 </resources>

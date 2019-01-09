@@ -28,8 +28,8 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
     private String SERVER_ADDRESS;
     private Handler handler;
 
-    private double longitude;
-    private double latitude;
+    private double lat;
+    private double lon;
 
     Member loginMember;
 
@@ -39,6 +39,8 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
 
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         btn_d_go_main = findViewById(R.id.btn_d_go_main);
         btn_d_refresh_coords = findViewById(R.id.btn_d_refresh_coords);
         wv_d_nearby = findViewById(R.id.wv_d_nearby);
@@ -48,8 +50,8 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
 
     private void setWebView() {
         getLocation();
-        Log.d(LOG_TAG, "latitude => " + latitude);
-        Log.d(LOG_TAG, "longitude => " + longitude);
+        Log.d(LOG_TAG, "lat => " + lat);
+        Log.d(LOG_TAG, "lon => " + lon);
 
         // Javascript 허용
         wv_d_nearby.getSettings().setJavaScriptEnabled(true);
@@ -58,10 +60,11 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
         // web client 를 chrome 으로 설정
         wv_d_nearby.setWebChromeClient(new WebChromeClient());
         // url load
-        wv_d_nearby.loadUrl(SERVER_ADDRESS + "/mobile/API_Daum_Map_Drugstore/" + latitude + "/" + longitude);
+        wv_d_nearby.loadUrl(SERVER_ADDRESS + "/mobile/API_Daum_Map_Drugstore/" + lat + "/" + lon);
     }
 
     private void getLocation() {
+        Log.d(LOG_TAG, "getLocation 들어옴.");
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -74,17 +77,24 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
             return;
         }
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        longitude = location.getLongitude();
-        latitude = location.getLatitude();
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+
+        Log.d(LOG_TAG, "lat => " + lat + " , lon => " + lon);
 
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+
+        Log.d(LOG_TAG, "lat => " + lat + " , lon => " + lon);
     }
 
     private final LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
+            lat = location.getLatitude();
+            lon = location.getLongitude();
         }
 
         @Override
@@ -128,8 +138,6 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drugstore__nearby);
-
-        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
         Intent intent = getIntent();
         loginMember = (Member) intent.getSerializableExtra("loginMember");

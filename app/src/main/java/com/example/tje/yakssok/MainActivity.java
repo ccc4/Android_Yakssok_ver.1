@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -19,8 +21,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     String SERVER_ADDRESS;
 
+    int chat_state;
+
     Gson gson;
     Member loginMember;
 
@@ -67,7 +75,18 @@ public class MainActivity extends AppCompatActivity {
     Button btn_main_drugstore;
     Button btn_main_emergency;
 
+//    FloatingActionButton fabtn_chat;
+
+    LinearLayout layout_article;
+    WebView wv_chat;
+
+    Button btn_chat_show;
+    Button btn_chat_hide;
+
+    Handler handler;
+
     private void setRefs() {
+        chat_state = 0; // 닫혀있는 상태
         SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
@@ -82,9 +101,68 @@ public class MainActivity extends AppCompatActivity {
         btn_main_board = (Button)findViewById(R.id.btn_main_board);
         btn_main_drugstore = (Button)findViewById(R.id.btn_main_drugstore);
         btn_main_emergency = (Button)findViewById(R.id.btn_main_emergency);
+
+//        fabtn_chat = findViewById(R.id.fabtn_chat);
+
+        layout_article = findViewById(R.id.layout_article);
+        wv_chat = findViewById(R.id.wv_chat);
+
+        btn_chat_show = findViewById(R.id.btn_chat_show);
+        btn_chat_hide = findViewById(R.id.btn_chat_hide);
+
+        handler = new Handler();
+    }
+
+
+
+    private void setWebView() {
+        // 자바스크립트 허용
+        wv_chat.getSettings().setJavaScriptEnabled(true);
+        // 자바스크립트 window.open 허용
+        wv_chat.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        // web client chrome 으로 설정
+        wv_chat.setWebChromeClient(new WebChromeClient());
+        // WebView URL 주소 세팅
+        wv_chat.loadUrl(SERVER_ADDRESS + "/mobile/API_Tawk");
     }
 
     private void setEvents() {
+        btn_chat_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout_article.setVisibility(View.GONE);
+                        btn_chat_show.setVisibility(View.GONE);
+
+                        wv_chat.setVisibility(View.VISIBLE);
+                        btn_chat_hide.setVisibility(View.VISIBLE);
+
+
+                    }
+                });
+
+            }
+        });
+
+        btn_chat_hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        wv_chat.setVisibility(View.GONE);
+                        btn_chat_hide.setVisibility(View.GONE);
+
+                        layout_article.setVisibility(View.VISIBLE);
+                        btn_chat_show.setVisibility(View.VISIBLE);
+                    }
+                });
+
+            }
+        });
+
         btn_main_pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -446,8 +524,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void init(){
-        setRefs();
-        setEvents();
 
         Intent intent = getIntent();
         loginMember = (Member) intent.getSerializableExtra("loginMember");
@@ -458,6 +534,11 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, loginMember.getNickname());
 
         }
+
+        setRefs();
+        setWebView();
+        setEvents();
+
 
         check_login();
     }
