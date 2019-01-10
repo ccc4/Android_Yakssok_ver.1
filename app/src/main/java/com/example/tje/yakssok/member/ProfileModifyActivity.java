@@ -389,13 +389,19 @@ public class ProfileModifyActivity extends AppCompatActivity {
         String address = loginMember.getAddress();
         String[] list = address.split(",");
 
-        for(String item : list) {
-            Log.d(LOG_TAG, item);
-        }
+        for(int i=0;i<list.length;i++) {
+            Log.d(LOG_TAG, list[i]);
+            if(i == 0 && !list[i].isEmpty()) {
+                modify_address1.setText(list[i]);
+            }
+            if(i == 1 && !list[i].isEmpty()) {
+                modify_address2.setText(list[i]);
+            }
+            if(i == 2 && !list[i].isEmpty()) {
+                modify_address3.setText(list[i]);
+            }
 
-        modify_address1.setText(list[0]);
-        modify_address2.setText(list[1]);
-        modify_address3.setText(list[2]);
+        }
 
     }
 

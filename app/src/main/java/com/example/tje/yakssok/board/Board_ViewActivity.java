@@ -96,19 +96,25 @@ public class Board_ViewActivity extends AppCompatActivity {
                 board = (Board) helper.getResult(resultType);
 
                 if(board != null) {
-                    str_b_view_title.setText(board.getTitle());
-                    str_b_view_nickname.setText(board.getNickname());
-                    str_b_view_writeDate.setText(board.getWriteDate());
-                    str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
-                    str_b_view_contents.setText(board.getContents());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            str_b_view_title.setText(board.getTitle());
+                            str_b_view_nickname.setText(board.getNickname());
+                            str_b_view_writeDate.setText(board.getWriteDate());
+                            str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
+                            str_b_view_contents.setText(board.getContents());
 
-                    if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
-                        set_visible(btn_b_view_modify, View.INVISIBLE);
-                        set_visible(btn_b_view_delete, View.INVISIBLE);
-                    } else if(loginMember.getM_idx() == board.getM_idx()){
-                        set_visible(btn_b_view_modify, View.VISIBLE);
-                        set_visible(btn_b_view_delete, View.VISIBLE);
-                    }
+                            if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
+                                set_visible(btn_b_view_modify, View.INVISIBLE);
+                                set_visible(btn_b_view_delete, View.INVISIBLE);
+                            } else if(loginMember.getM_idx() == board.getM_idx()){
+                                set_visible(btn_b_view_modify, View.VISIBLE);
+                                set_visible(btn_b_view_delete, View.VISIBLE);
+                            }
+                        }
+                    });
+
                 } else{
                     Log.d(LOG_TAG, "board null !!!");
                     finish();
@@ -267,57 +273,34 @@ public class Board_ViewActivity extends AppCompatActivity {
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
-                                try {
-                                    URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/delete");
-                                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
 
-                                    // POST 값 전달
-                                    myConnection.setRequestMethod("POST");
 
-                                    String requestParam = String.format("b_idx=%d", board.getB_idx());
-                                    myConnection.setDoOutput(true);
-                                    myConnection.getOutputStream().write(requestParam.getBytes());
-                                    // POST 값 전달 끝
+                                Server_Connect_Helper helper = new Server_Connect_Helper("board view delete");
+                                helper.connect(SERVER_ADDRESS + "/mBoard/" + type + "/delete");
 
-                                    if (myConnection.getResponseCode() == 200) {
-                                        Log.d(LOG_TAG, "mBoard_delete 200 success");
-                                        BufferedReader in =
-                                                new BufferedReader(
-                                                        new InputStreamReader(
-                                                                myConnection.getInputStream()));
-                                        StringBuffer buffer = new StringBuffer();
-                                        String temp = null;
-                                        while((temp = in.readLine()) != null) {
-                                            buffer.append(temp);
-                                        }
-                                        Log.d(LOG_TAG, "중간체크");
-                                        Type typeToken = new TypeToken<HashMap<String, Integer>>(){}.getType();
-                                        Gson gson = new Gson();
-                                        HashMap<String, Integer> myMap = gson.fromJson(buffer.toString(), typeToken);
+                                helper.selectMethod("POST");
+                                String str = "b_idx=%d";
+                                helper.setValue(String.format(str, board.getB_idx()));
 
-                                        int result = (int) myMap.get("result");
-                                        Log.d(LOG_TAG, "result = " + String.valueOf(result));
 
-                                        if(result == 1) {
-                                            show_Toast("삭제완료!");
-                                            Log.d(LOG_TAG, "삭제완료");
+                                Type resultType = new TypeToken<HashMap<String, Integer>>(){}.getType();
+                                HashMap<String, Integer> myMap = (HashMap<String, Integer>) helper.getResult(resultType);
 
-                                            Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
-                                            intent.putExtra("type", type);
-                                            intent.putExtra("loginMember", loginMember);
-                                            startActivity(intent);
+                                int result = (int) myMap.get("result");
+                                Log.d(LOG_TAG, "result = " + String.valueOf(result));
 
-                                        } else {
-                                            show_Toast("삭제실패!");
-                                            Log.d(LOG_TAG, "삭제실패");
-                                        }
-                                    } else {    // 200이 아닐 때
-                                        show_Toast("200번x");
-                                        Log.d(LOG_TAG, "200번x");
-                                    }
-                                } catch (Exception e) {
-                                    show_Toast("연결실패!");
-                                    Log.d(LOG_TAG, "login catch - 연결실패" + e.getMessage());
+                                if(result == 1) {
+                                    show_Toast("삭제완료!");
+                                    Log.d(LOG_TAG, "삭제완료");
+
+                                    Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
+                                    intent.putExtra("type", type);
+                                    intent.putExtra("loginMember", loginMember);
+                                    startActivity(intent);
+
+                                } else {
+                                    show_Toast("삭제실패!");
+                                    Log.d(LOG_TAG, "삭제실패");
                                 }
                             }
                         });
