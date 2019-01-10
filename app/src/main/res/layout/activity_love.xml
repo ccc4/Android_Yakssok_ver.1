@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".medList.loveActivity"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="106dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="278dp"
+            android:text="《이전페이지"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="압박 지혈"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/lovevideoLayuot_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/love_1"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+            <view
+                android:id="@+id/love_11"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="직접압박 지혈"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="출혈되는 상처부위를 압박한다. 출혈이 멈춘 후에는 상처부위를 소독거즈로 덮어준다. 소독거즈 근처로 압박붕대로 감아준다. ※ 출혈이 멈추지 않으면 더 세게 압박한다. ※ 응고를 위해 적어도 10분 아상 상처를 압박한다." />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" 동맥점압박 지혈"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="팔이나 다리에서의 출혈이 직접압박으로 지혈되지 않으면 동맥의 근위부를 압박함으로써 심한 출혈을 억제 할 수 있습니다. 상지의 출혈은 상완동맥을 압박한다. 하지의 출혈은 대퇴동맥을 압박한다." />
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView61"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주의사항"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView63"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상지나 하지는 여러 동맥에 의하여 혈액이 공급되어 있으므로 압박점을 압박하여 혈류를 차단하는 것은 쉬운 일이 아닙니다." />
+
+        <TextView
+            android:id="@+id/textView80"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView81"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" 쇼크(Shock)"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView82"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/lovevideoLayuot_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/love_2"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view21"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+            <view
+                android:id="@+id/love_22"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view22"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView83"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView84"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="쇼크란?"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView85"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView86"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="심한 외상, 화상, 수술, 대출혈 등 물리적 손상과 정신적 손상 또는 과민반응(알레르기) 등으로 인하여 신체의 혈관, 신경조절기능이 저하되고 탈진한 상태 등을 총칭함." />
+
+        <TextView
+            android:id="@+id/textView88"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView89"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="응급처치"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView90"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기도를 유지하고 필요에 따라 지원요청 또는 심폐소생술을 시행한다. 출혈부위를 직접압박 방법으로 지혈 한다. 다리 부분을 15~25cm정도 높여 혈액이 심장이나 뇌로 가도록 한다.(흉부나 뇌손상 환자 제외) 골절부위를 부목으로 고정시켜서 출혈유발과 쇼크악화를 방지한다. 쇼크 상태의 환자를 조심스럽게 다루며 옷이나 담요 등으로 덮어서 체온을 유지한다. 가급적 환자를 눕힌 상태로 유지한다. 그러나 심한 심장발작이나 폐질환 후에 쇼크에 빠진 환자는 앉거나 상체를 약간 뒤로 젖혀 앉은 상태에서  호흡을 잘하는 수가 있다. 구토가 심한 경우에는 얼굴을 옆으로 돌려서 토하는 음식물이 기도를 막지 않도록 한다." />
+
+        <TextView
+            android:id="@+id/textView92"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView93"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주의사항"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView95"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView96"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="환자에게는 먹을 거나 마실 것을 주지 않는다. 위장운동이 저하되어 있으므로 음식물을 섭취하면 토할 수 있다." />
+
+        <TextView
+            android:id="@+id/textView113"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView114"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="골절 및 염좌"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView115"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/lovevideoLayuot_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/love_3"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view32"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+            <view
+                android:id="@+id/love_33"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view33"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView116"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView117"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="골절"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView118"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView119"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="뼈가 부러졌거나 금이 간 상태" />
+
+        <TextView
+            android:id="@+id/textView120"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView121"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="염좌"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView122"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView123"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="인대난 근육이 손상된 상태" />
+
+        <TextView
+            android:id="@+id/textView124"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView125"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="증상"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView126"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView127"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="손상부위의 심한 통증 멍,부종 관절 부위의 운동장애" />
+
+        <TextView
+            android:id="@+id/textView128"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView129"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="응급처치 - RICES"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView130"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView131"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rest : 쉬고, 안 움직이고 Ice : 찜질하고 Compression : 압박하고 드레싱하고 Elevation : 올려주고 Splint : (부목)고정시켜줌" />
+
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView146"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="화상"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView147"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/lovevideoLayuot_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/love_4"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view43"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+            <view
+                android:id="@+id/love_44"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view44"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView148"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView149"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="화상은?"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView150"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView151"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="물질과의 마찰 또는 뜨거운 액체나 증기 같은 것 등으로 인해 신체 조직이 손상된 상태를 말한다. 불, 뜨거운 증기, 기름, 물, 주방기구 등에 의해 화상을 입으며, 주로 어린이들에게서 많이 발생한다." />
+
+        <TextView
+            android:id="@+id/textView152"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView153"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="증상"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView154"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView155"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1도 화상 : 피부가 빨개지고 물집이 없는 상태임 2도 화상 : 물집이 생김 3도 화상 : 피부가 하얗고 손상부위를 눌러도 통증을 느끼지 못하는 경우가 있음" />
+
+        <TextView
+            android:id="@+id/textView156"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView157"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="응급처치"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView158"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView159"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="화상 부위에 붙어 있는 옷 등은 제거하지 말고 더러운 물건이 접촉하지 않도록 한다. 특히 간장, 기름, 된장 등을 바르지 않도록 하며 화상 부위가 적을 경우에는 깨끗한 수돗물로 냉각시켜 통증을 감소시키는 것이 바람직하다. (흐르는 찬물 속에 최소 10분 동안 담가야 함) 소독 거즈가 있는 경우에는 화상 부위를 덮어주는 것이 좋다. 얼굴에 난 화상은 환자가 숨을 쉴 수 있도록 구멍을 낸 거즈를 덮는다. 물집은 터트리지 말고, 화상부위에 딱 붙어 있는 물질들을 떼어내지 않는 것이 좋다. 로션을 바르거나 연고, 기름 같은 것도 바르지 않는다. 환자를 빨리 병원으로 옮겨야 한다. 화상은 1, 2, 3도로 구분한다." />
+
+        <TextView
+            android:id="@+id/textView164"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView165"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="뇌졸중"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView166"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/lovevideoLayuot_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/love_5"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view54"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+            <view
+                android:id="@+id/love_55"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view55"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView167"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView168"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="정의"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView169"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView170"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="뇌로 가는 혈류의 차단으로 뇌가 손상을 입는 질환을 말한다." />
+
+        <TextView
+            android:id="@+id/textView171"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView172"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="증상"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView173"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView174"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="편측에 발생하는 부분적 혹은 전체적 마비 의식장애, 언어 혹은 시력장애 안면근육마비, 표정상실, 경련 두통, 구토, 어지러움증" />
+
+        <TextView
+            android:id="@+id/textView175"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView176"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="응급처치"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView177"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView178"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="환자의 호흡과 맥박상태를 확인하여 특별한 이상이 없다면 환자를 옆으로 눕히면서 머리를 약간 뒤로 젖히는 자세를 취하도록 함. 특히 구토에 의하여 기도가 폐쇄되었을 경우 즉시 이물질 제거로 기도확보를 하고, 호흡과 맥박이 없을 경우 심폐소생술을 시행한다." />
+
+        <TextView
+            android:id="@+id/textView183"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView184"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="열 손상"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView185"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView186"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="관련 질환"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView188"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView187"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="열사병, 일사병, 열실신, 열부종, 열경련 질환을 말한다" />
+
+        <TextView
+            android:id="@+id/textView189"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView190"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="열손상 관련 질환 관련 질환별 증상, 응급처치 안내표 ↓" />
+
+        <TextView
+            android:id="@+id/textView191"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#d2dafa"
+                    android:gravity="center"
+                    android:text="관련 질환"
+                    android:textColor="#1147a4"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:text="증상"
+                    android:textColor="#1147a4"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:text="응급처치"
+                    android:textColor="#1147a4"
+                    android:textStyle="bold"/>
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e9edfd" />
+
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#d2dafa"
+                    android:gravity="center"
+                    android:text="열사병"
+                    android:textColor="#6d6f9a" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="- 원인
+직접 태양에 노출 또는 뜨거운 차안등에서 강한 열에 장기간 노출됨으로써 발생
+· 뜨겁고 건조한 피부(땀이 나지 않음)
+· 초기는 빠르고 강한 맥박, 점차 약해짐
+· 두통, 어지러움, 오심
+· 의식저하, 심하면 혼수상태에 빠짐 " />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 시원한 장소로 이동조치 후 119 도움 요청
+· 젖은 물수건, 에어컨, 선풍기 또는 찬물 이용하여 빠른 시간 내에 체온을 냉각시킴
+· 머리를 다리보다 낮추고 구급대를 기다리는 시간이 길면 시원한 물이 담긴 욕조에 머리만 남기고 잠기도록 함.
+※ 주의사항!
+물과 음식은 함부로 주지 말아야 함" />
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e9edfd" />
+
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#d2dafa"
+                    android:gravity="center"
+                    android:text="열사병"
+                    android:textColor="#6d6f9a" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="- 원인
+강한 햇볕에 장기간 노출됨으로써 혈액의 저류와 체액과 전해질이 땀으로 과다 배출되는 발생
+· 피부가 차갑고 끈끈하며 젖어있음
+· 현기증, 정신착란 등 이상 의식변화" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 시원한 장소에서 휴식을 취하게 함
+· 의식이 있으면 이온음료 섭취
+· 젖은 물수건으로 얼굴을 닦고, 차가운 수건으로 손발을 식히면서 부채질 함." />
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e9edfd" />
+
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#d2dafa"
+                    android:gravity="center"
+                    android:text="열실신"
+                    android:textColor="#6d6f9a" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 일시적 의식소실" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 평평한 곳에 눕히도록 함" />
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e9edfd" />
+
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#d2dafa"
+                    android:gravity="center"
+                    android:text="열부종"
+                    android:textColor="#6d6f9a" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 발이나 발목이 부음" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 시원한 장소에서 발을 높인 자세로 휴식" />
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e9edfd" />
+
+            </LinearLayout>z
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#d2dafa"
+                    android:gravity="center"
+                    android:text="일사병"
+                    android:textColor="#6d6f9a" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="- 원인
+과다한 땀의 배출로 전해질이 고갈되어 발생
+· 근육의 경련, 피로감" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6d6f9a"
+                    android:gravity="center"
+                    android:text="· 시원한 장소에서 휴식을 취하게 함
+· 이온음료 섭취" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView192"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView193"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="예방법(대처방법)"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView194"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView195"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="목이 마르기 전에 물을 마시되 자주 섭취해야 합니다. 음료수를 많이 마시되 술은 마시지 맙시다. 모자를 쓰고, 목을 감싸는 옷은 피하며 헐렁한 옷을 입읍시다. 한낮의 뜨거운 햇볕은 피합시다." />
+
+
+    </LinearLayout>
+
+</ScrollView>

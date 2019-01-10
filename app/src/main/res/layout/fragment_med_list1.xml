@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".medList.medList1Fragment"
+    tools:ignore="MissingConstraints"
+    tools:layout_editor_absoluteY="25dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="151dp"
+        android:layout_height="160dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="1dp"
+        android:src="@drawable/pain"
+        app:layout_constraintBottom_toTopOf="@+id/textView29"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView17"
+        app:layout_constraintTop_toBottomOf="@+id/antipyreticBtn" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="151dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="1dp"
+        android:src="@drawable/digestive"
+        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        app:layout_constraintEnd_toStartOf="@+id/imageView18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coldBtn" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="152dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/antipyretic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="88dp"
+        android:text="파스"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView18" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="151dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView22"
+        android:layout_alignStart="@+id/imageView9"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="41dp"
+        android:gravity="center"
+        android:text="근육통, 관절통, 어깨결림 등이 있을 때"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/painBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <Button
+        android:id="@+id/painBtn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="13dp"
+        android:text="자세히 보기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/digestiveBtn"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="1dp"
+        android:text="소화제"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="151dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView22"
+        android:layout_alignStart="@+id/imageView9"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:text="위와 장의 소화기능을 높일 때"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/digestiveBtn"
+        app:layout_constraintEnd_toStartOf="@+id/textView30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <Button
+        android:id="@+id/digestiveBtn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="13dp"
+        android:text="자세히 보기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/painBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="77dp"
+        android:text="해열제"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="151dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView22"
+        android:layout_alignStart="@+id/imageView9"
+        android:layout_marginEnd="41dp"
+        android:gravity="center"
+        android:text="체온이 높아져 열을 내리기 위할 때"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/antipyreticBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <Button
+        android:id="@+id/antipyreticBtn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="41dp"
+        android:text="자세히 보기"
+        app:layout_constraintBottom_toTopOf="@+id/imageView18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/coldBtn"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="151dp"
+        android:layout_height="161dp"
+        android:layout_below="@+id/textView22"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/cold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="94dp"
+        android:text="감기"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="151dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView22"
+        android:layout_alignStart="@+id/imageView9"
+        android:layout_marginStart="41dp"
+        android:gravity="center"
+        android:text="기침, 콧물, 열 등 감기 증상이 심할 때"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/coldBtn"
+        app:layout_constraintEnd_toStartOf="@+id/textView26"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <Button
+        android:id="@+id/coldBtn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="41dp"
+        android:text="자세히 보기"
+        app:layout_constraintBottom_toTopOf="@+id/imageView17"
+        app:layout_constraintEnd_toStartOf="@+id/antipyreticBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+</android.support.constraint.ConstraintLayout>

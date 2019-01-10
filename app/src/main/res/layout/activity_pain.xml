@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".medList.painActivity"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="25dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="106dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="278dp"
+            android:text="《이전페이지"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="279dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="53dp"
+            android:layout_marginEnd="52dp"
+            android:gravity="center"
+            android:text="안전상비 의약품 - 파스"
+            android:textColor="#7097e6"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="251dp"
+            android:layout_height="235dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginEnd="66dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18"
+            app:srcCompat="@drawable/jaeil" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="제품정보" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_1"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="다층 혼합정제로 위와 장, 2단계에 걸쳐 소화를 촉진하는 프리미엄 소화제 5종의 소화효소와 위장관내 가스를 제거하는 시메치콘과 인체의 생리적 소화작용을 촉진시켜주는 UDCA가 배합된 소화제 가스제거 성분이 함유되어 가스로인한 소화불량, 위부팽만감 등을 제거"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="전성분" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_2"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="D-캄파 122.5 mg, 멘톨 175 mg, 치몰 17.5 mg, 메칠살리시네이트 262.5 mg, 박하유 87.5 mg"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_3"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="효과,효능" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_3"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="다음 증상의 진통 ㆍ 소염 : 삠, 타박상, 근육통, 관절통, 골절통, 요통, 어깨결림, 신경통, 류마티스통증"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_4"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="용법용량" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_4"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="1일 1~2회 환부에 붙인다. 포장단위 안전상비의약품 : 1포 4매"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_5"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="추가정보" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_5"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="어린이의 손이 닿지 않는 곳에 보관한다. 직사일광을 피하고 될 수 있으면 습기가 적고 서늘한 곳에 밀전하여 보관한다. 오용을 막고 품질의 보존을 위하여 다른 용기에 바꾸어 넣지 않는다."
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="251dp"
+                android:layout_height="164dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/sinsin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_6"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="제품정보" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_6"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="첩부제류 파스로 진통, 소염에 탁월한 신신제약 인기제품입니다."
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_7"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="전성분" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_7"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="엘-멘톨...90.90mg 박하유...45.46mg 살리실산메틸...90.90mg 디엘-캄파...34.10mg 니코틴산벤질...0.90mg 노닐산바닐아미드...0.114mg 산화아연...431.82mg 성상 : 이 약은 백색의 부직포에 점착성물질을 도포하고 고체면에 박리지를 덮은 것이다. 포장단위 안전상비의약품 : 1포 4매"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_8"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="효과,효능" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_8"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="다음 질환 및 증상의 진통∙소염: 어깨결림, 요통, 신경통, 류마티스, 타박상, 염좌, 근육통, 관절통"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_9"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="용법용량" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView87"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_9"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="1일 1~회 환부에 부착한다."
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView94"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_10"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="추가정보" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_10"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="눈 주위, 습진, 옻 등에 의한 피부염, 상처, 점막등의 부위에 사용하지 않습니다."
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

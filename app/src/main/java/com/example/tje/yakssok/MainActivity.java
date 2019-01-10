@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.board.Board_MainActivity;
 import com.example.tje.yakssok.drugstore.Drugstore_NearbyActivity;
+import com.example.tje.yakssok.medList.medListMain;
 import com.example.tje.yakssok.member.JoinActivity;
 import com.example.tje.yakssok.member.Modify_Pw_Activity;
 import com.example.tje.yakssok.member.ProfileModifyActivity;
@@ -182,7 +183,11 @@ public class MainActivity extends AppCompatActivity {
         btn_main_emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "준비중입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), medListMain.class);
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
             }
         });
         btn_main_board.setOnClickListener(new View.OnClickListener() {

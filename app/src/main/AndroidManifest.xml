@@ -31,7 +31,15 @@
         <activity android:name=".pill.Pill_ListActivity" />
         <activity android:name=".pill.Pill_ViewActivity" />
         <activity android:name=".drugstore.Drugstore_NearbyActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".medList.medListMain" />
+        <activity android:name=".medList.coldActivity" />
+        <activity android:name=".medList.antipyreticActivity" />
+        <activity android:name=".medList.digestiveActivity" />
+        <activity android:name=".medList.painActivity" />
+        <activity android:name=".medList.cprActivity" />
+        <activity android:name=".medList.heimlichActivity" />
+        <activity android:name=".medList.loveActivity"></activity>
     </application>
 
 </manifest>
