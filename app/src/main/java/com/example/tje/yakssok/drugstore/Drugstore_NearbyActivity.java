@@ -25,11 +25,10 @@ import com.example.tje.yakssok.model.Member;
 public class Drugstore_NearbyActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Yakssok";
-    private String SERVER_ADDRESS;
-    private Handler handler;
+    String SERVER_ADDRESS;
 
-    private double lat;
-    private double lon;
+    double lat;
+    double lon;
 
     Member loginMember;
 
@@ -41,17 +40,16 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
     private void setRefs() {
         SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
+        lat = 37.570967;
+        lon = 126.989478;
+
         btn_d_go_main = findViewById(R.id.btn_d_go_main);
         btn_d_refresh_coords = findViewById(R.id.btn_d_refresh_coords);
         wv_d_nearby = findViewById(R.id.wv_d_nearby);
-
-        handler = new Handler();
     }
 
     private void setWebView() {
         getLocation();
-        Log.d(LOG_TAG, "lat => " + lat);
-        Log.d(LOG_TAG, "lon => " + lon);
 
         // Javascript 허용
         wv_d_nearby.getSettings().setJavaScriptEnabled(true);
@@ -60,7 +58,7 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
         // web client 를 chrome 으로 설정
         wv_d_nearby.setWebChromeClient(new WebChromeClient());
         // url load
-        wv_d_nearby.loadUrl(SERVER_ADDRESS + "/mobile/API_Daum_Map_Drugstore/" + lat + "/" + lon);
+        wv_d_nearby.loadUrl(SERVER_ADDRESS + "/mobile/API_Daum_Map_Drugstore/" + lat + "/" + lon + "/");
     }
 
     private void getLocation() {
@@ -82,36 +80,7 @@ public class Drugstore_NearbyActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "lat => " + lat + " , lon => " + lon);
 
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-
-        lat = location.getLatitude();
-        lon = location.getLongitude();
-
-        Log.d(LOG_TAG, "lat => " + lat + " , lon => " + lon);
     }
-
-    private final LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            lat = location.getLatitude();
-            lon = location.getLongitude();
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
 
     private void setEvents() {
         btn_d_go_main.setOnClickListener(new View.OnClickListener() {

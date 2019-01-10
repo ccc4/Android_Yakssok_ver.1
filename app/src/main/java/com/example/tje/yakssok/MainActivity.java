@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     String SERVER_ADDRESS;
 
-    int chat_state;
-
     Gson gson;
     Member loginMember;
 
@@ -83,10 +81,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_chat_show;
     Button btn_chat_hide;
 
-    Handler handler;
-
     private void setRefs() {
-        chat_state = 0; // 닫혀있는 상태
         SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
@@ -110,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
         btn_chat_show = findViewById(R.id.btn_chat_show);
         btn_chat_hide = findViewById(R.id.btn_chat_hide);
 
-        handler = new Handler();
     }
 
 
