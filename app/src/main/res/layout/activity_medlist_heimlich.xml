@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".medList.heimlichActivity"
+    tools:context=".medList.Heimlich_Activity"
     android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/heimlich_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -290,7 +295,20 @@
             android:layout_height="wrap_content"
             android:text="영아의 머리를 아랫방향으로 향한 후 등을 5회 두드린다. 흉부압박법을 5회 반복한다. 입안의 이물질이 확인되면 제거한다. 흉부압박 후에도 의식이 없으면 심폐소생술을 실시한다." />
 
-
     </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/heimlich_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorSsok"
+        app:srcCompat="@android:drawable/stat_sys_upload" />
+
+</RelativeLayout>

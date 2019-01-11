@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".medList.cprActivity"
+    tools:context=".medList.Cpr_Activity"
     android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cpr_layout">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -665,7 +670,20 @@
         android:layout_height="wrap_content"
         android:text="회복되었거나 119구급대가 도착할 때까지 2분마다 심장리듬 분석 및 반복 시행토록 하세요. 처치자가 2인의 경우에는 압박과 호흡의 비율을 15:2로 실시하도록 합시다." />
 
-
 </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/cpr_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorSsok"
+        app:srcCompat="@android:drawable/stat_sys_upload" />
+
+</RelativeLayout>

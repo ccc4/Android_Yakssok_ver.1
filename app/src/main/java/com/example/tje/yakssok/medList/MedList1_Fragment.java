@@ -10,12 +10,12 @@ import android.widget.Button;
 
 import com.example.tje.yakssok.R;
 
-public class medList1Fragment extends Fragment implements View.OnClickListener  {
+public class MedList1_Fragment extends Fragment implements View.OnClickListener  {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_med_list1, container, false);
+        View view = inflater.inflate(R.layout.fragment_medlist_list1, container, false);
 
         Button coldBtn = (Button)view.findViewById(R.id.coldBtn);
         Button antipyreticBtn = (Button)view.findViewById(R.id.antipyreticBtn);
@@ -25,7 +25,7 @@ public class medList1Fragment extends Fragment implements View.OnClickListener  
         coldBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), coldActivity.class);
+                Intent intent = new Intent(getContext(), Cold_Activity.class);
                 startActivity(intent);
             }
         });
@@ -33,7 +33,7 @@ public class medList1Fragment extends Fragment implements View.OnClickListener  
         antipyreticBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), antipyreticActivity.class);
+                Intent intent = new Intent(getContext(), Antipyretic_Activity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +41,7 @@ public class medList1Fragment extends Fragment implements View.OnClickListener  
         digestiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), digestiveActivity.class);
+                Intent intent = new Intent(getContext(), Digestive_Activity.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +49,7 @@ public class medList1Fragment extends Fragment implements View.OnClickListener  
         painBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), painActivity.class);
+                Intent intent = new Intent(getContext(), Pain_Activity.class);
                 startActivity(intent);
             }
         });

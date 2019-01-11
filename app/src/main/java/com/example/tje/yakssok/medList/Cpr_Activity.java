@@ -1,6 +1,7 @@
 package com.example.tje.yakssok.medList;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 
-public class cprActivity extends YouTubeBaseActivity {
+public class Cpr_Activity extends YouTubeBaseActivity {
 
     Button btn_back;
 
@@ -25,7 +26,13 @@ public class cprActivity extends YouTubeBaseActivity {
     YouTubePlayerView cpr_3;
     YouTubeThumbnailView cpr_33;
 
+    View cpr_layout;
+    FloatingActionButton cpr_up_btn;
+
     public void setRefs(){
+
+        cpr_layout = (View)findViewById(R.id.cpr_layout);
+        cpr_up_btn = (FloatingActionButton)findViewById(R.id.cpr_up_btn);
 
         btn_back = (Button)findViewById(R.id.btn_back);
 
@@ -40,12 +47,26 @@ public class cprActivity extends YouTubeBaseActivity {
 
     public void setEvents() {
 
+        cpr_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cpr_layout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        cpr_layout.scrollTo(0,0);
+                    }
+                });
+            }
+        });
+
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        
 
 }
 
@@ -142,7 +163,7 @@ public class cprActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cpr);
+        setContentView(R.layout.activity_medlist_cpr);
 
         setRefs();
         setEvents();

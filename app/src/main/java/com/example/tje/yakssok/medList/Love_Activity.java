@@ -1,6 +1,7 @@
 package com.example.tje.yakssok.medList;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 
-public class loveActivity extends YouTubeBaseActivity {
+public class Love_Activity extends YouTubeBaseActivity {
 
     Button btn_back;
 
@@ -29,7 +30,13 @@ public class loveActivity extends YouTubeBaseActivity {
     YouTubePlayerView love_5;
     YouTubeThumbnailView love_55;
 
+    View love_layout;
+    FloatingActionButton love_up_btn;
+
     public void setRefs(){
+
+        love_layout = (View)findViewById(R.id.love_layout);
+        love_up_btn = (FloatingActionButton)findViewById(R.id.love_up_btn);
 
         btn_back = (Button)findViewById(R.id.btn_back);
 
@@ -48,6 +55,18 @@ public class loveActivity extends YouTubeBaseActivity {
     }
 
     public void setEvents() {
+
+        love_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                love_layout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        love_layout.scrollTo(0,0);
+                    }
+                });
+            }
+        });
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +229,7 @@ public class loveActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_love);
+        setContentView(R.layout.activity_medlist_love);
 
         setRefs();
         setEvents();

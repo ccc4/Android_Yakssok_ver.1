@@ -1,27 +1,17 @@
 package com.example.tje.yakssok;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -32,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.tje.yakssok.board.Board_MainActivity;
 import com.example.tje.yakssok.drugstore.Drugstore_NearbyActivity;
-import com.example.tje.yakssok.medList.medListMain;
+import com.example.tje.yakssok.medList.MedList_Main_Activity;
 import com.example.tje.yakssok.member.JoinActivity;
 import com.example.tje.yakssok.member.Modify_Pw_Activity;
 import com.example.tje.yakssok.member.ProfileModifyActivity;
@@ -42,15 +32,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.net.HttpCookie;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -183,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         btn_main_emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), medListMain.class);
+                Intent intent = new Intent(getApplicationContext(), MedList_Main_Activity.class);
                 if(loginMember != null) {
                     intent.putExtra("loginMember", loginMember);
                 }

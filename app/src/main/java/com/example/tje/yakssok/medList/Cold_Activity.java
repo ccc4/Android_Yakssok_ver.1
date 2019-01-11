@@ -1,6 +1,7 @@
 package com.example.tje.yakssok.medList;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.tje.yakssok.R;
 
-public class coldActivity extends AppCompatActivity {
+public class Cold_Activity extends AppCompatActivity {
 
     int count = 0;
 
@@ -37,7 +38,13 @@ public class coldActivity extends AppCompatActivity {
     TextView text_9;
     TextView text_10;
 
+    View cold_layout;
+    FloatingActionButton cold_up_btn;
+
     public void setRefs(){
+
+       cold_layout = (View)findViewById(R.id.cold_layout);
+       cold_up_btn = (FloatingActionButton)findViewById(R.id.cold_up_btn);
 
        btn_back = (Button)findViewById(R.id.btn_back);
        btn_1 = (Button)findViewById(R.id.btn_1);
@@ -46,11 +53,11 @@ public class coldActivity extends AppCompatActivity {
        btn_4 = (Button)findViewById(R.id.btn_4);
        btn_5 = (Button)findViewById(R.id.btn_5);
 
-        btn_6 = (Button)findViewById(R.id.btn_6);
-        btn_7 = (Button)findViewById(R.id.btn_7);
-        btn_8 = (Button)findViewById(R.id.btn_8);
-        btn_9 = (Button)findViewById(R.id.btn_9);
-        btn_10 = (Button)findViewById(R.id.btn_10);
+       btn_6 = (Button)findViewById(R.id.btn_6);
+       btn_7 = (Button)findViewById(R.id.btn_7);
+       btn_8 = (Button)findViewById(R.id.btn_8);
+       btn_9 = (Button)findViewById(R.id.btn_9);
+       btn_10 = (Button)findViewById(R.id.btn_10);
 
        text_1 = (TextView)findViewById(R.id.text_1);
        text_2 = (TextView)findViewById(R.id.text_2);
@@ -58,14 +65,26 @@ public class coldActivity extends AppCompatActivity {
        text_4 = (TextView)findViewById(R.id.text_4);
        text_5 = (TextView)findViewById(R.id.text_5);
 
-        text_6 = (TextView)findViewById(R.id.text_6);
-        text_7 = (TextView)findViewById(R.id.text_7);
-        text_8 = (TextView)findViewById(R.id.text_8);
-        text_9 = (TextView)findViewById(R.id.text_9);
-        text_10 = (TextView)findViewById(R.id.text_10);
+       text_6 = (TextView)findViewById(R.id.text_6);
+       text_7 = (TextView)findViewById(R.id.text_7);
+       text_8 = (TextView)findViewById(R.id.text_8);
+       text_9 = (TextView)findViewById(R.id.text_9);
+       text_10 = (TextView)findViewById(R.id.text_10);
     }
 
     public void setEvents(){
+
+        cold_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cold_layout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        cold_layout.scrollTo(0,0);
+                    }
+                });
+            }
+        });
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,7 +249,7 @@ public class coldActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cold);
+        setContentView(R.layout.activity_medlist_cold);
 
         setRefs();
         setEvents();

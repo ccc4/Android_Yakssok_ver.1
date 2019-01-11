@@ -10,12 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.tje.yakssok.R;
 
-public class medListMain extends AppCompatActivity {
+public class MedList_Main_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_med_list);
+        setContentView(R.layout.activity_medlist_list);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_tabs);
         //viewpager
@@ -23,8 +23,8 @@ public class medListMain extends AppCompatActivity {
 
         //프래그먼트 배열 - 만들어 놓은 프래그먼트를 차례대로 넣어 준다.
         Fragment[] arrFragments = new Fragment[2];
-        arrFragments[0] = new medList1Fragment();
-        arrFragments[1] = new medList2Fragment();
+        arrFragments[0] = new MedList1_Fragment();
+        arrFragments[1] = new MedList2_Fragment();
 
         //어답터 생성후 연결 - 배열을 인자로 추가해 준다.
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), arrFragments);
