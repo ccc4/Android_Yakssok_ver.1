@@ -1,6 +1,7 @@
 package com.example.tje.yakssok.medList;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.tje.yakssok.R;
 
-public class painActivity extends AppCompatActivity {
+public class Pain_Activity extends AppCompatActivity {
     int count = 0;
 
     Button btn_back;
@@ -36,7 +37,13 @@ public class painActivity extends AppCompatActivity {
     TextView text_9;
     TextView text_10;
 
+    View pain_layout;
+    FloatingActionButton pain_up_btn;
+
     public void setRefs(){
+
+        pain_layout = (View)findViewById(R.id.pain_layout);
+        pain_up_btn = (FloatingActionButton)findViewById(R.id.pain_up_btn);
 
         btn_back = (Button)findViewById(R.id.btn_back);
         btn_1 = (Button)findViewById(R.id.btn_1);
@@ -65,6 +72,18 @@ public class painActivity extends AppCompatActivity {
     }
 
     public void setEvents(){
+
+        pain_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pain_layout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        pain_layout.scrollTo(0,0);
+                    }
+                });
+            }
+        });
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,7 +248,7 @@ public class painActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pain);
+        setContentView(R.layout.activity_medlist_pain);
 
         setRefs();
         setEvents();

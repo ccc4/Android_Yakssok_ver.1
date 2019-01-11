@@ -1,6 +1,7 @@
 package com.example.tje.yakssok.medList;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +9,8 @@ import android.widget.TextView;
 
 import com.example.tje.yakssok.R;
 
-public class digestiveActivity extends AppCompatActivity {
+public class Antipyretic_Activity extends AppCompatActivity {
+
     int count = 0;
 
     Button btn_back;
@@ -36,35 +38,54 @@ public class digestiveActivity extends AppCompatActivity {
     TextView text_9;
     TextView text_10;
 
+    View antipyretic_layout;
+    FloatingActionButton antipyretic_up_btn;
+
     public void setRefs(){
 
-        btn_back = (Button)findViewById(R.id.btn_back);
-        btn_1 = (Button)findViewById(R.id.btn_1);
-        btn_2 = (Button)findViewById(R.id.btn_2);
-        btn_3 = (Button)findViewById(R.id.btn_3);
-        btn_4 = (Button)findViewById(R.id.btn_4);
-        btn_5 = (Button)findViewById(R.id.btn_5);
+       antipyretic_layout = (View)findViewById(R.id.antipyretic_layout);
+       antipyretic_up_btn = (FloatingActionButton)findViewById(R.id.antipyretic_up_btn);
 
-        btn_6 = (Button)findViewById(R.id.btn_6);
-        btn_7 = (Button)findViewById(R.id.btn_7);
-        btn_8 = (Button)findViewById(R.id.btn_8);
-        btn_9 = (Button)findViewById(R.id.btn_9);
-        btn_10 = (Button)findViewById(R.id.btn_10);
+       btn_back = (Button)findViewById(R.id.btn_back);
+       btn_1 = (Button)findViewById(R.id.btn_1);
+       btn_2 = (Button)findViewById(R.id.btn_2);
+       btn_3 = (Button)findViewById(R.id.btn_3);
+       btn_4 = (Button)findViewById(R.id.btn_4);
+       btn_5 = (Button)findViewById(R.id.btn_5);
 
-        text_1 = (TextView)findViewById(R.id.text_1);
-        text_2 = (TextView)findViewById(R.id.text_2);
-        text_3 = (TextView)findViewById(R.id.text_3);
-        text_4 = (TextView)findViewById(R.id.text_4);
-        text_5 = (TextView)findViewById(R.id.text_5);
+       btn_6 = (Button)findViewById(R.id.btn_6);
+       btn_7 = (Button)findViewById(R.id.btn_7);
+       btn_8 = (Button)findViewById(R.id.btn_8);
+       btn_9 = (Button)findViewById(R.id.btn_9);
+       btn_10 = (Button)findViewById(R.id.btn_10);
 
-        text_6 = (TextView)findViewById(R.id.text_6);
-        text_7 = (TextView)findViewById(R.id.text_7);
-        text_8 = (TextView)findViewById(R.id.text_8);
-        text_9 = (TextView)findViewById(R.id.text_9);
-        text_10 = (TextView)findViewById(R.id.text_10);
+       text_1 = (TextView)findViewById(R.id.text_1);
+       text_2 = (TextView)findViewById(R.id.text_2);
+       text_3 = (TextView)findViewById(R.id.text_3);
+       text_4 = (TextView)findViewById(R.id.text_4);
+       text_5 = (TextView)findViewById(R.id.text_5);
+
+       text_6 = (TextView)findViewById(R.id.text_6);
+       text_7 = (TextView)findViewById(R.id.text_7);
+       text_8 = (TextView)findViewById(R.id.text_8);
+       text_9 = (TextView)findViewById(R.id.text_9);
+       text_10 = (TextView)findViewById(R.id.text_10);
     }
 
     public void setEvents(){
+
+        antipyretic_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                antipyretic_layout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        antipyretic_layout.scrollTo(0,0);
+                    }
+                });
+            }
+        });
+
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,7 +250,7 @@ public class digestiveActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_digestive);
+        setContentView(R.layout.activity_medlist_antipyretic);
 
         setRefs();
         setEvents();

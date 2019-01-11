@@ -1,6 +1,7 @@
 package com.example.tje.yakssok.medList;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 
-public class heimlichActivity extends YouTubeBaseActivity {
+public class Heimlich_Activity extends YouTubeBaseActivity {
 
     Button btn_back;
 
@@ -23,7 +24,13 @@ public class heimlichActivity extends YouTubeBaseActivity {
     YouTubePlayerView heimlich_2;
     YouTubeThumbnailView heimlich_22;
 
+    View heimlich_layout;
+    FloatingActionButton heimlich_up_btn;
+
     public void setRefs(){
+
+        heimlich_layout = (View)findViewById(R.id.heimlich_layout);
+        heimlich_up_btn = (FloatingActionButton)findViewById(R.id.heimlich_up_btn);
 
         heimlich_11 = (YouTubeThumbnailView) findViewById(R.id.heimlich_11);
         heimlich_1 = (YouTubePlayerView) findViewById(R.id.heimlich_1);
@@ -35,6 +42,18 @@ public class heimlichActivity extends YouTubeBaseActivity {
     }
 
     public void setEvents() {
+
+        heimlich_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                heimlich_layout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        heimlich_layout.scrollTo(0,0);
+                    }
+                });
+            }
+        });
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +129,7 @@ public class heimlichActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_heimlich);
+        setContentView(R.layout.activity_medlist_heimlich);
 
         setRefs();
         setEvents();

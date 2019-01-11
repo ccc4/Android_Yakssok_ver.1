@@ -10,11 +10,11 @@ import android.widget.Button;
 
 import com.example.tje.yakssok.R;
 
-public class medList2Fragment extends Fragment implements View.OnClickListener  {
+public class MedList2_Fragment extends Fragment implements View.OnClickListener  {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_med_list2, container, false);
+        View view = inflater.inflate(R.layout.fragment_medlist_list2, container, false);
 
         Button cprBtn = (Button)view.findViewById(R.id.cprBtn);
         Button heimlichBtn = (Button)view.findViewById(R.id.heimlichBtn);
@@ -23,7 +23,7 @@ public class medList2Fragment extends Fragment implements View.OnClickListener  
         cprBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), cprActivity.class);
+                Intent intent = new Intent(getContext(), Cpr_Activity.class);
                 startActivity(intent);
             }
         });
@@ -31,7 +31,7 @@ public class medList2Fragment extends Fragment implements View.OnClickListener  
         heimlichBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), heimlichActivity.class);
+                Intent intent = new Intent(getContext(), Heimlich_Activity.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class medList2Fragment extends Fragment implements View.OnClickListener  
         loveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), loveActivity.class);
+                Intent intent = new Intent(getContext(), Love_Activity.class);
                 startActivity(intent);
             }
         });
