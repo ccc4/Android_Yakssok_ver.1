@@ -1,16 +1,20 @@
 package com.example.tje.yakssok.board;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tje.yakssok.MainActivity;
 import com.example.tje.yakssok.R;
+import com.example.tje.yakssok.Server_Connect_Helper;
 import com.example.tje.yakssok.model.Board;
 import com.example.tje.yakssok.model.Member;
 import com.google.gson.Gson;
@@ -23,12 +27,13 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 public class Board_ViewActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "Yakssok";
-    public static final String SERVER_ADDRESS = "http://192.168.10.132:8080/Yakssok";
+    String SERVER_ADDRESS;
 
     String type;
     Member loginMember;
@@ -67,6 +72,8 @@ public class Board_ViewActivity extends AppCompatActivity {
     }
 
     private void setRefs() {
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         str_b_view_title = (TextView)findViewById(R.id.str_b_view_title);
         str_b_view_nickname = (TextView)findViewById(R.id.str_b_view_nickname);
         str_b_view_writeDate = (TextView)findViewById(R.id.str_b_view_writeDate);
@@ -78,6 +85,92 @@ public class Board_ViewActivity extends AppCompatActivity {
     }
 
     public void init() {
+        // 밑의 둘의 차이가 뭔지 테스트...
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                Server_Connect_Helper helper = new Server_Connect_Helper("board view");
+                helper.connect(SERVER_ADDRESS + "/mBoard/" + type + "/view/" + b_idx);
+                Type resultType = new TypeToken<Board>(){}.getType();
+                board = (Board) helper.getResult(resultType);
+
+                if(board != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            str_b_view_title.setText(board.getTitle());
+                            str_b_view_nickname.setText(board.getNickname());
+                            str_b_view_writeDate.setText(board.getWriteDate());
+                            str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
+                            str_b_view_contents.setText(board.getContents());
+
+                            if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
+                                set_visible(btn_b_view_modify, View.INVISIBLE);
+                                set_visible(btn_b_view_delete, View.INVISIBLE);
+                            } else if(loginMember.getM_idx() == board.getM_idx()){
+                                set_visible(btn_b_view_modify, View.VISIBLE);
+                                set_visible(btn_b_view_delete, View.VISIBLE);
+                            }
+                        }
+                    });
+
+                } else{
+                    Log.d(LOG_TAG, "board null !!!");
+                    finish();
+                }
+
+
+//                try {
+//                    URL endPoint = new URL(SERVER_ADDRESS + "/mBoard/" + type + "/view/" + b_idx);
+//                    HttpURLConnection myConnection = (HttpURLConnection)endPoint.openConnection();
+//
+//                    if(myConnection.getResponseCode() == 200) {
+//                        Log.d(LOG_TAG, "view 200번 성공으로 들어옴");
+//                        BufferedReader in =
+//                                new BufferedReader(
+//                                        new InputStreamReader(
+//                                                myConnection.getInputStream()));
+//                        StringBuffer buffer = new StringBuffer();
+//                        String temp = null;
+//                        while((temp = in.readLine()) != null) {
+//                            buffer.append(temp);
+//                        }
+//                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                        board = gson.fromJson(buffer.toString(), Board.class);
+//                        if(board != null) {
+//                            Log.d(LOG_TAG, board.getB_idx() + " 의 board 받아옴");
+//
+//                            str_b_view_title.setText(board.getTitle());
+//                            str_b_view_nickname.setText(board.getNickname());
+//                            str_b_view_writeDate.setText(board.getWriteDate());
+//                            str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
+//                            str_b_view_contents.setText(board.getContents());
+//
+//                            if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
+//                                set_visible(btn_b_view_modify, View.INVISIBLE);
+//                                set_visible(btn_b_view_delete, View.INVISIBLE);
+//                            } else if(loginMember.getM_idx() == board.getM_idx()){
+//                                set_visible(btn_b_view_modify, View.VISIBLE);
+//                                set_visible(btn_b_view_delete, View.VISIBLE);
+//                            }
+//                        } else{
+//                            Log.d(LOG_TAG, "board null !!!");
+//                            finish();
+//                        }
+//                    } else {
+//                        Log.d(LOG_TAG, "서버연결 실패");
+//                        Log.d(LOG_TAG, myConnection.getResponseCode() + "");
+//                    }
+//                } catch(Exception e) {
+//                    Log.d(LOG_TAG, "board 받아오기 - 연결실패");
+//                    Log.d(LOG_TAG, e.getMessage());
+//                    e.printStackTrace();
+//                }
+            }
+        });
+
+        /*
         new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -100,38 +193,37 @@ public class Board_ViewActivity extends AppCompatActivity {
                         board = gson.fromJson(buffer.toString(), Board.class);
                         if(board != null) {
                             Log.d(LOG_TAG, board.getB_idx() + " 의 board 받아옴");
+
+                            str_b_view_title.setText(board.getTitle());
+                            str_b_view_nickname.setText(board.getNickname());
+                            str_b_view_writeDate.setText(board.getWriteDate());
+                            str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
+                            str_b_view_contents.setText(board.getContents());
+
+                            if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
+                                set_visible(btn_b_view_modify, View.INVISIBLE);
+                                set_visible(btn_b_view_delete, View.INVISIBLE);
+                            } else if(loginMember.getM_idx() == board.getM_idx()){
+                                set_visible(btn_b_view_modify, View.VISIBLE);
+                                set_visible(btn_b_view_delete, View.VISIBLE);
+                            }
                         } else{
                             Log.d(LOG_TAG, "board null !!!");
+                            finish();
                         }
                     } else {
                         Log.d(LOG_TAG, "서버연결 실패");
                         Log.d(LOG_TAG, myConnection.getResponseCode() + "");
                     }
                 } catch(Exception e) {
-                    e.printStackTrace();
                     Log.d(LOG_TAG, "board 받아오기 - 연결실패");
                     Log.d(LOG_TAG, e.getMessage());
+                    e.printStackTrace();
                 }
                 return null;
             }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                str_b_view_title.setText(board.getTitle());
-                str_b_view_nickname.setText(board.getNickname());
-                str_b_view_writeDate.setText(board.getWriteDate());
-                str_b_view_read_cnt.setText(Integer.toString(board.getRead_cnt()));
-                str_b_view_contents.setText(board.getTitle());
-
-                if(loginMember == null || loginMember.getM_idx() != board.getM_idx()) {
-                    set_visible(btn_b_view_modify, View.INVISIBLE);
-                    set_visible(btn_b_view_delete, View.INVISIBLE);
-                } else if(loginMember.getM_idx() == board.getM_idx()){
-                    set_visible(btn_b_view_modify, View.VISIBLE);
-                    set_visible(btn_b_view_delete, View.VISIBLE);
-                }
-            }
         }.execute();
+        */
     }
 
     private void set_visible(final Button btn, final int state) {
@@ -148,7 +240,84 @@ public class Board_ViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
-                finish();
+                intent.putExtra("type", type);
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
+            }
+        });
+        btn_b_view_modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Board_WriteActivity.class);
+                intent.putExtra("type", type);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                intent.putExtra("choice", "modify");
+                intent.putExtra("board", board);
+                startActivity(intent);
+            }
+        });
+        btn_b_view_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Board_ViewActivity.this);
+                builder.setCancelable(true);
+                builder.setTitle("게시글 삭제");
+                builder.setMessage("정말 삭제하시겠습니까?");
+                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+
+
+                                Server_Connect_Helper helper = new Server_Connect_Helper("board view delete");
+                                helper.connect(SERVER_ADDRESS + "/mBoard/" + type + "/delete");
+
+                                helper.selectMethod("POST");
+                                String str = "b_idx=%d";
+                                helper.setValue(String.format(str, board.getB_idx()));
+
+
+                                Type resultType = new TypeToken<HashMap<String, Integer>>(){}.getType();
+                                HashMap<String, Integer> myMap = (HashMap<String, Integer>) helper.getResult(resultType);
+
+                                int result = (int) myMap.get("result");
+                                Log.d(LOG_TAG, "result = " + String.valueOf(result));
+
+                                if(result == 1) {
+                                    show_Toast("삭제완료!");
+                                    Log.d(LOG_TAG, "삭제완료");
+
+                                    Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
+                                    intent.putExtra("type", type);
+                                    intent.putExtra("loginMember", loginMember);
+                                    startActivity(intent);
+
+                                } else {
+                                    show_Toast("삭제실패!");
+                                    Log.d(LOG_TAG, "삭제실패");
+                                }
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("취소", null);
+
+                builder.show();
+            }
+        });
+    }
+
+    private void show_Toast(final String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,10 +1,8 @@
 package com.example.tje.yakssok.board;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +13,12 @@ import com.example.tje.yakssok.model.Member;
 
 import java.util.List;
 
-public class BoardCustomAdapter extends RecyclerView.Adapter<Board_Holder> {
-    Context context;
+public class Board_CustomAdapter extends RecyclerView.Adapter<Board_Holder> {
     List<Board> list;
     String type;
     Member loginMember;
 
-    public BoardCustomAdapter(Context context, List<Board> list, String type, Member loginMember)  {
-        this.context = context;
+    public Board_CustomAdapter(List<Board> list, String type, Member loginMember)  {
         this.list = list;
         this.type = type;
         this.loginMember = loginMember;
@@ -30,7 +26,7 @@ public class BoardCustomAdapter extends RecyclerView.Adapter<Board_Holder> {
 
     @Override
     public Board_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_board_list, parent, false);
         return new Board_Holder(view, type, loginMember);
     }
 

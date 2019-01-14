@@ -3,6 +3,8 @@
     package="com.example.tje.yakssok">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +23,23 @@
         <activity android:name=".board.Board_MainActivity" />
         <activity android:name=".board.Board_SelectedActivity" />
         <activity android:name=".board.Board_ViewActivity" />
-        <activity android:name=".Board_WriteActivity" />
+        <activity android:name=".board.Board_WriteActivity" />
         <activity android:name=".member.JoinActivity" />
         <activity android:name=".member.DaumWebViewActivity" />
-        <activity android:name=".Firstaid_mainActivity" />
-        <activity android:name=".EmergencyActivity"></activity>
+        <activity android:name=".member.Modify_Pw_Activity" />
+        <activity android:name=".member.ProfileModifyActivity" />
+        <activity android:name=".pill.Pill_ListActivity" />
+        <activity android:name=".pill.Pill_ViewActivity" />
+        <activity android:name=".drugstore.Drugstore_NearbyActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".medList.MedList_Main_Activity" />
+        <activity android:name=".medList.Cold_Activity" />
+        <activity android:name=".medList.Antipyretic_Activity" />
+        <activity android:name=".medList.Digestive_Activity" />
+        <activity android:name=".medList.Pain_Activity" />
+        <activity android:name=".medList.Cpr_Activity" />
+        <activity android:name=".medList.Heimlich_Activity" />
+        <activity android:name=".medList.Love_Activity" />
     </application>
 
 </manifest>

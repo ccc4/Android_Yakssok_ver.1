@@ -6,6 +6,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제목"
+        android:textSize="20dp"/>
+
     <EditText
         android:id="@+id/str_b_write_title"
         android:layout_width="match_parent"
@@ -15,11 +22,19 @@
         android:inputType="textPersonName"
         android:layout_marginBottom="5dp"/>
 
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내용"
+        android:textSize="20dp"/>
+
     <EditText
         android:id="@+id/str_b_write_contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="top"
         android:hint="Input Contents"
         android:inputType="textMultiLine"
         android:minHeight="200dp" />
@@ -43,7 +58,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="작성"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_b_modify_ok"
+            style="@android:style/Widget.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정"
+            android:textAlignment="center"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

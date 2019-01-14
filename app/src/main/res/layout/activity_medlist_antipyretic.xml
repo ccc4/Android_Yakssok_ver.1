@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".medList.Antipyretic_Activity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/antipyretic_layout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="25dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="106dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="278dp"
+            android:text="《이전페이지"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="279dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="53dp"
+            android:layout_marginEnd="52dp"
+            android:gravity="center"
+            android:text="안전상비 의약품 - 해열제"
+            android:textColor="#7097e6"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="251dp"
+            android:layout_height="235dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginEnd="66dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18"
+            app:srcCompat="@drawable/ti500mg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="제품정보" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_1"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="아세트아미노펜, 단일성분, 무카페인, 무 색소의 빠르고 마음편한 해열 진통제 속방정으로 4시간동안 빠르고 강한 약효과를 발휘 빠른 통증완화가 필요한 두통, 생리통, 치통에 효과적인 해열 진통제 위장장애에 대한 부담이 적어 식전식후 구분없이 공복에도 사용 가능한 진통제"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_2"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="전성분" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_2"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="조성(1정중) 주성분 아세트아미노펜(약전) ········· 500 mg 성상 필름 코팅을 한 백색의 장방형 정제 포장단위 안전상비의약품 : 8정"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_3"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="효과,효능" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_3"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="주 효능·효과 감기로 인한 발열 및 동통(통증), 두통, 신경통, 근육통, 월경통, 염좌통(삔 통증) 다음 질환에도 사용할 수 있습니다. 치통, 관절통, 류마티양 동통(통증) 타이레놀® 500mg 주성분 / 아세트아미노펜 함량(mg/정) / 500 제형 / 신속히 방출되는 정제 적응증 / 진통, 해열 / 진통, 해열 아스피린 함유여부 / 함유하지 않음 12세 이상의 소아 및 성인의 투여용량 / 1회 1~2정씩 복용 / 1일 3~4회(4~6시간마다) 복용 최대 투여용량 / 24시간동안 8정을 초과하지 말 것"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_4"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="용법용량" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_4"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="만 12세 이상 소아 및 성인 1회 1~2정씩 1일 3-4회 (4-6시간 마다) 필요시 복용한다. 1일 최대 4그램 (8정)을 초과하여 복용하지 않는다. 이 약은 가능한 최단기간동안 최소 유효용량으로 복용한다.  [안전용기 개봉방법]  뒷면의 절제선을 따라 지시된 복용량만큼 정제를 잘라냅니다. 정제 뒷면의 표시부분을 잡고 화살표 방향으로 호일을 벗겨냅니다. 뒷면 호일이 벗겨지면 약을 꺼냅니다. ※ 포장을 벗긴 후에는 즉시 복용하시고, 포장을 벗긴 상태로 보관하지 마십시오."
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_5"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="추가정보" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_5"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="밀폐용기에 넣어 실온(1~30℃)에서 보관하십시오. 반드시 포장된 용기에 넣고 꼭 닫아서 보관하십시오. 이 약을 포장에서 꺼내어 다른 용기에 보관하는 것은 의약품을 잘못 사용하는 사고 발생이나 품질저하의 원인이 될 수 있습니다."
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="251dp"
+                android:layout_height="241dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ti_liquid" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_6"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="제품정보" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_6"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="어린이 타이레놀 현탁액, 무색소 100ml 약을 먹기 싫어하는 아이에게는 어린이 타이레놀 현탁액을 주세요 생후 4개월부터 먹일 수 있는 빠르고 마음편한 어린이 해열 진통제 어린이가 복용하기 쉽도록 약의 쓴맛을 없애고 체리맛 첨가 약 성분이 침전되지 않도록 개발된 현탁액으로 매번 흔들어 먹이지 않아도 돼요! 용법·용량 표기가 몸무게에 따라 표기되어 있어 안심하고 먹일 수 있어요! 어린이 보호용 안전포장 사용"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_7"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="전성분" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_7"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="조성. 성상 - 무색소 조성 (100mL중) 주성분 아세트아미노펜(미분화)(USP) ········· 3.2g 보존제 파라옥시벤조산부틸(NF) ········· 0.025g 보존제 파라옥시벤조산프로필(NF) ········· 0.04g 백색 또는 미백색의 체리향 현탁액 포장단위 안전상비의약품 : 100ml"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_8"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="효과,효능" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_8"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="주 효능·효과 감기로 인한 발열 및 동통(통증), 두통, 신경통, 근육통, 월경통, 염좌통(삔 통증) 다음 질환에도 사용할 수 있습니다 치통, 관절통, 류마티양 동통(통증) 타이레놀® 160mg * 허가된 효능-효과와 다른 용도로 사용시 심각한 부작용이 나타날 수 있습니다."
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_9"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="용법용량" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView87"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_9"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text="만 12세 이하의 소아 다음 1회 권장용량을 4~6시간마다 필요시 복용한다. 이 약은 가능한 최단기간 동안 최소 유효용량으로 복용하며, 1일 5회(75mg/kg)를 초과하여 복용하지 않는다. 몸무게를 아는 경우 몸무게에 따른 (10~15mg/kg)으로 복용하는 것이 더 적절하다.  연령 / 몸무게 / 아세트아미노펜으로서 1회 권장 용량 / 이 약 1회 권장 용량  4개월-6개월 / 7-7.9kg / 80mg / 2.5mL  7개월-23개월 / 8-11.9kg / 120mg / 3.5mL  만 2세-3세 / 12-15.9kg / 160mg / 5mL  만 4세-6세 / 16-22.9kg / 240mg / 7.5mL  만 7세-8세 / 23-29.9kg / 320mg / 10mL  만 9세-10세 / 30-37.9kg / 400mg / 12.5mL  만 11세 / 38-42.9kg / 480mg / 15mL  만 12세 / 43kg 이상 / 640mg / 20mL  [안전용기 개봉방법]  병뚜껑을 위에서 아래로 힘껏 누른다. 뚜껑을 누른 상태에서 시계 반대방향으로 돌린다. 뚜껑을 연다. ※잘 흔들어 사용하시고, 사용 후에는 마개를 꼭 닫아서 보관하십시오.  "
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView94"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_10"
+                android:layout_width="251dp"
+                android:layout_height="50dp"
+                android:background="@drawable/med"
+                android:text="추가정보" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="67dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/text_10"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:text=" 기밀용기에 넣어 실온(1~30°C)에서 보관하십시오. 이 약을 포장에서 꺼내어 다른 용기에 보관하는 것은 의약품을 잘못 사용하는 사고 발생이나 의약품의 품질 저하의 원인이 될 수 있습니다.반드시 포장된 용기에 넣고 꼭 닫아서 보관하시기 바랍니다."
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/antipyretic_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorSsok"
+        app:srcCompat="@android:drawable/stat_sys_upload" />
+
+
+</RelativeLayout>

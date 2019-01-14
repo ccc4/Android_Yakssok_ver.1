@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".medList.Heimlich_Activity"
+    android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/heimlich_layout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="106dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="278dp"
+            android:text="《이전페이지"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="원인과 증상"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="원인"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이물질로는 혈액, 음식물, 구토물 등이 있으며, 혀 또는 후두개가 이완되어 기도가 막히게 됩니다." />
+
+        <TextView
+            android:id="@+id/textView51"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="증상"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="두 손으로 목부분을 쥐면서 기침을 하려고 합니다. 목부분에서 심한 천명음(‘쌕~쌕’하는 소리)이 들릴 수 있습니다. 얼굴이 파랗게(청색증) 변합니다." />
+
+        <TextView
+            android:id="@+id/textView45"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주의사항"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기도가 완전히 폐쇄된 경우에는 3~4분 이내 의식을 잃게 됩니다. 4~6분이 경과하면 뇌세포의 영구적인 손상이 발생하여 생명이 위험에 빠질 수 있으므로 빠른 시간 내에 응급처치를 시행합니다." />
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textView145"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="성인 응급처치"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView144"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/heimlichvideoLayuot_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/heimlich_1"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+            <view
+                android:id="@+id/heimlich_11"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="환자의 의식이 있는 상태"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="말을 할 수 있는 경우에는 기침을 유도하며, 지속적으로 기침을 해도 이물질이 배출되지 않을 때에는 즉시 119로 연락합니다. 말을 할 수 없는 경우에는 119에 신고한 후 하임리히법을 실시합니다." />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="하임리히법 실시요령"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="환자의 등 뒤에서 양팔로 허리를 감싼다. 구조자는 오른손으로 왼주먹을 감싸 잡고 명치에 땐다. 빠르게 위로(후상방향) 밀쳐 올린다. 이물질이 밖으로 나오거나 환자가 의식을 잃을 때까지 계속한다." />
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView61"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="환자의 의식이 없는 상태"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView63"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="의식이 없는 완전 기도폐쇄 환자는 심폐소생술을 실시합니다." />
+
+        <TextView
+            android:id="@+id/textView64"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView65"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주의사항"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView66"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView67"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="임산부나 비만환자는 상복부가 아닌 흉부를 압박한다." />
+
+        <TextView
+            android:id="@+id/textView80"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/textView81"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="유아 응급처치"
+            android:textColor="#7097e6" />
+
+        <TextView
+            android:id="@+id/textView82"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/heimlichvideoLayuot_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <view
+                android:id="@+id/heimlich_22"
+                class="com.google.android.youtube.player.YouTubeThumbnailView"
+                id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="172dp" />
+
+            <view
+                android:id="@+id/heimlich_2"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView83"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView84"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="하임리히법 실시요령"
+            android:textColor="#cc7693" />
+
+        <TextView
+            android:id="@+id/textView85"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView86"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영아의 머리를 아랫방향으로 향한 후 등을 5회 두드린다. 흉부압박법을 5회 반복한다. 입안의 이물질이 확인되면 제거한다. 흉부압박 후에도 의식이 없으면 심폐소생술을 실시한다." />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/heimlich_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorSsok"
+        app:srcCompat="@android:drawable/stat_sys_upload" />
+
+</RelativeLayout>

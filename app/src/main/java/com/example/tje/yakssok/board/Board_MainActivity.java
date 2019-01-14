@@ -46,7 +46,7 @@ public class Board_MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
                 intent.putExtra("type", "share");
                 if (loginMember != null) {
-                    intent.putExtra("loginMember_idx", loginMember);
+                    intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
             }
@@ -57,7 +57,7 @@ public class Board_MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Board_SelectedActivity.class);
                 intent.putExtra("type", "free");
                 if (loginMember != null) {
-                    intent.putExtra("loginMember_idx", loginMember);
+                    intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
             }
@@ -67,7 +67,10 @@ public class Board_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                finish();
+                if(loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                }
+                startActivity(intent);
             }
         });
     }

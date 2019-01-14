@@ -16,8 +16,8 @@ import com.example.tje.yakssok.R;
 
 public class DaumWebViewActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG= "yakssokjoin";
-    public static final String SERVER_ADDRESS = "192.168.10.132:8080/Yakssok";
+    private static final String LOG_TAG= "Yakssok";
+    String SERVER_ADDRESS;
 
     WebView daum_webView;
     TextView daum_result;
@@ -30,6 +30,8 @@ public class DaumWebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daum_web_view);
 
+        SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
+
         daum_result = findViewById(R.id.daum_result);
         btn_address_cancle = findViewById(R.id.btn_address_cancel);
         btn_address_ok = findViewById(R.id.btn_address_ok);
@@ -41,6 +43,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
 
     public void setEvents(){
         final Intent intentB = new Intent(getApplicationContext(), JoinActivity.class);
+        final Intent intentC = new Intent(getApplicationContext(), ProfileModifyActivity.class);
         if(daum_result.getText().equals("주소륵 선택해주세요.")){
             btn_address_ok.setEnabled(false);
         }
@@ -48,8 +51,10 @@ public class DaumWebViewActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     intentB.putExtra("address", daum_result.getText().toString());
-                    Log.d("yakssokjoin", "웹뷰액티비티로그 주소값:" + daum_result.getText().toString());
+                    intentC.putExtra("address", daum_result.getText().toString());
+                    Log.d(LOG_TAG, "웹뷰액티비티로그 주소값:" + daum_result.getText().toString());
                     setResult(RESULT_OK, intentB);
+                    setResult(RESULT_OK,intentC);
                     finish();
                 }
             });
@@ -59,6 +64,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED,intentB);
+                setResult(RESULT_CANCELED,intentC);
                 finish();
             }
         });
@@ -76,7 +82,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
         //web client를 chrome 으로 설정
         daum_webView.setWebChromeClient(new WebChromeClient());
         //webview url load.jsp 파일 주소
-        daum_webView.loadUrl("http://" + SERVER_ADDRESS + "/mobileDaumApi.jsp");
+        daum_webView.loadUrl(SERVER_ADDRESS + "/mobile/API_Daum_Address");
     }
 
 
