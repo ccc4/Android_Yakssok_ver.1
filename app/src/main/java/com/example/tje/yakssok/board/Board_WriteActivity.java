@@ -65,7 +65,6 @@ public class Board_WriteActivity extends AppCompatActivity {
             str_b_write_contents.setText(board.getContents());
         }
 
-
     }
 
     private void setEvents() {

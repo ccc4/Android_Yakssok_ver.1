@@ -69,6 +69,7 @@
                 android:id="@+id/btn_1"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="제품정보" />
 
@@ -106,6 +107,7 @@
                 android:id="@+id/btn_2"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="전성분" />
         </LinearLayout>
@@ -142,6 +144,7 @@
                 android:id="@+id/btn_3"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="효과,효능" />
         </LinearLayout>
@@ -178,6 +181,7 @@
                 android:id="@+id/btn_4"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="용법용량" />
         </LinearLayout>
@@ -214,6 +218,7 @@
                 android:id="@+id/btn_5"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="추가정보" />
         </LinearLayout>
@@ -276,6 +281,7 @@
                 android:id="@+id/btn_6"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="제품정보" />
 
@@ -313,6 +319,7 @@
                 android:id="@+id/btn_7"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="전성분" />
         </LinearLayout>
@@ -349,6 +356,7 @@
                 android:id="@+id/btn_8"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="효과,효능" />
         </LinearLayout>
@@ -385,6 +393,7 @@
                 android:id="@+id/btn_9"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="용법용량" />
         </LinearLayout>
@@ -421,6 +430,7 @@
                 android:id="@+id/btn_10"
                 android:layout_width="251dp"
                 android:layout_height="50dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/med"
                 android:text="추가정보" />
         </LinearLayout>

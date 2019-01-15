@@ -360,6 +360,17 @@ public class MainActivity extends AppCompatActivity {
                 dlg.show();
             }
         });
+        btn_main_login.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_login.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_login.setBackgroundColor(Color.WHITE);
+                }
+                return false;
+            }
+        });
 
         btn_main_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -421,11 +432,33 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+        btn_main_logout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_logout.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_logout.setBackgroundColor(Color.WHITE);
+                }
+                return false;
+            }
+        });
         btn_main_regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
                 startActivity(intent);
+            }
+        });
+        btn_main_regist.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_regist.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_regist.setBackgroundColor(Color.WHITE);
+                }
+                return false;
             }
         });
 
@@ -466,6 +499,17 @@ public class MainActivity extends AppCompatActivity {
                 dlg.show();
             }
 
+        });
+        btn_main_modify.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_modify.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_modify.setBackgroundColor(Color.WHITE);
+                }
+                return false;
+            }
         });
     }
 
