@@ -1,21 +1,27 @@
 package com.example.tje.yakssok;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,19 +58,18 @@ public class MainActivity extends AppCompatActivity {
     Button btn_main_logout;
     Button btn_main_regist;
     Button btn_main_modify;
-    Button btn_main_pill;
-    Button btn_main_board;
-    Button btn_main_drugstore;
-    Button btn_main_emergency;
-
-//    FloatingActionButton fabtn_chat;
+    ImageView btn_main_pill;
+    ImageView btn_main_board;
+    ImageView btn_main_drugstore;
+    ImageView btn_main_emergency;
 
     LinearLayout layout_article;
     WebView wv_chat;
 
-    Button btn_chat_show;
-    Button btn_chat_hide;
+    FloatingActionButton btn_chat_show;
+    FloatingActionButton btn_chat_hide;
 
+    @SuppressLint("WrongViewCast")
     private void setRefs() {
         SERVER_ADDRESS = getString(R.string.SERVER_ADDRESS_STR);
 
@@ -76,18 +81,16 @@ public class MainActivity extends AppCompatActivity {
         btn_main_logout = (Button)findViewById(R.id.btn_main_logout);
         btn_main_regist = (Button)findViewById(R.id.btn_main_regist);
         btn_main_modify = (Button)findViewById(R.id.btn_main_modify);
-        btn_main_pill = (Button)findViewById(R.id.btn_main_pill);
-        btn_main_board = (Button)findViewById(R.id.btn_main_board);
-        btn_main_drugstore = (Button)findViewById(R.id.btn_main_drugstore);
-        btn_main_emergency = (Button)findViewById(R.id.btn_main_emergency);
-
-//        fabtn_chat = findViewById(R.id.fabtn_chat);
+        btn_main_pill = (ImageView)findViewById(R.id.btn_main_pill);
+        btn_main_board = (ImageView)findViewById(R.id.btn_main_board);
+        btn_main_drugstore = (ImageView)findViewById(R.id.btn_main_drugstore);
+        btn_main_emergency = (ImageView)findViewById(R.id.btn_main_emergency);
 
         layout_article = findViewById(R.id.layout_article);
         wv_chat = findViewById(R.id.wv_chat);
 
-        btn_chat_show = findViewById(R.id.btn_chat_show);
-        btn_chat_hide = findViewById(R.id.btn_chat_hide);
+        btn_chat_show = (FloatingActionButton)findViewById(R.id.btn_chat_show);
+        btn_chat_hide = (FloatingActionButton)findViewById(R.id.btn_chat_hide);
 
     }
 
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 runOnUiThread(new Runnable() {
+                    @SuppressLint("RestrictedApi")
                     @Override
                     public void run() {
                         layout_article.setVisibility(View.GONE);
@@ -128,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 runOnUiThread(new Runnable() {
+                    @SuppressLint("RestrictedApi")
                     @Override
                     public void run() {
                         wv_chat.setVisibility(View.GONE);
@@ -144,11 +149,24 @@ public class MainActivity extends AppCompatActivity {
         btn_main_pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), Pill_ListActivity.class);
                 if (loginMember != null) {
                     intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
+            }
+        });
+        // 버튼 클릭중일때 버튼 배경 변경
+        btn_main_pill.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_pill.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_pill.setBackgroundColor(Color.WHITE);
+                }
+                return false;
             }
         });
         btn_main_drugstore.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +181,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btn_main_drugstore.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_drugstore.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_drugstore.setBackgroundColor(Color.WHITE);
+                }
+                return false;
+            }
+        });
         btn_main_emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +202,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btn_main_emergency.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_emergency.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_emergency.setBackgroundColor(Color.WHITE);
+                }
+                return false;
+            }
+        });
         btn_main_board.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +221,17 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
+            }
+        });
+        btn_main_board.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_main_board.setBackgroundColor(Color.LTGRAY);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_main_board.setBackgroundColor(Color.WHITE);
+                }
+                return false;
             }
         });
 

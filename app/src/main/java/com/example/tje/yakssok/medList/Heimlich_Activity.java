@@ -17,8 +17,6 @@ public class Heimlich_Activity extends YouTubeBaseActivity {
 
     Button btn_back;
 
-    YouTubePlayer.OnInitializedListener listener;
-
     YouTubePlayerView heimlich_1;
     YouTubeThumbnailView heimlich_11;
     YouTubePlayerView heimlich_2;
@@ -69,7 +67,7 @@ public class Heimlich_Activity extends YouTubeBaseActivity {
 
             Glide.with(this).load("https://img.youtube.com/vi/mv3WLJMpGfI/mqdefault.jpg").into(heimlich_11);
 
-            listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener heimlich1 = new YouTubePlayer.OnInitializedListener() {
                 @Override
                 public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                     // 비디오 아이디
@@ -87,7 +85,7 @@ public class Heimlich_Activity extends YouTubeBaseActivity {
                     if (heimlich_11.getVisibility() == View.VISIBLE) {
                         heimlich_1.setVisibility(View.VISIBLE);
                         heimlich_11.setVisibility(View.GONE);
-                        heimlich_1.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                        heimlich_1.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", heimlich1);
                         return;
                     }
                 }
@@ -100,7 +98,7 @@ public class Heimlich_Activity extends YouTubeBaseActivity {
 
         Glide.with(this).load("https://img.youtube.com/vi/ZsHe2j0YKSI/mqdefault.jpg").into(heimlich_22);
 
-        listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener heimlich2 = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 // 비디오 아이디
@@ -118,7 +116,7 @@ public class Heimlich_Activity extends YouTubeBaseActivity {
                 if (heimlich_22.getVisibility() == View.VISIBLE) {
                     heimlich_2.setVisibility(View.VISIBLE);
                     heimlich_22.setVisibility(View.GONE);
-                    heimlich_2.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                    heimlich_2.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", heimlich2);
                     return;
                 }
             }

@@ -66,11 +66,7 @@ public class Board_MainActivity extends AppCompatActivity {
         btn_board_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                if(loginMember != null) {
-                    intent.putExtra("loginMember", loginMember);
-                }
-                startActivity(intent);
+                finish();
             }
         });
     }

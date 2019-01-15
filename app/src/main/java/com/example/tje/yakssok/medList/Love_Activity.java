@@ -80,7 +80,7 @@ public class Love_Activity extends YouTubeBaseActivity {
 
         Glide.with(this).load("https://img.youtube.com/vi/G7weqwa3d4o/mqdefault.jpg").into(love_11);
 
-        listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener love1 = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 // 비디오 아이디
@@ -98,7 +98,7 @@ public class Love_Activity extends YouTubeBaseActivity {
                 if (love_11.getVisibility() == View.VISIBLE) {
                     love_1.setVisibility(View.VISIBLE);
                     love_11.setVisibility(View.GONE);
-                    love_1.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                    love_1.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", love1);
                     return;
                 }
             }
@@ -110,7 +110,7 @@ public class Love_Activity extends YouTubeBaseActivity {
 
         Glide.with(this).load("https://img.youtube.com/vi/dklm3weX0s4/mqdefault.jpg").into(love_22);
 
-        listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener love2 = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 // 비디오 아이디
@@ -128,7 +128,7 @@ public class Love_Activity extends YouTubeBaseActivity {
                 if (love_22.getVisibility() == View.VISIBLE) {
                     love_2.setVisibility(View.VISIBLE);
                     love_22.setVisibility(View.GONE);
-                    love_2.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                    love_2.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", love2);
                     return;
                 }
             }
@@ -140,7 +140,7 @@ public class Love_Activity extends YouTubeBaseActivity {
 
         Glide.with(this).load("https://img.youtube.com/vi/pkdwixKmZu4/mqdefault.jpg").into(love_33);
 
-        listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener love3 = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 // 비디오 아이디
@@ -158,7 +158,7 @@ public class Love_Activity extends YouTubeBaseActivity {
                 if (love_33.getVisibility() == View.VISIBLE) {
                     love_3.setVisibility(View.VISIBLE);
                     love_33.setVisibility(View.GONE);
-                    love_3.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                    love_3.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", love3);
                     return;
                 }
             }
@@ -170,7 +170,7 @@ public class Love_Activity extends YouTubeBaseActivity {
 
         Glide.with(this).load("https://img.youtube.com/vi/G9YegpvgBe0/mqdefault.jpg").into(love_44);
 
-        listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener love4 = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 // 비디오 아이디
@@ -188,7 +188,7 @@ public class Love_Activity extends YouTubeBaseActivity {
                 if (love_44.getVisibility() == View.VISIBLE) {
                     love_4.setVisibility(View.VISIBLE);
                     love_44.setVisibility(View.GONE);
-                    love_4.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                    love_4.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", love4);
                     return;
                 }
             }
@@ -200,7 +200,7 @@ public class Love_Activity extends YouTubeBaseActivity {
 
         Glide.with(this).load("https://img.youtube.com/vi/N0u-amYZTqk/mqdefault.jpg").into(love_55);
 
-        listener = new YouTubePlayer.OnInitializedListener() {
+        final YouTubePlayer.OnInitializedListener love5 = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 // 비디오 아이디
@@ -218,7 +218,7 @@ public class Love_Activity extends YouTubeBaseActivity {
                 if (love_55.getVisibility() == View.VISIBLE) {
                     love_5.setVisibility(View.VISIBLE);
                     love_55.setVisibility(View.GONE);
-                    love_5.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", listener);
+                    love_5.initialize("AIzaSyCSdDZ3qAZnEqG_fk19WSfobpdPOYjH50A", love5);
                     return;
                 }
             }
