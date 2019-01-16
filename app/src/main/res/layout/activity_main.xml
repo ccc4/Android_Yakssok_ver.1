@@ -31,7 +31,14 @@
             <SearchView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_color"></SearchView>
+                android:background="@drawable/search_color">
+
+            </SearchView>
+
+            <TextView
+                android:id="@+id/textView161"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
 
             <TextView
                 android:id="@+id/str_output"
@@ -42,6 +49,11 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
+
+            <TextView
+                android:id="@+id/textView162"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,11 +114,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView163"
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="30dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,13 +180,12 @@
         android:id="@+id/wv_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.1"
+        android:layout_weight="1"
         android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
         android:gravity="bottom|end"
         android:orientation="horizontal">
 
@@ -184,7 +199,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_chat_show"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
@@ -193,7 +208,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_chat_hide"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"

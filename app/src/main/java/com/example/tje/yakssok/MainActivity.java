@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                         wv_chat.setVisibility(View.VISIBLE);
                         btn_chat_hide.setVisibility(View.VISIBLE);
 
-
                     }
                 });
 
