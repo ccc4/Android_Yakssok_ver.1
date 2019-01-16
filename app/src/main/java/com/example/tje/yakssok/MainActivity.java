@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setEvents() {
+
+        // 다른 페이지에서 메인으로 intent 할때 맴버 정보를 같이 넘겨 주면 아래의 코드로 맴버클래스에 다시 입력해준다.
+        final Intent intent = getIntent();
+        loginMember = (Member) intent.getSerializableExtra("loginMember");
+
         btn_chat_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("loginMember", loginMember);
                 }
                 startActivity(intent);
+
             }
         });
         // 버튼 클릭중일때 버튼 배경 변경

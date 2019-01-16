@@ -171,7 +171,11 @@ public class Pill_ListActivity extends AppCompatActivity {
         btn_p_list_go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                if (loginMember != null) {
+                    intent.putExtra("loginMember", loginMember);
+                    startActivity(intent);
+                }
             }
         });
 
