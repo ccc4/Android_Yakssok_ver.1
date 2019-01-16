@@ -174,8 +174,8 @@ public class Pill_ListActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 if (loginMember != null) {
                     intent.putExtra("loginMember", loginMember);
-                    startActivity(intent);
                 }
+                startActivity(intent);
             }
         });
 

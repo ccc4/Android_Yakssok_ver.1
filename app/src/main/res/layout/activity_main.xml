@@ -214,7 +214,7 @@
             android:clickable="true"
             android:visibility="gone"
             app:backgroundTint="@color/colorYak"
-            app:srcCompat="@android:drawable/ic_delete" />
+            app:srcCompat="@drawable/xicon" />
 
     </LinearLayout>
 
